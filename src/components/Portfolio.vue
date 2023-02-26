@@ -17,7 +17,7 @@
         <span
           class="title text-center"
           :class="{ pgray: !nightMode, 'text-light': nightMode }"
-          >Portfolio.</span
+          >Story</span
         >
       </div>
       <hr
@@ -26,7 +26,7 @@
       />
 
       <vue-tabs :activeTextColor="!nightMode ? '#535A5E' : '#dfdfdf'">
-      <v-tab title="design">
+      <v-tab title="Photo">
           <div class="row">
             <div
               v-for="(design, idx) in desgin_info"
@@ -72,14 +72,14 @@
                   class="btn-sm btn btn-outline-secondary no-outline"
                   @click.prevent="showDesignModalFn(design)"
                 >
-                  read more
+                  Xem thêm
                 </button>
               </div>
             </div>
           </div>
           <br />
         </v-tab>
-        <v-tab title="development">
+        <v-tab title="Video">
           <br />
           <div class="row">
             <div
@@ -365,12 +365,12 @@ export default {
 .dimg:hover .design-img {
   position: relative;
   border-radius: 15px;
-  opacity: 0.1;
+  opacity: 0;
   cursor: pointer;
 }
 
 .dimg:hover .middle {
-  opacity: 1;
+  opacity: 0;
 }
 
 /deep/.vueperslide {

@@ -17,7 +17,7 @@
           <span
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-            >Welcome to my portfolio!</span
+            >Welcome to my World.</span
           >
           <div>
             <p v-html="description"></p>
@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .home-title {
-  font-size: 32px;
+  font-size: 55px;
   font-weight: 500;
 }
 

@@ -17,7 +17,7 @@
         <span
           class="title text-center"
           :class="{ pgray: !nightMode, 'text-light': nightMode }"
-          >About Me.</span
+          >Suy nghĩ vớ vẩn</span
         >
       </div>
       <hr
@@ -25,12 +25,12 @@
         :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
       <div class="row">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">
+        <div>
           <Timeline :data="education" :nightMode="nightMode" />
         </div>
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">
-          <Timeline :data="experience" :nightMode="nightMode" />
-        </div>
+<!--        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">-->
+<!--          <Timeline :data="experience" :nightMode="nightMode" />-->
+<!--        </div>-->
       </div>
     </div>
   </div>

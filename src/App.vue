@@ -3,9 +3,9 @@
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
       <Home :nightMode="nightMode" />
-      <About id="about" :nightMode="nightMode" />
-      <Skills id="skills" :nightMode="nightMode" />
       <Portfolio id="portfolio" :nightMode="nightMode" />
+      <About id="about" :nightMode="nightMode" />
+<!--      <Skills id="skills" :nightMode="nightMode" />-->
       <Contact id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
     </div>
@@ -76,8 +76,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Lobster');
 #app {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Lobster", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
