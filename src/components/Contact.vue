@@ -17,7 +17,7 @@
         <span
           class="title text-center"
           :class="{ pgray: !nightMode, 'text-light': nightMode }"
-          >Contact.</span
+          >Liên hệ</span
         >
       </div>
       <hr
@@ -36,7 +36,7 @@
             type="text"
             name="user_name"
             v-model="name"
-            placeholder="name"
+            placeholder="Nhập cái tên đáng yêu vào đây"
             class="pinput"
             :class="{
               pgray: !nightMode,
@@ -77,7 +77,7 @@
           <textarea
             name="message"
             v-model="text"
-            placeholder="message"
+            placeholder="Điều gì thầm kín thì nhắn vào đây nhé. Không thì gửi qua messenger cũng được =))"
             class="pinput"
             rows="4"
             :class="{
@@ -148,14 +148,22 @@ export default {
     sendEmail() {
       if (!this.email || !this.name || !this.text) {
         this.showSnackbar = true;
-        this.snackbarMessage = "Please all the fields";
+        if (!this.email && !this.name && !this.text){
+          this.snackbarMessage = "Không nhập cái gì thì gửi bằng niềm tin à";
+        } else if (!this.name){
+          this.snackbarMessage = "Không nhập tên thì tôi biết bạn là ai :(";
+        } else if (!this.email){
+          this.snackbarMessage = "Quên không nhập mail kìa bạn êiiii";
+        } else if (!this.text){
+          this.snackbarMessage = "Định gửi cho tôi cái mail trắng trơn hả " + this.name;
+        }
         this.snackbarColor = "#64808E";
       } else {
         var obj = {
           user_email: this.email,
           from_name: this.name,
           message_html: this.text,
-          to_name: "Mahy Mohab",
+          to_name: "Cảnh Nguyễn",
         };
 
         emailjs
@@ -168,7 +176,7 @@ export default {
           .then(
             (result) => {
               this.showSnackbar = true;
-              this.snackbarMessage = "Thanks! Message recieved.";
+              this.snackbarMessage = "Cảm ơn " + this.name + " nha!" +  "Mình sẽ phản hồi sớm nhất.";
               this.snackbarColor = "#1aa260";
 
               this.email = "";
@@ -177,7 +185,7 @@ export default {
             },
             (error) => {
               this.showSnackbar = true;
-              this.snackbarMessage = "Oops! Something went wrong.";
+              this.snackbarMessage = "Ôi bạn ơi! Lỗi này Cảnh chưa kịp fix.";
               this.snackbarColor = "#64808E";
             }
           );
@@ -215,24 +223,24 @@ export default {
   padding: 10px;
   width: 50%;
   transition: all 1s;
-  background-color: #b3b3cc;
+  background-color: #97FFFF;
 }
 
 .btn {
-  border-color: #759CC9;
-  color: #759CC9;
+  border-color: #00CCCC;
+  color: #00CCCC;
   width: 50%;
 }
 
 .btn:hover {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #00CCCC;
+  border-color: #00CCCC;
   color: white;
 }
 
 .btn:focus {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #00CCCC;
+  border-color: #00CCCC;
   color: white;
 }
 

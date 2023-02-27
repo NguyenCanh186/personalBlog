@@ -23,33 +23,40 @@
             <p v-html="description"></p>
           </div>
           <div class="text-center pb-4">
+<!--            <button-->
+<!--              class="btn btn-outline-secondary mx-2 "-->
+<!--              @click="open('linkedin')"-->
+<!--              v-tooltip.bottom="'LinkedIn'"-->
+<!--            >-->
+<!--              <i class="fab fa-linkedin"></i>-->
+<!--            </button>-->
             <button
-              class="btn btn-outline-secondary mx-2 "
-              @click="open('linkedin')"
-              v-tooltip.bottom="'LinkedIn'"
+                class="btn btn-outline-secondary mx-2 "
+                @click="open('linkedin')"
+                v-tooltip.bottom="'Facebook'"
             >
-              <i class="fab fa-linkedin"></i>
+              <i class="fa-brands fa-square-facebook"></i>
             </button>
             <button
               class="btn btn-outline-secondary mx-2"
               @click="open('github')"
-              v-tooltip.bottom="'GitHub'"
+              v-tooltip.bottom="'Tóp tóp'"
             >
-              <i class="fab fa-github"></i>
+              <i class="fa-brands fa-tiktok"></i>
             </button>
             <button
               class="btn btn-outline-secondary mx-2"
               @click="open('behance')"
-              v-tooltip.bottom="'behance'"
+              v-tooltip.bottom="'Skype'"
             >
-              <i class="fab fa-behance"></i>
+              <i class="fa-brands fa-skype"></i>
             </button>
             <button
               class="btn btn-outline-secondary mx-2"
               @click="open('resume')"
-              v-tooltip.bottom="'Resume'"
+              v-tooltip.bottom="'Telegram'"
             >
-              <i class="fa fa-file"></i>
+              <i class="fa-brands fa-telegram"></i>
             </button>
           </div>
         </div>

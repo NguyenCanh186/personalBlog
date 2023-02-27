@@ -6,34 +6,38 @@
           class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pbelow"
           style="color: white;"
         >
-          <span>© 2021 Copyright: Mahy Mohab</span>
+          <span>© 2023 Bản quyền của Cảnh Nguyễn</span>
         </div>
 
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">
           <div class="text-center">
             <button
-              class="btn btn-outline-secondary mx-2 "
-              @click="open('linkedin')"
+                class="btn btn-outline-secondary mx-2 "
+                @click="open('linkedin')"
+                v-tooltip.bottom="'Facebook'"
             >
-              <i class="fab fa-linkedin"></i>
+              <i class="fa-brands fa-square-facebook"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
-              @click="open('github')"
+                class="btn btn-outline-secondary mx-2"
+                @click="open('github')"
+                v-tooltip.bottom="'Tóp tóp'"
             >
-              <i class="fab fa-github"></i>
+              <i class="fa-brands fa-tiktok"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
-              @click="open('behance')"
+                class="btn btn-outline-secondary mx-2"
+                @click="open('behance')"
+                v-tooltip.bottom="'Skype'"
             >
-              <i class="fab fa-behance"></i>
+              <i class="fa-brands fa-skype"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
-              @click="open('resume')"
+                class="btn btn-outline-secondary mx-2"
+                @click="open('resume')"
+                v-tooltip.bottom="'Telegram'"
             >
-              <i class="fa fa-file"></i>
+              <i class="fa-brands fa-telegram"></i>
             </button>
           </div>
         </div>

@@ -11,9 +11,9 @@ let info = {
   description:
     "Xin chào, tôi là Cảnh. Tên đầy đủ là Nguyễn Thế Cảnh, sinh năm 1996 tại Phú Thọ. Hiện tại thì tôi đang sinh sống và làm việc tại Hà Nội. Mọi người đến đây chắc hẳn cũng có chut tò mò về Cảnh. Blog này là nơi tôi ghi lại những khoảnh khắc, và những suy nghĩ vớ vẩn của mình. Cảm ơn mọi người đã ghé thăm nhé! Chúc mọi người một ngày tốt lành.",
   links: {
-    linkedin: "https://www.linkedin.com/in/mahy-mohab-209/",
-    github: "https://github.com/mahy209",
-    behance: "https://www.behance.net/mahymohab",
+    linkedin: "https://www.facebook.com/Shurikenger186",
+    github: "https://www.tiktok.com/@ka1896.jp?_t=8aDcPNpf72X&_r=1",
+    behance: "https://join.skype.com/invite/yX3vsxMddME8",
     resume: "https://drive.google.com/file/d/1W0pzOo1Gb-W70BYKehOfZ4qaJt7m1_7O/view?usp=sharing",
   },
   education: [
@@ -204,47 +204,51 @@ let info = {
       description:
         ""
     },
-  //   {
-  //     name: "Credit card design",
-  //     title: "Illustration",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/designs/credit/behance cover.png"),
-  //         title: "MoodBoard"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/degisning.png"),
-  //         title: "Degisning"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/Dual tune.png"),
-  //         title: "Dual tune"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/Glassmorphism.png"),
-  //         title: "Glassmorphism"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/Gradiant.png"),
-  //         title: "Gradiant"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/Monochrome.png"),
-  //         title: "Monochrome"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/credit/Neumorphism.png"),
-  //         title: "Neumorphism"
-  //       },
-  //     ],
-  //     technologies: ["Figma", "Illustrator"],
-  //     category: "Visual Design",
-  //     github: "",
-  //     date: "Dec, 2021",
-  //     visit: "",
-  //     description:
-  //       ""
-  //   },
+    {
+      name: "Bạn, thân ai người ấy lo",
+      title: "Cạ cứng",
+      pictures: [
+        {
+          img: require("./src/assets/designs/credit/avt.jpg"),
+          title: "Bộ 3 nam tài tử chưa lấy vợ của làng Văn Lang mặc dù đã gần đến tuổi tam tuần :("
+        },
+        {
+          img: require("./src/assets/designs/credit/avtcuonggia.jpg"),
+          title: "Đây là thằng Cường, fullname là Nguyễn Mạnh Cường. Thằng này lắm biệt danh nên tôi gán cho nó cái nào mọi người cứ hiểu là thằng này nhé. Nhưng nếu là Cường Mèo thì không phải thằng này =)))))"
+        },
+        {
+          img: require("./src/assets/designs/credit/avtlaodai.jpg"),
+          title: "Còn thằng này là thằng Dân (Nguyễn Xuân Dân). Thằng này thì xem lắm phim kiếm hiệp quá nên Facebook của nó là Lâm Xung"
+        },
+        {
+          img: require("./src/assets/designs/credit/anh1.jpg"),
+          title: "Bộ 3 bọn tôi chơi với nhau từ xưa xửa xừa xưa, từ cái ngày học mẫu giáo. Mà ngày đấy k có smartphone nên cái ảnh này là cũ lắm rồi"
+        },
+        {
+          img: require("./src/assets/designs/credit/2.jpg"),
+          title: "Sau lớp 9 thì mỗi thằng 1 nơi"
+        },
+        {
+          img: require("./src/assets/designs/credit/3.jpg"),
+          title: "2 thằng này thì học nghề, còn tôi thì tiếp tục đánh điện tử trên danh nghĩa học sinh cấp 3 trường Hạ Hòa =)))"
+        },
+        {
+          img: require("./src/assets/designs/credit/4.jpg"),
+          title: "Nhưng mỗi khi có dịp gặp lại nhau, thì ôi thôi!!! Như chưa hề có cuộc chia ly luôn =))) làm đủ mọi trò, bên nhau cả ngày không chán"
+        },
+        {
+          img: require("./src/assets/designs/credit/5.jpg"),
+          title: "Và rồi đến lúc tôi phải sang Nhật để trả số nợ đã báo ngày cấp 3 kia =)) Hôm đấy 3 thằng say không ngửa mặt lên được, mà trước lúc tôi say thì 2 thằng này vẫn tỉnh"
+        },
+      ],
+      technologies: ["Cường Coóng", "Dân Thoòng"],
+      category: "Những người anh em khác cha khác mẹ =)))",
+      github: "",
+      date: "Forever",
+      visit: "",
+      description:
+        ""
+    },
   //   {
   //     name: "BOOKSI",
   //     title: "E-Book library - UI/UX Design",
