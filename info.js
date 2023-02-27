@@ -237,8 +237,44 @@ let info = {
           title: "Nhưng mỗi khi có dịp gặp lại nhau, thì ôi thôi!!! Như chưa hề có cuộc chia ly luôn =))) làm đủ mọi trò, bên nhau cả ngày không chán"
         },
         {
+          img: require("./src/assets/designs/credit/trenthuyen.jpg"),
+          title: "Tôi học xong cấp 3 thì nó cũng về. Ngày đó chúng tôi là những thanh niên thất nghiệp, nhưng mà vẫn vô lo vô nghĩ lắm =)"
+        },
+        {
+          img: require("./src/assets/designs/credit/dihatchuacoviec.jpg"),
+          title: "Ngày thì chèo thuyền ngao du nhưng tối vẫn đi hát hò bay nhảy mặc dù không có đồng nào trong người"
+        },
+        {
+          img: require("./src/assets/designs/credit/3thang.jpg"),
+          title: "3 nam tài tử thất nghiệp"
+        },
+        {
+          img: require("./src/assets/designs/credit/thamtoikhitoidinghiavu.jpg"),
+          title: "Và rồi tôi quyết định đi nghĩa vụ, 4 tháng huấn luyện tăng 9kg, mặt mũi như những anh chàng châu Phi. Tưởng chúng nó quên tôi rồi mà nó vẫn vượt hơn trăm km đến thăm. Ngày nó đến tôi như vỡ òa. Trực ban gọi tên mà phải đi hỏi cả trung đội xem có phải mình không =))"
+        },
+        {
+          img: require("./src/assets/designs/credit/dian.jpg"),
+          title: "Rồi tôi về đơn vị chúng nó vẫn đến thăm mà. Tôi đưa chúng nó đi ăn"
+        },
+        {
+          img: require("./src/assets/designs/credit/dihattanlap.jpg"),
+          title: "Rồi đi hát hò bay nhảy này"
+        },
+        {
+          img: require("./src/assets/designs/credit/divscungnhaup2.jpg"),
+          title: "Nhớ nhau đến độ đi toilet cũng không rời xa nhau mà. Đoạn này thằng Cường Già đang bận ăn đào nên không có mặt =)))"
+        },
+        {
+          img: require("./src/assets/designs/credit/divscungnhau.jpg"),
+          title: "Nhưng mà vẫn còn bức ảnh để đời này mà hahah"
+        },
+        {
+          img: require("./src/assets/designs/credit/laodainghiavu.jpg"),
+          title: "Tôi đi nghĩa vụ được 1 năm thì thằng dân cũng đi theo tiếng gọi của tổ quốc. Ảnh này là nhớ nó quá nên phải cắt phép đi thăm này"
+        },
+        {
           img: require("./src/assets/designs/credit/5.jpg"),
-          title: "Và rồi đến lúc tôi phải sang Nhật để trả số nợ đã báo ngày cấp 3 kia =)) Hôm đấy 3 thằng say không ngửa mặt lên được, mà trước lúc tôi say thì 2 thằng này vẫn tỉnh"
+          title: "Tôi hết nghĩa vụ thì nó cũng hết. 3 anh em chúng tôi lại trên 1 chiếc xe tăng hihaahha"
         },
       ],
       technologies: ["Cường Coóng", "Dân Thoòng"],
