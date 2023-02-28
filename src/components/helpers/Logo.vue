@@ -35,6 +35,7 @@ export default {
 }
 
 .logo-title-name {
+  color: white;
   font-size: 35px;
   font-weight: 500;
   letter-spacing: 2px;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg navbar-light bg-light fixed-top p-st"
+      class="navbar navbar-expand-lg navbar-dark bg-info fixed-top p-st"
     >
       <div class="container">
         <a
@@ -116,6 +116,7 @@ export default {
 
 <style scoped>
 .nav-link {
+  color: white;
   font-weight: 500;
 }
 .nav-link:hover{

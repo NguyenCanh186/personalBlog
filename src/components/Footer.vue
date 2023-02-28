@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondary">
+  <div class="bg-info">
     <div class="container py-3">
       <div class="row pt-1 align-items-center">
         <div

@@ -23,36 +23,29 @@
             <p v-html="description"></p>
           </div>
           <div class="text-center pb-4">
-<!--            <button-->
-<!--              class="btn btn-outline-secondary mx-2 "-->
-<!--              @click="open('linkedin')"-->
-<!--              v-tooltip.bottom="'LinkedIn'"-->
-<!--            >-->
-<!--              <i class="fab fa-linkedin"></i>-->
-<!--            </button>-->
             <button
-                class="btn btn-outline-secondary mx-2 "
+                class="btn btn-outline-success mx-2 "
                 @click="open('linkedin')"
                 v-tooltip.bottom="'Facebook'"
             >
               <i class="fa-brands fa-square-facebook"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
+              class="btn btn-outline-info mx-2"
               @click="open('github')"
               v-tooltip.bottom="'Tóp tóp'"
             >
               <i class="fa-brands fa-tiktok"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
+              class="btn btn-outline-info mx-2"
               @click="open('behance')"
               v-tooltip.bottom="'Skype'"
             >
               <i class="fa-brands fa-skype"></i>
             </button>
             <button
-              class="btn btn-outline-secondary mx-2"
+              class="btn btn-outline-info mx-2"
               @click="open('resume')"
               v-tooltip.bottom="'Telegram'"
             >
@@ -142,19 +135,19 @@ img {
 }
 
 .btn {
-  border-color: #759CC9;
-  color: #759CC9;
+  border-color: #17a2b8;
+  color: #17a2b8;
 }
 
 .btn:hover {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 
 .btn:focus {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 
