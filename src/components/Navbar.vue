@@ -134,13 +134,11 @@ button:hover {
 }
 
 nav {
-  color: mediumspringgreen;
   border-bottom: 1px solid rgba(160, 159, 159, 0.336);
   position: fixed !important;
 }
 
 .navbar-blur {
-  background-color: mediumspringgreen;
   backdrop-filter: blur(12px);
 }
 </style>

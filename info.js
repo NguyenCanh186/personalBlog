@@ -13,7 +13,7 @@ let info = {
   links: {
     linkedin: "https://www.facebook.com/Shurikenger186",
     github: "https://www.tiktok.com/@ka1896.jp?_t=8aDcPNpf72X&_r=1",
-    behance: "https://join.skype.com/invite/yX3vsxMddME8",
+      behance: "https://join.skype.com/invite/yX3vsxMddME8",
     resume: "https://drive.google.com/file/d/1W0pzOo1Gb-W70BYKehOfZ4qaJt7m1_7O/view?usp=sharing",
   },
   education: [
@@ -285,43 +285,43 @@ let info = {
       description:
         ""
     },
-  //   {
-  //     name: "BOOKSI",
-  //     title: "E-Book library - UI/UX Design",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/designs/booksi/behance cover.png"),
-  //         title: "Cover"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/booksi/behance board.png"),
-  //         title: "MoodBoard"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/booksi/login.png"),
-  //         title: "login"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/booksi/register.png"),
-  //         title: "register"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/booksi/home page.png"),
-  //         title: "homepage"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/booksi/For you.png"),
-  //         title: "just for you"
-  //       }
-  //     ],
-  //     technologies: ["Figma", "Photoshop"],
-  //     category: "Visual Design",
-  //     github: "",
-  //     date: "Nov, 2021",
-  //     visit: "",
-  //     description:
-  //       " BOOKSI is Ebook android app for easy read books."
-  //   },
+    {
+      name: "Life in Japan",
+      title: "Nhật Bản - Những tháng ngày nhớ mãi",
+      pictures: [
+        {
+          img: require("./src/assets/designs/booksi/anhbia.jpg"),
+          title: "Đó là nơi tôi khao khát muốn đến kể từ khi học tiếng nhật sau khi hết nghĩa vụ quân sự"
+        },
+        {
+          img: require("./src/assets/designs/booksi/behance board.png"),
+          title: "MoodBoard"
+        },
+        {
+          img: require("./src/assets/designs/booksi/login.png"),
+          title: "login"
+        },
+        {
+          img: require("./src/assets/designs/booksi/register.png"),
+          title: "register"
+        },
+        {
+          img: require("./src/assets/designs/booksi/home page.png"),
+          title: "homepage"
+        },
+        {
+          img: require("./src/assets/designs/booksi/For you.png"),
+          title: "just for you"
+        }
+      ],
+      technologies: ["Cảnh và những người bạn"],
+      category: "Chỉ cần có cơ hội, tôi sẽ trở lại nơi này",
+      github: "",
+      date: "10/2018 - 11/2021",
+      visit: "",
+      description:
+        "Nhật Bản luôn ở trong trái tim tôi"
+    },
   //   {
   //     name: "Quiet Weather",
   //     title: "UI/UX Design",
