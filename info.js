@@ -294,26 +294,98 @@ let info = {
           title: "Đó là nơi tôi khao khát muốn đến kể từ khi học tiếng nhật sau khi hết nghĩa vụ quân sự"
         },
         {
-          img: require("./src/assets/designs/booksi/behance board.png"),
-          title: "MoodBoard"
+          img: require("./src/assets/designs/booksi/hoconghiepdoan.jpg"),
+          title: "Ngày đầu tiên đến Nhật và học ở nghiệp đoàn"
         },
         {
-          img: require("./src/assets/designs/booksi/login.png"),
-          title: "login"
+          img: require("./src/assets/designs/booksi/nghitruaowcongty.jpg"),
+          title: "Học được một tháng thì về công ty làm việc"
         },
         {
-          img: require("./src/assets/designs/booksi/register.png"),
-          title: "register"
+          img: require("./src/assets/designs/booksi/quanantruataicongty.jpg"),
+          title: "Ăn trưa ở công ty này các idol"
         },
         {
-          img: require("./src/assets/designs/booksi/home page.png"),
-          title: "homepage"
+          img: require("./src/assets/designs/booksi/thangluongdautien.jpg"),
+          title: "Tháng lương đầu tiên"
         },
         {
-          img: require("./src/assets/designs/booksi/For you.png"),
-          title: "just for you"
+          img: require("./src/assets/designs/booksi/nguyenvaanhcungutrua.jpg"),
+          title: "Idol Nguyên và Anh Cu ngủ trưa ở công ty này =))"
+        },
+        {
+          img: require("./src/assets/designs/booksi/hoctiengnhatvoicacsuthay.jpg"),
+          title: "Học tiếng Nhật với sư thầy"
+        },
+        {
+          img: require("./src/assets/designs/booksi/maythanhnienkhongbietnghigi.jpg"),
+          title: "Ngày đó không hiểu mấy thanh niên nghĩ gì mà mua bộ này về mặc"
+        },
+        {
+          img: require("./src/assets/designs/booksi/nghicuoituancuaanhem.jpg"),
+          title: "Nghỉ cuối tuần của các anh em team eiwa"
+        },
+        {
+          img: require("./src/assets/designs/booksi/duathangemhieudingamgainhat.jpg"),
+          title: "Đưa thằng em Hiếu đi ngắm gái Nhật"
+        },
+        {
+          img: require("./src/assets/designs/booksi/tuyetday.jpg"),
+          title: "Mùa đông đầu tiên nhìn thấy tuyết"
+        },
+        {
+          img: require("./src/assets/designs/booksi/tuyettrang.jpg"),
+          title: ""
+        },
+        {
+          img: require("./src/assets/designs/booksi/dacsanhokkaido.jpg"),
+          title: ""
+        },
+        {
+          img: require("./src/assets/designs/booksi/bongdangaytuyetroi.jpeg"),
+          title: "Bóng đá ngày tuyết rơi"
+        },
+        {
+          img: require("./src/assets/designs/booksi/nguoituyetdautay.jpg"),
+          title: "Bóng đá ngày tuyết rơi"
+        },
+        {
+          img: require("./src/assets/designs/booksi/moichiataynguoiyeuvu.jpg"),
+          title: "Cái này là vừa mới chia tay người yêu cũ"
+        },
+        {
+          img: require("./src/assets/designs/booksi/monquacuacongty.jpg"),
+          title: "Biết mình thích chơi game nên công ty tặng cho cái máy chơi game luôn =)))))"
+        },
+        {
+          img: require("./src/assets/designs/booksi/quatangcuacongty.jpg"),
+          title: "Thi tiếng Nhật về lại được quà tiếp"
+        },
+        {
+          img: require("./src/assets/designs/booksi/ngaymailathu7nhi.jpg"),
+          title: "Những ngày cuối tuần"
+        },
+        {
+          img: require("./src/assets/designs/booksi/kiemtiencuoituan.jpg"),
+          title: "Ngày đi làm còn tối về anh em giúp nhau kiếm thêm thu nhập"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lolonhat.jpg"),
+          title: "Đã là đam mê thì ở đâu cũng có thể làm được. LOL in Japan"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenbao.jpg"),
+          title: "Cuộc sống cứ như một bản nhạc toàn nốt lên. Lên báo này"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenbarsowmnhatpho.jpg"),
+          title: "Lên bar này! Mà lần này mấy ae lên bar sớm nhất phố Sapporo luôn"
+        },
+        {
+          img: require("./src/assets/designs/booksi/chayphooinazumi.jpg"),
+          title: "Lên phố này"
         }
-      ],
+        ],
       technologies: ["Cảnh và những người bạn"],
       category: "Chỉ cần có cơ hội, tôi sẽ trở lại nơi này",
       github: "",
