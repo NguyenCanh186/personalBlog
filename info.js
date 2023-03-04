@@ -306,6 +306,10 @@ let info = {
           title: "Ăn trưa ở công ty này các idol"
         },
         {
+          img: require("./src/assets/designs/booksi/hoanngoinghigiailao.jpg"),
+          title: " Thần Hoàn ngồi nghỉ giải lao tranh thủ nói chuyện với gái"
+        },
+        {
           img: require("./src/assets/designs/booksi/thangluongdautien.jpg"),
           title: "Tháng lương đầu tiên"
         },
@@ -340,6 +344,10 @@ let info = {
         {
           img: require("./src/assets/designs/booksi/dacsanhokkaido.jpg"),
           title: ""
+        },
+        {
+          img: require("./src/assets/designs/booksi/dilamngaytuyetroi.jpg"),
+          title: "Đi làm ngày tuyết rơi"
         },
         {
           img: require("./src/assets/designs/booksi/bongdangaytuyetroi.jpeg"),
@@ -384,7 +392,165 @@ let info = {
         {
           img: require("./src/assets/designs/booksi/chayphooinazumi.jpg"),
           title: "Lên phố này"
-        }
+        },
+        {
+          img: require("./src/assets/designs/booksi/aodoivoibancungphong.jpg"),
+          title: "Áo đôi với An Kem"
+        },
+        {
+          img: require("./src/assets/designs/booksi/choibowling.jpg"),
+          title: "Chơi bowling lần đầu ở nhật"
+        },
+        {
+          img: require("./src/assets/designs/booksi/anhdaidien.jpg"),
+          title: "Ở nhà một mình tự sướng. Cái ảnh này là avt của tôi từ tháng 3 năm 2019 đến giờ"
+        },
+        {
+          img: require("./src/assets/designs/booksi/chogauan.jpg"),
+          title: "Lên Donkihote cho gấu ăn"
+        },
+        {
+          img: require("./src/assets/designs/booksi/batcachepcungidolnguyen.jpg"),
+          title: "Idol Nguyên bắt được cá này"
+        },
+        {
+          img: require("./src/assets/designs/booksi/minhcungtranhthucheckin.jpg"),
+          title: "Tranh thủ làm kiểu sống ảo tý"
+        },
+        {
+          img: require("./src/assets/designs/booksi/mayaecattoc.jpg"),
+          title: "Mấy ae tự cắt tóc cuối tuần, kia là Thần Hoàn và An Kem nhé =)) "
+        },
+        {
+          img: require("./src/assets/designs/booksi/sapporovedem.jpg"),
+          title: "Phố Sapporo về đêm"
+        },
+        {
+          img: require("./src/assets/designs/booksi/mohinhthanhphosapporo.jpg"),
+          title: "Mô hình thành phố Sapporo"
+        },
+        {
+          img: require("./src/assets/designs/booksi/t38sapporo.jpeg"),
+          title: "Tầng 38 tại ga Sapporo, ban đêm lên đây ngắm thành phố thì hết sảy. Rượu ngon, nhạc cũng du dương nữa"
+        },
+        {
+          img: require("./src/assets/designs/booksi/tieptucngamgainhat.jpg"),
+          title: "Tiếp tục series ngắm gái Nhật"
+        },
+        {
+          img: require("./src/assets/designs/booksi/gocnholamvieccuatoi.jpg"),
+          title: "Góc nhỏ của tôi. Ngày đó idol Kyary Pamyu nên đồng nghiệp ở công ty tặng cho quả ảnh không thể chất lượng hơn"
+        },
+        {
+          img: require("./src/assets/designs/booksi/otaru1.jpg"),
+          title: "Otaru cũng đẹp ở Hokkaido nhé. Mọi người sang nhật nhớ ghé qua đây nha"
+        },
+        {
+          img: require("./src/assets/designs/booksi/otaru2.jpg"),
+          title: "Cửa hàng bán đồ thủy tinh ở Otaru"
+        },{
+          img: require("./src/assets/designs/booksi/ngamhoa.jpg"),
+          title: "Ngắm hoa lệ rơi. À nhầm! Ngắm hoa anh đào"
+        },{
+          img: require("./src/assets/designs/booksi/mitomhaohao.jpg"),
+          title: "Mì hảo hảo sau 2 năm xa quê"
+        },
+        {
+          img: require("./src/assets/designs/booksi/dichoiohassamu.jpeg"),
+          title: "Aeon mall Hassamu"
+        },
+        {
+          img: require("./src/assets/designs/booksi/duanguoiyeudichoi.jpg"),
+          title: "Đưa Ngọc Anh lên Shinsapporo"
+        },
+        {
+          img: require("./src/assets/designs/booksi/chuanbiconguoiyeu.jpg"),
+          title: "Công viên tình yêu ShiroiKoibito"
+        },
+        {
+          img: require("./src/assets/designs/booksi/anhmawtnhinxaxam.jpg"),
+          title: "Chuẩn bị đón mùa hè"
+        },
+        {
+          img: require("./src/assets/designs/booksi/comgicuahanquocquentenroi.jpg"),
+          title: "Ăn cơm Hàn Quốc"
+        },
+        {
+          img: require("./src/assets/designs/booksi/dilamveluc6giosang.jpg"),
+          title: "Bình minh ở InazumiKouen, lúc này là 6 giờ sáng. Hôm đó mình làm đêm"
+        },
+        {
+          img: require("./src/assets/designs/booksi/dibienlan2.jpg"),
+          title: "Bãi biển Hoshimi"
+        },
+        {
+          img: require("./src/assets/designs/booksi/cauvongojojankei.jpeg"),
+          title: "Cầu vồng ở Joujankei"
+        },
+        {
+          img: require("./src/assets/designs/booksi/canphongnhocuatoi.jpg"),
+          title: "Ngâm nga làm bài cho đỡ quên phím =)"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenbarcungcacem.jpg"),
+          title: "Đưa các em lên bar chơi"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenbarcungcacem2.jpg"),
+          title: "Chỗ này là bar King XMHU"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenduongdiosaka.jpg"),
+          title: "Lên đường đi chơi Osaka"
+        },
+        // {
+        //   img: require("./src/assets/designs/booksi/anhvadinhtochucsinhanhhatchominh.JPG"),
+        //   title: "2 đứa bạn Ánh và Dĩnh tổ chức sinh nhật cho tôi "
+        // },
+        // {
+        //   img: require("./src/assets/designs/booksi/duadichoicacthunay.JPG"),
+        //   title: "Đưa đi chơi các thứ này"
+        // },
+        {
+          img: require("./src/assets/designs/booksi/chupmayquaanhngaudet.jpg"),
+          title: "Chụp cái ảnh kỉ niệm ở Hirakata Park"
+        },
+        {
+          img: require("./src/assets/designs/booksi/caunamba.jpg"),
+          title: "Cầu Namba Osaka, chỗ này là nổi tiếng lắm này"
+        },
+        {
+          img: require("./src/assets/designs/booksi/ladocungdongbon.jpg"),
+          title: "Lá đỏ cùng đồng bọn ở Nakajima Kouen"
+        },
+        {
+          img: require("./src/assets/designs/booksi/ladoocungdongbon2.jpg"),
+          title: "Mùa này thì ngắm lá đỏ cả ngày không chán"
+        },
+        {
+          img: require("./src/assets/designs/booksi/ladocungdongbon3.jpg"),
+          title: ""
+        },
+        {
+          img: require("./src/assets/designs/booksi/anchoionakajima.jpg"),
+          title: "Ngắm chán thì đến quán Việt Nam ở gần đấy ăn chơi phè phởn"
+        },
+        {
+          img: require("./src/assets/designs/booksi/tambietgiamdocvamoinguoi.jpg"),
+          title: "Ngày cuối cùng ở Nhật, hôm đó đến tạm biệt giám đốc và mọi người"
+        },
+        {
+          img: require("./src/assets/designs/booksi/vaophongcho.jpg"),
+          title: "Phòng chờ ở sân bay Narita Tokyo"
+        },
+        {
+          img: require("./src/assets/designs/booksi/lenmaybay.jpg"),
+          title: "Lên máy bay"
+        },
+        {
+          img: require("./src/assets/designs/booksi/dacomatovietnam.jpg"),
+          title: "Đã có mặt tại sân bay Đà Nẵng Việt Nam"
+        },
         ],
       technologies: ["Cảnh và những người bạn"],
       category: "Chỉ cần có cơ hội, tôi sẽ trở lại nơi này",
