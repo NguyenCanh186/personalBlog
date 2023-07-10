@@ -175,6 +175,9 @@ export default {
           )
           .then(
             (result) => {
+              result.text === "OK"
+                ? console.log("Email sent successfully")
+                : console.log(result.text);
               this.showSnackbar = true;
               this.snackbarMessage = "Cảm ơn " + this.name + " nha!" +  "Mình sẽ phản hồi sớm nhất.";
               this.snackbarColor = "#1aa260";
@@ -184,6 +187,9 @@ export default {
               this.name = "";
             },
             (error) => {
+              error.text === "Opps! Something went wrong"
+                ? console.log("Email sent failed")
+                : console.log(error.text);
               this.showSnackbar = true;
               this.snackbarMessage = "Ôi bạn ơi! Lỗi này Cảnh chưa kịp fix.";
               this.snackbarColor = "#64808E";

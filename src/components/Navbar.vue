@@ -20,7 +20,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span style="color: gray; font-size: 23px;"
+          <span style="color: white; font-size: 23px;"
             ><i class="fas fa-bars"></i>
             </span>
         </button>
@@ -32,25 +32,14 @@
                 class="nav-link"
                 href="/portfolio"
                 @click.prevent="$emit('scroll', 'portfolio')"
-                :class="{ 'text-light': nightMode }"
                 >Story</a
               >
             </li>
-<!--            <li class="nav-item mx-2">-->
-<!--              <a-->
-<!--                class="nav-link"-->
-<!--                href="/skills"-->
-<!--                @click.prevent="$emit('scroll', 'skills')"-->
-<!--                :class="{ 'text-light': nightMode }"-->
-<!--                >Skills</a-->
-<!--              >-->
-<!--            </li>-->
             <li class="nav-item mx-2 ">
               <a
                 class="nav-link"
                 href="/about"
                 @click.prevent="$emit('scroll', 'about')"
-                :class="{ 'text-light': nightMode }"
                 >Blog</a
               >
             </li>
@@ -59,7 +48,6 @@
                 class="nav-link"
                 href="/contact"
                 @click.prevent="$emit('scroll', 'contact')"
-                :class="{ 'text-light': nightMode }"
                 >Contact</a
               >
             </li>
@@ -67,7 +55,6 @@
               <a
                   class="nav-link"
                   @click.prevent="showDesignModalFn()"
-                  :class="{ 'text-light': nightMode }"
               >Login</a
               >
             </li>
@@ -124,15 +111,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scope>
 .nav-link {
-  color: white;
+  color: white !important;
   font-weight: 500;
 }
 .nav-link:hover{
-  background-color: rgba(160, 159, 159, 0.336);
+  color: white;
 }
-
 button {
   border: none;
   outline: none;
