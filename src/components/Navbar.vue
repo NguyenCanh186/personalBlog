@@ -63,31 +63,31 @@
                 >Contact</a
               >
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item mx-2">
               <a
-                class="nav-link"
-                href="#"
-                @click.prevent="switchMode"
-                :class="{ 'text-light': nightMode }"
-                ><i
-                  :class="{
-                    'fas fa-moon': nightMode,
-                    'far fa-moon': !nightMode,
-                  }"
-                  v-tooltip.bottom="nightMode ? 'Light Mode' : 'Night Mode'"
-                ></i
-              ></a>
+                  class="nav-link"
+                  @click.prevent="showDesignModalFn()"
+                  :class="{ 'text-light': nightMode }"
+              >Login</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <Login
+        :showModal="showDesignModal"
+        @close="closeModal"
+        v-if="showDesignModal"
+        :nightMode="nightMode"
+    />
   </div>
 </template>
 
 <script>
 import Logo from "./helpers/Logo";
 import info from "../../info";
+import Login from "@/components/helpers/Login.vue";
 
 export default {
   name: "Navbar",
@@ -100,15 +100,25 @@ export default {
     return {
       navbarConfig: info.config.navbar,
       localNightMode: this.nightMode,
+      showDesignModal: false,
     };
   },
   components: {
     Logo,
+    Login,
   },
   methods: {
     switchMode() {
       this.localNightMode = !this.localNightMode;
       this.$emit("nightMode", this.localNightMode);
+    },
+    closeModal() {
+      this.showModal = false;
+      this.showDesignModal = false;
+      document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    },
+    showDesignModalFn() {
+      this.showDesignModal = true;
     },
   },
 };
