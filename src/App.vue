@@ -5,10 +5,12 @@
       <Home :nightMode="nightMode" />
       <Portfolio id="portfolio" :nightMode="nightMode" />
       <About id="about" :nightMode="nightMode" />
-<!--      <Skills id="skills" :nightMode="nightMode" />-->
       <Contact id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
     </div>
+<!--    <div class="parent" v-if="currentUser !== null">-->
+<!--      <Management :nightMode="nightMode" />-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -16,20 +18,20 @@
 import Navbar from "./components/Navbar.vue";
 import Home from "./components/Home";
 import About from "./components/About";
-import Skills from "./components/Skills";
 import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 import info from "../info";
+// import Management from "@/components/admin/management.vue";
 
 export default {
   name: "App",
   components: {
+    // Management,
     Navbar,
     Home,
     About,
-    Skills,
     Portfolio,
     Contact,
     Footer,

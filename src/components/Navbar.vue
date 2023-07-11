@@ -51,11 +51,18 @@
                 >Contact</a
               >
             </li>
-            <li class="nav-item mx-2">
+            <li class="nav-item mx-2" v-if="currentUser === null">
               <a
                   class="nav-link"
                   @click.prevent="showDesignModalFn()"
               >Login</a
+              >
+            </li>
+            <li class="nav-item mx-2" v-if="currentUser !== null">
+              <a
+                  class="nav-link"
+                  @click.prevent="logOut()"
+              >Logout</a
               >
             </li>
           </ul>
@@ -66,7 +73,13 @@
         :showModal="showDesignModal"
         @close="closeModal"
         v-if="showDesignModal"
-        :nightMode="nightMode"
+        @login="login"
+    />
+    <Snackbar
+        :showSnackbar="showSnackbar"
+        @close="closeSnackbar"
+        :snackbarMessage="snackbarMessage"
+        :snackbarColor="snackbarColor"
     />
   </div>
 </template>
@@ -75,6 +88,7 @@
 import Logo from "./helpers/Logo";
 import info from "../../info";
 import Login from "@/components/helpers/Login.vue";
+import Snackbar from "@/components/helpers/Snackbar.vue";
 
 export default {
   name: "Navbar",
@@ -88,13 +102,32 @@ export default {
       navbarConfig: info.config.navbar,
       localNightMode: this.nightMode,
       showDesignModal: false,
+      showSnackbar: false,
+      snackbarMessage: "",
+      snackbarColor: "",
     };
   },
   components: {
     Logo,
     Login,
+    Snackbar,
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   methods: {
+    closeSnackbar(val) {
+      if (!val) {
+        setTimeout(() => {
+          this.showSnackbar = val;
+        }, 1000);
+      }
+    },
     switchMode() {
       this.localNightMode = !this.localNightMode;
       this.$emit("nightMode", this.localNightMode);
@@ -104,8 +137,27 @@ export default {
       this.showDesignModal = false;
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
+    login(password) {
+      this.$store.dispatch('auth/login', password).then(
+          () => {
+            this.$router.push('/admin/home');
+            this.showDesignModal = false;
+          },
+          error => {
+            this.a = (error.response && error.response.data)
+            this.showSnackbar = true;
+            this.snackbarMessage = "Không vào được đâu bạn ơi.";
+            this.snackbarColor = "#64808E";
+          }
+      );
+    },
     showDesignModalFn() {
       this.showDesignModal = true;
+    },
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/');
+      location.reload();
     },
   },
 };

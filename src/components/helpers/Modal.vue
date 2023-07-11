@@ -61,10 +61,7 @@
               class="mt-1 mb-3"
               :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
-            <button class="btn w-25 mr-3" @click="open(portfolio.github)">
-              github
-            </button>
-            <button class="btn w-25" @click="$emit('close')">close</button>
+            <button class="btn w-25" @click="$emit('close')">Đóng</button>
           </div>
         </div>
       </div>
@@ -79,7 +76,6 @@ import Gallery from "./Gallery";
 export default {
   name: "Modal",
   components: {
-    Carousel,
     Gallery,
   },
   props: {
@@ -226,19 +222,19 @@ a:hover {
 }
 
 .btn {
-  border-color: #759CC9;
-  color: #759CC9;
+  border-color: #17a2b8;
+  color: #17a2b8;
 }
 
 .btn:hover {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 
 .btn:focus {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 

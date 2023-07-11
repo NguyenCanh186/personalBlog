@@ -93,6 +93,100 @@ let info = {
       icon: "fas fa-laptop-code"
     },
   ],
+  portfolio: [
+    {
+      name: "Quản lý điểm V-Point",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/diary/trangchu.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/themdiem.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/nhapexcel.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/nhapexcel2.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/thongtindiem2.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/quanlynguoidung.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/themmoinguoidung.jpg")
+        },
+        {
+          img: require("./src/assets/portfolio/diary/quanlyphongban.jpg")
+        },
+      ],
+      technologies: ["Spring boot", "Spring security", "SQL", "Database", "VueJS2", "Bootstrap"],
+      category: "Web App",
+      date: "06/2022 - 08/2022",
+      github:
+          "https://github.com/NguyenCanh186/V-PointTool-1",
+      visit: "https://github.com/NguyenCanh186/V-PointTool-1",
+      description:
+          "Quản lý điểm V-point là hệ thống giúp phòng nhân lực của công ty chấm điểm được các nhân viên dựa trên chỉ số KPI công việc, các hoạt động đào tạo, tham gia đào tạo.... Từ điểm đó, nhân viên có thể nhận được các gói phúc lợi khác nhau.  "
+    },
+    {
+      name: "Xếp hạng tín dụng TP bank",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/online examination/login.png")
+        },
+        {
+          img: require("./src/assets/portfolio/online examination/khoitaohoso.png")
+        },
+        {
+          img: require("./src/assets/portfolio/online examination/dinhdanhkhachhang.png")
+        },
+        {
+          img: require("./src/assets/portfolio/online examination/quanlynhomnganh.png")
+        },
+        {
+          img: require("./src/assets/portfolio/online examination/giahanchamdiem.png")
+        },
+        {
+          img: require("./src/assets/portfolio/online examination/xephangvono.png")
+        }
+      ],
+      technologies: ["Spring boot", "Spring security", "SQL", "Database", "VueJS2", "Bootstrap"],
+      category: "Web App",
+      date: "08/2022 - hiện tại",
+      github: "https://github.com/",
+      visit: "https://github.com/",
+      description:
+          "Xếp hạng tín dụng TP bank là hệ thống xếp hạng các khách hàng của ngân hàng TP bank dựa trên vốn chủ đầu tư, báo cáo tài chính, tổng tài sản... để có thể đưa ra các khoản vay thích hợp "
+    },
+    {
+      name: "Blog cá nhân",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/myflix.com/trangchu.png")
+        },
+        {
+          img: require("./src/assets/portfolio/myflix.com/story.png")
+        },
+        {
+          img: require("./src/assets/portfolio/myflix.com/blogcanhan.png")
+        },
+        {
+          img: require("./src/assets/portfolio/myflix.com/lienhe.png")
+        },
+      ],
+      technologies: ["VueJS", "Bootstrap"],
+      category: "Web App",
+      date: "Dự án cá nhân",
+      github:
+          "https://github.com/NguyenCanh186/personalBlog",
+      visit: "https://canhnguyensblog.netlify.app/",
+      description:
+          "Nơi lưu trữ những khoảnh khắc và những suy nghĩ của mình"
+    },
+  ],
   portfolio_design: [
     {
       name: "Gia đình nhỏ, hạnh phúc to",
@@ -119,13 +213,7 @@ let info = {
           title: "Checkin trước vườn hoa nhà mình này"
         },
       ],
-      technologies: ["Bố Mẹ", "Anh chị", "Tôi và 2 thằng cháu"],
       category: "Vui vẻ và đầy ắp tiếng cười",
-      github: "",
-      date: "Tháng 2 - 2022",
-      visit: "",
-      description:
-        ""
     },
     {
       name: "Một nửa của Cảnh =))))",
@@ -196,13 +284,7 @@ let info = {
           title: "Mà cuối năm nay cô ấy về rồi =))) Cuối năm mình update tiếp nhé <3"
         },
       ],
-      technologies: ["Nguyễn Cảnh", "Ngọc Anh"],
       category: "Để tôi kể cho mà nghe ",
-      github: "",
-      date: "Quá khứ - Hiện tại - Tương lai",
-      visit: "",
-      description:
-        ""
     },
     {
       name: "Bạn, thân ai người ấy lo",
@@ -277,17 +359,11 @@ let info = {
           title: "Tôi hết nghĩa vụ thì nó cũng hết. 3 anh em chúng tôi lại trên 1 chiếc xe tăng hihaahha"
         },
       ],
-      technologies: ["Cường Coóng", "Dân Thoòng"],
       category: "Những người anh em khác cha khác mẹ =)))",
-      github: "",
-      date: "Forever",
-      visit: "",
-      description:
-        ""
     },
     {
       name: "Life in Japan",
-      title: "Nhật Bản - Những tháng ngày nhớ mãi",
+      title: "Nhật Bản",
       pictures: [
         {
           img: require("./src/assets/designs/booksi/anhbia.jpg"),
@@ -503,14 +579,6 @@ let info = {
           img: require("./src/assets/designs/booksi/lenduongdiosaka.jpg"),
           title: "Lên đường đi chơi Osaka"
         },
-        // {
-        //   img: require("./src/assets/designs/booksi/anhvadinhtochucsinhanhhatchominh.JPG"),
-        //   title: "2 đứa bạn Ánh và Dĩnh tổ chức sinh nhật cho tôi "
-        // },
-        // {
-        //   img: require("./src/assets/designs/booksi/duadichoicacthunay.JPG"),
-        //   title: "Đưa đi chơi các thứ này"
-        // },
         {
           img: require("./src/assets/designs/booksi/chupmayquaanhngaudet.jpg"),
           title: "Chụp cái ảnh kỉ niệm ở Hirakata Park"
@@ -552,140 +620,8 @@ let info = {
           title: "Đã có mặt tại sân bay Đà Nẵng Việt Nam"
         },
         ],
-      technologies: ["Cảnh và những người bạn"],
       category: "Chỉ cần có cơ hội, tôi sẽ trở lại nơi này",
-      github: "",
-      date: "10/2018 - 11/2021",
-      visit: "",
-      description:
-        "Nhật Bản luôn ở trong trái tim tôi"
     },
-  //   {
-  //     name: "Quiet Weather",
-  //     title: "UI/UX Design",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/designs/weather/Wooden Hand iPhone 12 Pro.png"),
-  //         title: "MoodBoard"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/weather/artboard.png"),
-  //         title: "show"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/weather/weather app react native.png"),
-  //         title: "components"
-  //       },
-  //     ],
-  //     technologies: ["Figma", "Illustration"],
-  //     category: "Visual Design",
-  //     github: "",
-  //     date: "Nov, 2021",
-  //     visit: "",
-  //     description:
-  //       "Quiet Weather is a react native app by openweathermap api, i designed the ui/ux and coding it in react native, enjoy it!"
-  //   },
-  //   {
-  //     name: "Pill Reminder",
-  //     title: "Pill Reminder - Mockup Design",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/designs/pill reminder/Web 1.png"),
-  //         title: "Moodboard"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/pill reminder/1.png"),
-  //         title: "Mockups 1"
-  //       },
-  //       {
-  //         img: require("./src/assets/designs/pill reminder/2.png"),
-  //         title: "Mockups 2"
-  //       }
-  //     ],
-  //     technologies: ["XD", "Illustrator"],
-  //     category: "Visual Design",
-  //     github: "",
-  //     date: "Apr, 2021",
-  //     visit: "",
-  //     description:
-  //       "pill reminder app for nessecary drugs for the day."
-  //   },
-  // ],
-  // portfolio: [
-  //   {
-  //     name: "Diary App",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/portfolio/diary/1.png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/diary/2.png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/diary/3.png")
-  //       },
-  //     ],
-  //     technologies: ["react", "scss", "local storage"],
-  //     category: "Web App",
-  //     date: "Aug, 2021 - 20 days",
-  //     github:
-  //       "https://github.com/mahy209/notes-react-app.git",
-  //     visit: "https://github.com/mahy209/notes-react-app.git",
-  //     description:
-  //       " Diary react app with some new features: Dark mode, upload images, tags, filter search with title/content/tag "
-  //   },
-  //   {
-  //     name: "Online Examination",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/portfolio/online examination/exam (1).png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/online examination/exam (2).png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/online examination/exam (3).png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/online examination/exam (4).png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/online examination/exam (5).png")
-  //       }
-  //     ],
-  //     technologies: ["HTML", "CSS","JavaSript","JQuery", "PHP", "MySQL"],
-  //     category: "Web App",
-  //     date: "Apr, 2021 - May, 2021",
-  //     github: "https://github.com/mahy209/online-examination.git",
-  //     visit: "https://github.com/mahy209/online-examination.git",
-  //     description:
-  //       "Online Examination System Today Online Examination System has become a fast growing examination method because of its speed and accuracy. It is also needed less manpower to execute the examination. Almost all organizations now-a-days, are conducting their objective exams by online examination system, it saves students time in examinations. Organizations can also easily check the performance of the student that they give in an examination. As a result of this, organizations are releasing results in less time. It also helps the environment by saving paper. According to today’s requirement, online examination project in php is very useful to learn it. What is an online examination system? In an online examination system examine get their user id and password with his/her admit card. This id is already saved in the examination server. When examine login to the server he/she get his/her profile already register. On the certain time examine gets the message to start the examination. All answers given by examine are saved into the server with his/her profile information. Online examination system also allows to correct the answer if the examine needed to change any answer in the examination time duration, however, after the time duration any change will not allow. This also makes c checking the answer easy and error proof as computers are more accurate than man and provide fast results too. Php is a web base language so we can create an online examination system in PHP. Administrator of Online Examination has multiple features such as Add, Delete, Update Topics and Question. To Login as Admin put inside your browser."
-  //   },
-  //   {
-  //     name: "MyFlix.com",
-  //     pictures: [
-  //       {
-  //         img: require("./src/assets/portfolio/myflix.com/1.png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/myflix.com/2.png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/myflix.com/3.png")
-  //       },
-  //       {
-  //         img: require("./src/assets/portfolio/myflix.com/4.png")
-  //       },
-  //     ],
-  //     technologies: ["react", "css", "TMDB"],
-  //     category: "Web App",
-  //     date: "Aug, 2021 - 10 days",
-  //     github:
-  //       "https://github.com/mahy209/MyFlix-react-app.git",
-  //     visit: "https://github.com/mahy209/MyFlix-react-app.git",
-  //     description:
-  //       " flix.com is a netflix clone using React JS and TMDB with courusal and search engine. "
-  //   },
   ],
 };
 

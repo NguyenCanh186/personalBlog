@@ -10,48 +10,73 @@
       data-aos-duration="1000"
     >
       <div class="row align-items-center">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
-          <img :src="picture" />
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser !== null">
+          <div class="image-container">
+            <img :src="picture" :style="getImageStyle" />
+            <button @click="changePicture" class="camera-button">
+              <i class="fas fa-camera"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser === null">
+          <div class="image-container">
+            <img :src="picture"/>
+          </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-          <span
+          <span v-if="currentUser === null"
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-            >Welcome to my World.</span
+            >{{ homeTitle }}</span
           >
-          <div>
-            <p v-html="description"></p>
+          <div v-if="currentUser !== null" class="d-flex flex-column align-items-end">
+            <input type="text" style="font-size: 20px" class="form-control" v-model="homeTitle">
+            <button class="btn btn-outline-success mt-2 mb-2" @click="updateDescription">Update Title</button>
           </div>
-          <div class="text-center pb-4">
-            <button
-                class="btn btn-outline-success mx-2 "
-                @click="open('linkedin')"
-                v-tooltip.bottom="'Facebook'"
-            >
-              <i class="fa-brands fa-square-facebook"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('github')"
-              v-tooltip.bottom="'Tóp tóp'"
-            >
-              <i class="fa-brands fa-tiktok"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('behance')"
-              v-tooltip.bottom="'Skype'"
-            >
-              <i class="fa-brands fa-skype"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('resume')"
-              v-tooltip.bottom="'Telegram'"
-            >
-              <i class="fa-brands fa-telegram"></i>
-            </button>
+
+          <div v-if="currentUser === null">
+            <div>
+              <p v-html="description"></p>
+            </div>
+            <div class="text-center pb-4">
+              <button
+                  class="btn btn-outline-success mx-2 "
+                  @click="open('linkedin')"
+                  v-tooltip.bottom="'Facebook'"
+              >
+                <i class="fa-brands fa-square-facebook"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('github')"
+                  v-tooltip.bottom="'Tóp tóp'"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('behance')"
+                  v-tooltip.bottom="'Skype'"
+              >
+                <i class="fa-brands fa-skype"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('resume')"
+                  v-tooltip.bottom="'Telegram'"
+              >
+                <i class="fa-brands fa-telegram"></i>
+              </button>
+            </div>
           </div>
+          <div v-else>
+            <div class="d-flex flex-column align-items-end">
+              <textarea v-model="description" class="form-control" rows="6"></textarea>
+              <button class="btn btn-outline-success mt-2" @click="updateDescription">Update</button>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -61,12 +86,10 @@
 <script>
 import info from "../../info";
 
-import Wave from "./helpers/Wave";
 
 export default {
   name: "Home",
   components: {
-    Wave,
   },
   props: {
     nightMode: {
@@ -75,6 +98,7 @@ export default {
   },
   data() {
     return {
+      homeTitle: "Welcome to my World.",
       picture: info.flat_picture,
       description: info.description,
       name: info.name,
@@ -84,7 +108,15 @@ export default {
       resume: info.links.resume
     };
   },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
   methods: {
+    changePicture() {
+      this.picture = 'new_picture.jpg';
+    },
     open(link) {
       switch (link) {
         case "linkedin":
@@ -106,6 +138,26 @@ export default {
 </script>
 
 <style scoped>
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.camera-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  padding: 0px 20px;
+  border-radius: 4px;
+  background-color: rgba(65, 63, 63, 0.5);
+  backdrop-filter: blur(8px);
+}
 .home-title {
   font-size: 55px;
   font-weight: 500;
@@ -114,7 +166,6 @@ export default {
 img {
   max-width: 800px;
   max-height: 500px;
-  margin-top: 80px;
   transform: rotateY(180deg);
 }
 

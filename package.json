@@ -10,6 +10,7 @@
   "dependencies": {
     "@chenfengyuan/vue-carousel": "^1.0.5",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.4.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "core-js": "^3.6.4",
     "emailjs-com": "^2.6.4",
@@ -23,7 +24,8 @@
     "vue-router": "^3.3.4",
     "vue-scrollto": "^2.18.1",
     "vue-selector": "0.0.1",
-    "vueperslides": "^2.10.2"
+    "vueperslides": "^2.10.2",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",

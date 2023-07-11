@@ -46,7 +46,7 @@ export default {
   border-radius: 7px;
   padding: 16px;
   position: fixed;
-  z-index: 1;
+  z-index: 99999999999999999999999999999;
   left: 50%;
   float: right;
   top: 100px;

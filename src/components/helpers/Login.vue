@@ -17,7 +17,7 @@
             <a
                 class="pull-right"
                 style="font-size: 18px;"
-                @click="$emit('close')"
+                @click="close()"
             ><i class="fas fa-times"></i
             ></a>
             <hr
@@ -27,7 +27,6 @@
           </div>
           <div class="text-center">
             <div
-                class="mb-3"
                 data-aos="fade-up"
                 data-aos-once="true"
                 data-aos-duration="1000"
@@ -36,7 +35,7 @@
               <input
                   type="password"
                   name="user_name"
-                  v-model="name"
+                  v-model="password"
                   placeholder="Mời bố Cảnh nhập mật khẩu"
                   class="pinput"
                   :class="{
@@ -51,8 +50,8 @@
             </div>
 
             <button
-                @click.prevent="sendEmail"
-                class="mt-1 btn mb-3"
+                @click="login()"
+                class="mt-2 btn"
                 data-aos="fade"
                 data-aos-once="true"
                 data-aos-duration="1000"
@@ -60,16 +59,8 @@
             >
               Đăng nhập
             </button>
-            <p>Không phải Cảnh, vui lòng đóng popup</p>
+            <p class="mt-5">Không phải Cảnh, vui lòng đóng popup</p>
           </div>
-
-<!--          <div class="text-center pb-3">-->
-<!--            <hr-->
-<!--                class="mt-1 mb-3"-->
-<!--                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"-->
-<!--            />-->
-<!--            <button class="btn w-25" @click="$emit('close')">close</button>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -77,36 +68,41 @@
 </template>
 
 <script>
-import Carousel from "./Carousel";
 import info from "../../../info";
 export default {
-  name: "Modal",
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    Carousel,
-  },
+  name: "Login",
   props: {
     showModal: {
-      type: Boolean,
-    },
-    portfolio: {
-      type: Object,
-    },
-    nightMode: {
       type: Boolean,
     },
   },
   data() {
     return {
+      password: "",
       picture: info.flat_picture,
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
   created() {
-    document.getElementsByTagName("body")[0].classList.add("modal-open");
+    if (this.loggedIn) {
+      this.$router.push('/admin/home');
+    }
   },
   methods: {
     open(url) {
       window.open(url, "_blank");
+    },
+    close() {
+      this.$emit("close");
+      this.password = "";
+    },
+    login() {
+      this.$emit("login", this.password);
+      console.log(this.password)
     },
   },
 };
