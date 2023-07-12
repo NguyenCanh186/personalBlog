@@ -2,7 +2,8 @@
   <div id="app" :class="{ 'text-dark': !nightMode, 'text-light': nightMode }">
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
-      <Home :nightMode="nightMode" />
+      <Home v-if="currentUser === null" :nightMode="nightMode" />
+      <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
       <Portfolio id="portfolio" :nightMode="nightMode" />
       <About id="about" :nightMode="nightMode" />
       <Contact id="contact" :nightMode="nightMode" />
@@ -23,11 +24,13 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 import info from "../info";
+import HomeAdmin from "@/components/admin/HomeAdmin.vue";
 // import Management from "@/components/admin/management.vue";
 
 export default {
   name: "App",
   components: {
+    HomeAdmin,
     // Management,
     Navbar,
     Home,
@@ -35,6 +38,11 @@ export default {
     Portfolio,
     Contact,
     Footer,
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   data() {
     return {
