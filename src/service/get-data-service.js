@@ -4,7 +4,7 @@ export class GetDataService {
     static serverURL = `http://localhost:8080`
 
     static getProfile() {
-        return axios.get(`${this.serverURL}/get-data/profile`, { headers: authHeader() })
+        return axios.get(`${this.serverURL}/get-data/profile`)
     }
 
     static update(profile) {

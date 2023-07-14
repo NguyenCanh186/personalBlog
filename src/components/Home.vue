@@ -9,46 +9,19 @@
       data-aos-once="true"
       data-aos-duration="1000"
     >
-      <div class="row align-items-center" v-if="currentUser !== null">
-        <form id="form">
-          <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
-            <div class="image-container">
-              <img :src="`${'http://localhost:8080/image/' + profile.image}`" />
-              <!--              <input type="file" name="image">-->
-              <button class="camera-button">
-                <i class="fas fa-camera"></i>
-              </button>
-            </div>
-          </div>
-          <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-            <div class="d-flex flex-column align-items-end">
-              <input type="text" name="title" style="font-size: 20px" class="form-control" v-model="homeTitle">
-              <!--              <button class="btn btn-outline-success mt-2 mb-2" @click="updateTitle">Update Title</button>-->
-            </div>
-            <br>
-            <div class="d-flex flex-column align-items-end">
-              <textarea v-model="description" name="description" class="form-control" rows="6"></textarea>
-              <button class="btn btn-outline-success mt-2" @click.prevent="update">Update profile</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-
-
-      <div class="row align-items-center" v-if="currentUser === null">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser === null">
+      <div class="row align-items-center">
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
           <div class="image-container">
             <img :src="picture"/>
           </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-          <span v-if="currentUser === null"
+          <span
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
             >{{ homeTitle }}</span
           >
-          <div v-if="currentUser === null">
+          <div>
             <div>
               <p v-html="description"></p>
             </div>
@@ -116,11 +89,6 @@ export default {
       resume: info.links.resume
     };
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-  },
   created() {
     this.getProfile();
   },
@@ -138,9 +106,6 @@ export default {
       getDataService.update(form).then(() => {
         this.getProfile();
       });
-    },
-    changePicture() {
-      this.picture = 'new_picture.jpg';
     },
     open(link) {
       switch (link) {
@@ -168,21 +133,6 @@ export default {
   display: inline-block;
 }
 
-.camera-button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 25px;
-  cursor: pointer;
-  padding: 0px 20px;
-  border-radius: 4px;
-  background-color: rgba(65, 63, 63, 0.5);
-  backdrop-filter: blur(8px);
-}
 .home-title {
   font-size: 55px;
   font-weight: 500;
@@ -204,10 +154,6 @@ img {
     margin-bottom: 10px;
     border: 2px solid rgb(205, 205, 205);
   }
-}
-
-.fa {
-  font-size: 15px;
 }
 
 .btn {

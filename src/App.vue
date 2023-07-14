@@ -9,9 +9,6 @@
       <Contact id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
     </div>
-<!--    <div class="parent" v-if="currentUser !== null">-->
-<!--      <Management :nightMode="nightMode" />-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -25,13 +22,11 @@ import Footer from "./components/Footer";
 
 import info from "../info";
 import HomeAdmin from "@/components/admin/HomeAdmin.vue";
-// import Management from "@/components/admin/management.vue";
 
 export default {
   name: "App",
   components: {
     HomeAdmin,
-    // Management,
     Navbar,
     Home,
     About,
@@ -54,6 +49,7 @@ export default {
     if (this.config.use_cookies) {
       this.nightMode = this.$cookie.get("nightMode") === "true" ? true : false;
     }
+    console.log(this.$store.state.auth.user)
   },
   mounted() {
     ["about", "contact", "skills", "portfolio"].forEach((l) => {

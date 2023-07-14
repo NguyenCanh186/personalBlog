@@ -10,39 +10,34 @@
         data-aos-duration="1000"
     >
       <div class="row align-items-center">
-        <form style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-          <div class="row align-items-center">
-            <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser !== null">
-              <div class="image-container">
-                <img :src="getImageUrl(profile.image)">
-                <input type="file" name="image" id="image" @change="handleFileChange($event)">
-                <label class="camera-icon">
-                  <i class="fas fa-camera"></i>
-                </label>
-              </div>
-            </div>
-            <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-              <div v-if="currentUser !== null" class="d-flex flex-column align-items-end">
-                <input type="text" name="title" style="font-size: 20px" id="title" class="form-control" v-model="homeTitle">
-              </div>
-              <br>
-              <div>
-                <div class="d-flex flex-column align-items-end">
-                  <textarea v-model="description" name="description" id="description" class="form-control" rows="6"></textarea>
-                  <button class="btn btn-outline-success mt-2" @click="update">Update</button>
-                </div>
-              </div>
+
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
+          <div class="image-container">
+            <img :src="getImageUrl(profile.image)">
+            <input type="file" name="image" id="image" @change="handleFileChange($event)">
+            <label class="camera-icon">
+              <i class="fas fa-camera"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
+          <div class="d-flex flex-column align-items-end">
+            <input type="text" name="title" style="font-size: 20px" id="title" class="form-control" v-model="homeTitle">
+          </div>
+          <br>
+          <div>
+            <div class="d-flex flex-column align-items-end">
+              <textarea v-model="description" name="description" id="description" class="form-control" rows="6"></textarea>
+              <button class="btn btn-outline-success mt-2" @click="update">Update</button>
             </div>
           </div>
-        </form>
-
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import info from "../../info";
 
 
 import info from "../../../info";
@@ -71,11 +66,6 @@ export default {
       resume: info.links.resume
     };
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-  },
   created() {
     this.getProfile();
   },
@@ -103,25 +93,6 @@ export default {
       await getDataService.update(formData).then(() => {
         this.getProfile();
       });
-    },
-    changePicture() {
-      this.picture = 'new_picture.jpg';
-    },
-    open(link) {
-      switch (link) {
-        case "linkedin":
-          window.open(this.linkedin, "_blank");
-          break;
-        case "github":
-          window.open(this.github, "_blank");
-          break;
-        case "behance":
-          window.open(this.behance, "_blank");
-          break;
-        case "resume":
-          window.open(this.resume, "_blank");
-          break;
-      }
     },
   },
 };
@@ -179,9 +150,6 @@ img {
   }
 }
 
-.fa {
-  font-size: 15px;
-}
 
 .btn {
   border-color: #17a2b8;
