@@ -10,30 +10,32 @@
         data-aos-duration="1000"
     >
       <div class="row align-items-center">
-        <form style="width: 100%">
+        <form style="width: 90%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
           <div class="row align-items-center">
             <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser !== null">
               <div class="image-container">
-                <img :src="picture" :style="getImageStyle" />
-                <button @click="changePicture" class="camera-button">
+                <img :src="getImageUrl(profile.image)">
+                <input type="file" name="image" id="image" @change="handleFileChange($event)">
+                <label class="camera-icon">
                   <i class="fas fa-camera"></i>
-                </button>
+                </label>
               </div>
             </div>
             <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
               <div v-if="currentUser !== null" class="d-flex flex-column align-items-end">
-                <input type="text" style="font-size: 20px" class="form-control" v-model="homeTitle">
-                <button class="btn btn-outline-success mt-2 mb-2" @click="updateDescription">Update Title</button>
+                <input type="text" name="title" style="font-size: 20px" id="title" class="form-control" v-model="homeTitle">
               </div>
+              <br>
               <div>
                 <div class="d-flex flex-column align-items-end">
-                  <textarea v-model="description" class="form-control" rows="6"></textarea>
-                  <button class="btn btn-outline-success mt-2" @click="updateDescription">Update</button>
+                  <textarea v-model="description" name="description" id="description" class="form-control" rows="6"></textarea>
+                  <button class="btn btn-outline-success mt-2" @click="update">Update</button>
                 </div>
               </div>
             </div>
           </div>
         </form>
+
       </div>
     </div>
   </div>
@@ -44,6 +46,7 @@
 
 
 import info from "../../../info";
+import {GetDataService as getDataService} from "@/service/get-data-service";
 
 export default {
   name: "HomeAdmin",
@@ -56,9 +59,11 @@ export default {
   },
   data() {
     return {
-      homeTitle: "Welcome to my World.",
+      file: null,
+      profile: null,
+      homeTitle: '',
       picture: info.flat_picture,
-      description: info.description,
+      description: '',
       name: info.name,
       linkedin: info.links.linkedin,
       github: info.links.github,
@@ -71,7 +76,34 @@ export default {
       return this.$store.state.auth.user;
     },
   },
+  created() {
+    this.getProfile();
+  },
   methods: {
+    handleFileChange(event) {
+      this.file = event.target.files[0];
+    },
+    getImageUrl(imageName) {
+      return `http://localhost:8080/image/${imageName}`;
+    },
+    getProfile() {
+      getDataService.getProfile().then((response) => {
+        this.profile = response.data;
+        this.homeTitle = this.profile.title;
+        this.description = this.profile.description;
+      });
+    },
+    async update() {
+      const formData = new FormData();
+      formData.append('title', this.homeTitle);
+      formData.append('description', this.description);
+      if (this.file) {
+        formData.append('image', this.file);
+      }
+      await getDataService.update(formData).then(() => {
+        this.getProfile();
+      });
+    },
     changePicture() {
       this.picture = 'new_picture.jpg';
     },
@@ -101,25 +133,33 @@ export default {
   display: inline-block;
 }
 
-.camera-button {
+.image-container {
+  position: relative;
+}
+
+.image-container input[type="file"] {
+  opacity: 0;
   position: absolute;
-  bottom: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.image-container .camera-icon {
+  position: absolute;
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
   background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 25px;
   cursor: pointer;
   padding: 0px 20px;
-  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
   background-color: rgba(65, 63, 63, 0.5);
-  backdrop-filter: blur(8px);
+  color: #ffffff;
 }
-.home-title {
-  font-size: 55px;
-  font-weight: 500;
-}
+
 
 img {
   max-width: 800px;
