@@ -1,0 +1,152 @@
+<template>
+  <div>
+    <!-- Các trường nhập dữ liệu -->
+    <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
+      <div class="d-flex flex-column align-items-end">
+        <input type="text" name="title" style="font-size: 20px" id="title" class="form-control" v-model="storyTitle">
+      </div>
+      <br>
+      <div>
+        <div class="d-flex flex-column align-items-end">
+          <textarea v-model="storyName" name="description" id="description" class="form-control" rows="6"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bảng hiển thị các hàng -->
+    <table>
+      <thead>
+      <tr>
+        <th>Thứ tự</th>
+        <th>Ảnh</th>
+        <th>Title</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(item, index) in items" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>
+          <input type="file" @change="handleImageUpload(index, $event)" />
+        </td>
+        <td>
+          <input type="text" v-model="item.title" />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Nút "Thêm mới" -->
+    <button @click="addRow">Thêm mới</button>
+    <br>
+    <!-- Nút "Gửi dữ liệu" -->
+    <button @click="submitData">Gửi dữ liệu</button>
+  </div>
+</template>
+
+<script>
+import { GetDataService } from "@/service/get-data-service";
+
+export default {
+  name: "StoryManagement",
+  data() {
+    return {
+      items: [],
+      storyName: "",
+      storyTitle: "",
+    };
+  },
+  methods: {
+    addRow() {
+      this.items.push({
+        title: "",
+        image: null,
+      });
+    },
+    handleImageUpload(index, event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const imageData = {
+          title: this.items[index].title,
+          image: reader.result,
+        };
+        this.$set(this.items, index, imageData);
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    },
+    async submitData() {
+      for (let i = 0; i < this.items.length; i++) {
+        const item = this.items[i];
+        if (item.title && item.image) {
+          const formData = new FormData();
+          formData.append('name', this.storyTitle);
+          formData.append('title', this.storyName);
+          formData.append('titleImage', item.title);
+
+          const imageData = this.convertBase64ToBlob(item.image);
+          formData.append('image', imageData, "image.jpg");
+
+          try {
+            const response = await GetDataService.createStory(formData);
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    },
+    convertBase64ToBlob(base64Data) {
+      const parts = base64Data.split(";base64,");
+      const contentType = parts[0].split(":")[1];
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+
+      return new Blob([uInt8Array], { type: contentType });
+    },
+  },
+};
+</script>
+
+
+
+
+
+
+<style scoped>
+/* Định dạng cho bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Định dạng cho nút "Thêm mới" */
+button {
+  margin-top: 10px;
+}
+
+/* Định dạng kích thước ảnh */
+.image-preview {
+  max-width: 10%;
+  max-height: 10%;
+}
+</style>

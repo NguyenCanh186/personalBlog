@@ -4,7 +4,9 @@
     <div class="parent">
       <Home v-if="currentUser === null" :nightMode="nightMode" />
       <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
-      <Portfolio id="portfolio" :nightMode="nightMode" />
+      <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />
+      <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
+<!--      <StoryManagement v-if="currentUser !== null" :nightMode="nightMode" id="story" />-->
       <About id="about" :nightMode="nightMode" />
       <Contact id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
@@ -22,10 +24,14 @@ import Footer from "./components/Footer";
 
 import info from "../info";
 import HomeAdmin from "@/components/admin/HomeAdmin.vue";
+import StoryAdmin from "@/components/admin/StoryAdmin.vue";
+// import StoryManagement from "@/components/admin/StoryManagement.vue";
 
 export default {
   name: "App",
   components: {
+    StoryAdmin,
+    // StoryManagement,
     HomeAdmin,
     Navbar,
     Home,
