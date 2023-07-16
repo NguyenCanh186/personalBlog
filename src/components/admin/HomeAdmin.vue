@@ -28,7 +28,7 @@
           <div>
             <div class="d-flex flex-column align-items-end">
               <textarea v-model="description" name="description" id="description" class="form-control" rows="6"></textarea>
-              <button class="btn btn-outline-success mt-2" @click="update">Update</button>
+              <button class="btn mt-2" @click="update">Update</button>
             </div>
           </div>
         </div>

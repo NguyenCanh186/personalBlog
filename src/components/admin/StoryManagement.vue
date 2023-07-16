@@ -20,16 +20,26 @@
         <th>Thứ tự</th>
         <th>Ảnh</th>
         <th>Title</th>
+        <th>Xóa</th> <!-- Add the "Xóa" header -->
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in items" :key="index">
+      <tr v-for="(item, index) in items" :key="item.id">
         <td>{{ index + 1 }}</td>
         <td>
-          <input type="file" @change="handleImageUpload(index, $event)" />
+          <div class="image-container">
+          <img v-if="item.image" :src="item.image" alt="Preview" class="image-preview" /><br>
+          <input type="file" @change="handleFileChange(index, $event)" />
+          </div>
         </td>
         <td>
           <input type="text" v-model="item.title" />
+        </td>
+        <td>
+          <!-- Hiển thị biểu tượng xóa với viền đỏ -->
+          <span class="delete-icon" @click="deleteRow(item.id)">
+      ❌
+    </span>
         </td>
       </tr>
       </tbody>
@@ -45,37 +55,65 @@
 
 <script>
 import { GetDataService } from "@/service/get-data-service";
+import index from "vuex";
 
 export default {
   name: "StoryManagement",
+  computed: {
+    index() {
+      return index
+    }
+  },
   data() {
     return {
       items: [],
       storyName: "",
       storyTitle: "",
+      nextId: 1,
     };
   },
   methods: {
+    deleteRow(id) {
+      console.log(this.items);
+      console.log(id);
+      this.items = this.items.filter(item => item.id !== id);
+    },
     addRow() {
       this.items.push({
+        id: this.nextId, // Sử dụng biến đếm để tạo id
         title: "",
         image: null,
       });
+      this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
     },
-    handleImageUpload(index, event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+    // async handleFileChange(index, event) {
+    //   const file = event.target.files[0];
+    //   const reader = new FileReader();
+    //
+    //   reader.onload = () => {
+    //     const imageData = {
+    //       ...this.items[index], // Copy các thuộc tính của item hiện tại
+    //       title: this.items[index].title, // Giữ title
+    //       image: reader.result, // Cập nhật ảnh mới
+    //     };
+    //     this.$set(this.items, index, imageData);
+    //   };
+    //
+    //   if (file) {
+    //     reader.readAsDataURL(file);
+    //   }
+    // },
 
-      reader.onload = () => {
+    async handleFileChange(index, event) {
+      const file = event.target.files[0];
+      if (file) {
+        const imageURL = URL.createObjectURL(file); // Tạo URL tạm thời cho ảnh
         const imageData = {
+          ...this.items[index],
           title: this.items[index].title,
-          image: reader.result,
+          image: imageURL, // Gán URL cho thuộc tính image
         };
         this.$set(this.items, index, imageData);
-      };
-
-      if (file) {
-        reader.readAsDataURL(file);
       }
     },
     async submitData() {
@@ -115,13 +153,16 @@ export default {
   },
 };
 </script>
-
-
-
-
-
-
 <style scoped>
+.delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.delete-icon-active {
+  color: red;
+  border: 1px solid red;
+}
 /* Định dạng cho bảng */
 table {
   width: 100%;
@@ -148,5 +189,22 @@ button {
 .image-preview {
   max-width: 10%;
   max-height: 10%;
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container .camera-icon {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background: transparent;
+  cursor: pointer;
+  padding: 0px 20px;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  background-color: rgba(65, 63, 63, 0.5);
+  color: #ffffff;
 }
 </style>
