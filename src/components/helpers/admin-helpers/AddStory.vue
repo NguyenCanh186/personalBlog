@@ -25,7 +25,7 @@
                 :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
           </div>
-          <div style="padding: 30px">
+          <div style="padding: 30px" class="modal-body my-0 pb-0 px-4 pt-0">
             <div
                 data-aos="fade-up"
                 data-aos-once="true"
@@ -56,18 +56,56 @@
          text-align: center;
          line-height: 1.5;"
               />
+              <br><br>
+              <table>
+                <thead>
+                <tr>
+                  <th style="width: 5%">Stt</th>
+                  <th style="width: 30%; text-align: center">Ảnh</th>
+                  <th style="width: 60%">Title</th>
+                  <th style="width: 5%">Xóa</th> <!-- Add the "Xóa" header -->
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item, index) in items" :key="item.id">
+                  <td>{{ index + 1 }}</td>
+                  <td style="width: 30%; text-align: center">
+                    <div class="image-container">
+                      <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
+                      <label v-if="!item.image" class="btn btn-file">
+                        <span v-if="!item.image">Chọn ảnh</span>
+                        <input type="file" @change="handleFileChange(index, $event)" />
+                      </label>
+                      <label v-else class="btn btn-file-change">
+                        <span><i class="fas fa-camera"></i></span>
+                        <input type="file" @change="handleFileChange(index, $event)" />
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" v-model="item.title" />
+                  </td>
+                  <td>
+                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
+                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-column align-items-center">
+                <button class="btn-add-row mt-2 rounded-circle" @click="addRow">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
             </div>
 
-            <button
-                @click="login()"
-                class="mt-2 btn"
-                data-aos="fade"
-                data-aos-once="true"
-                data-aos-duration="1000"
-                data-aos-offset="50"
-            >
-              Thêm mới
-            </button>
+          </div>
+          <div class="text-center pb-3">
+            <hr
+                class="mt-1 mb-4"
+                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
+            />
+            <button class="btn-add w-25" @click="submitData">Thêm mới</button>
           </div>
         </div>
       </div>
@@ -76,6 +114,8 @@
 </template>
 
 <script>
+import index from "vuex";
+import { GetDataService } from "@/service/get-data-service";
 export default {
   name: "AddStory",
   props: {
@@ -85,32 +125,77 @@ export default {
   },
   data() {
     return {
-      password: "",
-      picture: info.flat_picture,
+      items: [],
+      storyName: "",
+      storyTitle: "",
+      nextId: 1,
     };
   },
   computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
-  },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push('/admin/home');
+    index() {
+      return index
     }
   },
+  created() {
+  },
   methods: {
-    open(url) {
-      window.open(url, "_blank");
-    },
     close() {
       this.$emit("close");
-      this.password = "";
     },
-    login() {
-      this.$emit("login", this.password);
-      console.log(this.password)
+    deleteRow(id) {
+      console.log(this.items);
+      console.log(id);
+      this.items = this.items.filter(item => item.id !== id);
     },
+    addRow() {
+      this.items.push({
+        id: this.nextId, // Sử dụng biến đếm để tạo id
+        title: "",
+        image: null,
+        imageShow: null,
+      });
+      this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
+    },
+    async handleFileChange(index, event) {
+      const file = event.target.files[0];
+      if (file) {
+        const imageData = {
+          ...this.items[index],
+          title: this.items[index].title,
+          image: file, // Gán URL cho thuộc tính image
+        };
+        this.$set(this.items, index, imageData);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageURL = e.target.result;
+          this.items[index].imageShow = imageURL;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    async submitData() {
+      console.log(123)
+      for (let i = 0; i < this.items.length; i++) {
+        const item = this.items[i];
+        console.log(item)
+        if (item.title && item.image) {
+          const formData = new FormData();
+          formData.append('name', this.storyTitle);
+          formData.append('title', this.storyName);
+          formData.append('titleImage', item.title);
+
+          // const imageData = this.convertBase64ToBlob(item.image);
+          formData.append('image', item.image);
+          console.log(234)
+          try {
+            const response = await GetDataService.createStory(formData);
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    }
   },
 };
 </script>
@@ -131,7 +216,6 @@ a:hover {
   transition: all 0.2s;
   color: gray;
 }
-
 .date {
   font-size: 14px;
   font-weight: 400;
@@ -159,7 +243,7 @@ a:hover {
 
 .modal-container {
   width: 50%;
-  max-height: 80%;
+  max-height: 100%;
   margin: 0px auto;
   border-radius: 7px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -184,23 +268,10 @@ a:hover {
 
 @media screen and (max-width: 580px) {
   .modal-container {
-    width: 90%;
-    height: 100%;
+    margin-top: -80px;
+    width: 95%;
+    height: 60%;
   }
-}
-
-.modal-body {
-  margin: 20px 0;
-  overflow-y: scroll;
-  max-height: inherit;
-}
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
 }
 
 .modal-enter .modal-container,
@@ -209,62 +280,16 @@ a:hover {
   transform: scale(1.1);
 }
 
-.title {
-  font-size: 30px;
-  font-weight: 500;
-}
 .title1 {
   font-size: 24px;
   font-weight: 400;
 }
 
-.title2 {
-  font-size: 20px;
-  font-weight: 400;
+.modal-body {
+  margin: 20px 0;
+  overflow-y: scroll;
+  max-height: inherit;
 }
-
-.title3 {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.badge {
-  background-color: #bbd4dd;
-  transition: all 0.5s;
-  font-weight: 500;
-}
-
-.badge:hover {
-  transition: all 0.5s;
-  box-shadow: 2px 2px 5px rgb(179, 179, 179);
-}
-
-.btn {
-  border-color: #759CC9;
-  color: #759CC9;
-}
-
-.btn:hover {
-  background-color: #759CC9;
-  border-color: #759CC9;
-  color: white;
-}
-
-.btn:focus {
-  background-color: #759CC9;
-  border-color: #759CC9;
-  color: white;
-}
-
-.bg-dark4 {
-  background-color: #494e55 !important;
-}
-
-
-
-
-
-
 .pinput {
   font-size: 18px;
   outline: none;
@@ -277,7 +302,22 @@ a:hover {
 }
 
 .btn {
-  border-color: #00CCCC;
+  color: #00CCCC;
+}
+
+.btn-add-row {
+  border: 1px solid #00CCCC;
+  color: #00CCCC;
+  background-color: white;
+}
+
+.btn-add {
+  margin-top: -20px;
+  width: 150px;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #00CCCC;
   color: #00CCCC;
 }
 
@@ -293,33 +333,142 @@ a:hover {
   color: white;
 }
 
-.pgray-dark {
-  background-color: #3c4148 !important;
-}
-img {
-  object-fit: cover;
-  max-width: 250px;
-  max-height: 250px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 50%;
-  transform: rotateY(180deg);
-}
-
-@media only screen and (max-width: 580px) {
-  img {
-    object-fit: cover;
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid rgb(205, 205, 205);
-  }
-}
 @media screen and (max-width: 1000px) {
   .pinput {
     width: 100%;
   }
+}
+
+.delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+/* Định dạng cho bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Định dạng cho nút "Thêm mới" */
+button {
+  margin-top: 10px;
+}
+
+/* Định dạng kích thước ảnh */
+.image-preview {
+  max-width: 30%;
+  max-height: 30%;
+}
+@media only screen and (max-width: 580px) {
+  .image-preview {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+/* ... */
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container .btn-file {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: white;
+  background-color: #17a2b8 !important;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btn-file-change {
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  height: 28px;
+  font-size: 12px;
+  color: white;
+  background-color: #606060 !important;
+}
+
+.btn-file-change {
+  position: relative;
+  overflow: hidden;
+  width: 50px;
+  height: 28px;
+  font-size: 17px;
+  color: white;
+  background-color: #606060 !important;
+
+}
+
+.image-container .btn-file-change {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: white;
+  background-color: #424141 !important;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+/* ... */
+
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  height: 28px;
+  font-size: 12px;
+  color: white;
+  background-color: #17a2b8 !important;
+}
+.btn-file input[type=file] {
+  /*color: #00CCCC;*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 10%;
+  min-height: 10%;
+  font-size: 10px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.btn-file-change input[type=file] {
+  /*color: #00CCCC;*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 10%;
+  min-height: 10%;
+  font-size: 10px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }
 </style>

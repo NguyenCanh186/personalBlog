@@ -6,7 +6,7 @@
       <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
       <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />
       <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
-      <StoryManagement v-if="currentUser !== null" :nightMode="nightMode" id="story" />
+<!--      <StoryManagement v-if="currentUser !== null" :nightMode="nightMode" id="story" />-->
       <About id="about" :nightMode="nightMode" />
       <Contact id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />

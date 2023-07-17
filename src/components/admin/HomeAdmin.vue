@@ -122,6 +122,7 @@ export default {
   position: absolute;
   bottom: 0;
   left: 50%;
+  margin-top: 50%;
   background: transparent;
   cursor: pointer;
   padding: 0px 20px;
