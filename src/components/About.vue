@@ -186,28 +186,6 @@ export default {
   font-size: 30px;
   font-weight: 500;
 }
-.title1 {
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.title2 {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.title3 {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
 
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
@@ -282,27 +260,6 @@ export default {
   transition: all 0.5s;
 }
 
-.design-img {
-  width: 100%;
-  border-radius: 15px;
-  transition: all 0.5s;
-}
-
-.dimg {
-  position: relative;
-  border-radius: 15px;
-}
-.middle {
-  transition: all 0.5s;
-  opacity: 0;
-  position: absolute;
-  bottom: 0px;
-  left: 70px;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-  padding: 20px;
-}
 
 .dimg:hover .design-img {
   position: relative;
@@ -337,27 +294,5 @@ export default {
   background-color: #17a2b8;
   border-color: #17a2b8;
   color: white;
-}
-/deep/ .vueperslides__arrow {
-  outline: none !important;
-  border: none;
-  color: grey;
-}
-
-.badge {
-  background-color: #bbd4dd;
-  transition: all 0.5s;
-  font-weight: 500;
-  font-size: 13px;
-}
-
-.bg-dark4 {
-  background-color: #494e55 !important;
-}
-
-.date {
-  font-size: 14px;
-  font-weight: 400;
-  opacity: 0.75
 }
 </style>

@@ -13,7 +13,8 @@
 
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
           <div class="image-container">
-            <img :src="getImageUrl(profile.image)">
+            <img v-if="this.file === null" :src="getImageUrl(profile.image)">
+            <img v-else :src="fileShow">
             <input type="file" name="image" id="image" @change="handleFileChange($event)">
             <label class="camera-icon">
               <i class="fas fa-camera"></i>
@@ -55,6 +56,7 @@ export default {
   data() {
     return {
       file: null,
+      fileShow: null,
       profile: null,
       homeTitle: '',
       picture: info.flat_picture,
@@ -70,8 +72,36 @@ export default {
     this.getProfile();
   },
   methods: {
-    handleFileChange(event) {
-      this.file = event.target.files[0];
+    async handleFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.file = file;
+        this.fileShow = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const maxSize = Math.min(img.width, img.height);
+            canvas.width = maxSize;
+            canvas.height = maxSize;
+            const ctx = canvas.getContext('2d');
+            const offsetX = img.width > maxSize ? (img.width - maxSize) / 2 : 0;
+            const offsetY = img.height > maxSize ? (img.height - maxSize) / 2 : 0;
+            ctx.drawImage(img, offsetX, offsetY, maxSize, maxSize, 0, 0, maxSize, maxSize);
+            const dataURL = canvas.toDataURL(file.type);
+            this.fileShow = dataURL;
+
+            canvas.toBlob(async (blob) => {
+              const fileName = file.name; // Preserve the original file name
+              const newFile = new File([blob], fileName, { type: file.type });
+              this.file = newFile; // Set this.file to the cropped File
+            }, file.type);
+          };
+        };
+        reader.readAsDataURL(file);
+      }
     },
     getImageUrl(imageName) {
       return `http://localhost:8080/image/${imageName}`;
@@ -136,7 +166,6 @@ export default {
 img {
   max-width: 800px;
   max-height: 500px;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (max-width: 580px) {
