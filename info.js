@@ -1,6 +1,6 @@
 let info = {
   name: "Canh Nguyen",
-  logo_name: "Cảnh Nguyễn",
+  logo_name: "Call Me",
   flat_picture: require("./src/assets/me.jpg"),
   config: {
     use_cookies: true,
@@ -8,91 +8,12 @@ let info = {
       blur: false
     }
   },
-  description:
-    "Xin chào, tôi là Cảnh. Tên đầy đủ là Nguyễn Thế Cảnh, sinh năm 1996 tại Phú Thọ. Hiện tại thì tôi đang sinh sống và làm việc tại Hà Nội. Mọi người đến đây chắc hẳn cũng có chut tò mò về Cảnh. Blog này là nơi tôi ghi lại những khoảnh khắc, và những suy nghĩ vớ vẩn của mình. Cảm ơn mọi người đã ghé thăm nhé! Chúc mọi người một ngày tốt lành.",
   links: {
     linkedin: "https://www.facebook.com/Shurikenger186",
     github: "https://www.tiktok.com/@ka1896.jp?_t=8aDcPNpf72X&_r=1",
       behance: "https://join.skype.com/invite/yX3vsxMddME8",
     resume: "https://drive.google.com/file/d/1W0pzOo1Gb-W70BYKehOfZ4qaJt7m1_7O/view?usp=sharing",
   },
-  education: [
-    {
-      name: "KFS University",
-      place: "Kafr Elsheikh",
-      date: "sep, 2018 - present",
-      degree: "bachelor in software engineering",
-      gpa: "3.1/4.0",
-      description:
-        "",
-      skills: [
-        "Software Engineering",
-        "web programming",
-        "UI/UX design",
-        "Front-end developing",
-      ]
-    },
-  ],
-  experience: [
-    {
-      name: "ITI",
-      place: "Kafr elSheikh, Egypt",
-      date: "1,sep, 2021 - 28,sep, 2021",
-      position: "VueJS web developer",
-      description:
-        "",
-      skills: ["HTML5", "CSS3", "Bootstrap", "JQuery", "Json", "JavaSript", "TypeSript", "es6", "VueJS"]
-    },
-    {
-      name: "Udacity",
-      place: "Egypt",
-      date: "Jun 2021 - Jan 2022",
-      position: "React Web Developer",
-      description:
-        "",
-      skills: ["Javascript", "Typescript", "ReactJS", "React-Redux", "webpack", "NLP"]
-    },
-    {
-      name: "Freelancer",
-      place: "Egypt",
-      date: "jun, 2021 - sep, 2021",
-      position: "Junior UI/UX Designer",
-      description: "creating apps and web UI, Creating Interactive prototypes, Low fidelity and UX researches",
-      skills: ["figma", "Adobe XD", "Photoshop", "Illustrator"]
-    },
-    {
-      name: "Technopolitan",
-      place: "Cairo, Egypt",
-      date: "Jan 2022 - Present",
-      position: "Mid-Level UI/UX Designer",
-      description: "part of team include project managers and developers to create technically feasible design, creating 95% of CRM of the company ,creating user experience and interface using adobe XD for best user solution ,finishing 80% of tasks before the target ",
-      skills: ["figma", "Adobe XD"]
-    },
-  ],
-  skills: [
-    {
-      title: "UX/UI Design",
-      info: ["Figma", "Illustrator", "XD", "Photoshop", "Gimp"],
-      icon: "fa fa-pencil-square-o"
-    },
-    {
-      title: "Language",
-      info: [
-        "Python","Javascript","TypeScript","Java","C#"],
-      icon: "fa fa-code"
-    },
-    {
-      title: "Front-end",
-      info: [
-        "HTML5","CSS3","Bootstrap3","Es6"],
-      icon: "fa fa-cubes"
-    },
-    {
-      title: "web technologies",
-      info: ["Vue", "React", "Node"],
-      icon: "fas fa-laptop-code"
-    },
-  ],
   portfolio: [
     {
       name: "Quản lý điểm V-Point",

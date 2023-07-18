@@ -67,11 +67,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(item, index) in items" :key="item.id">
+                <tr v-for="(item, index) in items" :key="item.idRow">
                   <td>{{ index + 1 }}</td>
                   <td style="width: 30%; text-align: center">
                     <div class="image-container">
-                      <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
+                      <img v-if="item.image && !item.change" :src="`http://localhost:8080/image/${item.imageShow}`" alt="Preview" class="image-preview" />
+                      <img v-if="item.image && item.change" :src="item.imageShow" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
                         <span v-if="!item.image">Chọn ảnh</span>
                         <input type="file" @change="handleFileChange(index, $event)" />
@@ -87,7 +88,7 @@
                   </td>
                   <td>
                     <!-- Hiển thị biểu tượng xóa với viền đỏ -->
-                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                    <span class="delete-icon" @click="deleteRow(item.idRow)">❌</span>
                   </td>
                 </tr>
                 </tbody>
@@ -105,7 +106,7 @@
                 class="mt-1 mb-4"
                 :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
-            <button class="btn-add w-25" @click="submitData">Thêm mới</button>
+            <button class="btn-add w-25" @click="submitData">Cập nhật</button>
           </div>
         </div>
       </div>
@@ -116,29 +117,21 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
-    <!-- Modal cho việc nhập tiêu đề -->
-<!--    <b-modal v-model="showTitleModal" title="Nhập tiêu đề">-->
-<!--      <input-->
-<!--          type="text"-->
-<!--          v-model="titleInput"-->
-<!--          placeholder="Nhập tiêu đề"-->
-<!--          class="pinput"-->
-<!--          style="transition-delay: 0.2s; text-align: center; line-height: 1.5;"-->
-<!--      />-->
-<!--      <button class="btn-add mt-2" @click="saveTitle">Lưu</button>-->
-<!--    </b-modal>-->
   </div>
 </template>
 
 <script>
 import index from "vuex";
-import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
+import { GetDataService } from "@/service/get-data-service";
 export default {
-  name: "AddStory",
+  name: "EditStory",
   props: {
     showModal: {
       type: Boolean,
+    },
+    data: {
+      type: Object,
     },
   },
   data() {
@@ -147,36 +140,60 @@ export default {
       storyName: "",
       storyTitle: "",
       nextId: 1,
+      listIdPicture: "",
       showSnackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
     };
   },
-  components: {
-    Snackbar,
-  },
+    components: {
+      Snackbar,
+    },
   computed: {
     index() {
       return index
     }
   },
   created() {
-  },
+    this.convertData()
+    },
   methods: {
     close() {
       this.$emit("close");
     },
-    deleteRow(id) {
-      console.log(this.items);
-      console.log(id);
-      this.items = this.items.filter(item => item.id !== id);
+    deleteRow(idRow) {
+      let itemcheck = null
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i].idRow === idRow) {
+          itemcheck = this.items[i]
+        }
+      }
+      if (itemcheck.id !== null) {
+        this.listIdPicture += itemcheck.id + ","
+      }
+      console.log(this.listIdPicture)
+      this.items = this.items.filter(item => item.idRow !== idRow);
+    },
+    async convertData() {
+      this.items = this.data.storyPictures;
+      this.storyName = this.data.name;
+      this.storyTitle = this.data.title;
+      for (let i = 0; i < this.items.length; i++) {
+        this.items[i].idRow = this.nextId;
+        this.items[i].imageShow = this.items[i].image;
+        this.items[i].change = false;
+        console.log(this.items[i])
+        this.nextId++;
+      }
     },
     addRow() {
       this.items.push({
-        id: this.nextId, // Sử dụng biến đếm để tạo id
+        idRow: this.nextId, // Sử dụng biến đếm để tạo id
         title: "",
         image: null,
         imageShow: null,
+        change: false,
+        id: null,
       });
       this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
     },
@@ -187,6 +204,7 @@ export default {
           ...this.items[index],
           title: this.items[index].title,
           image: file, // Gán URL cho thuộc tính image
+          change: true,
         };
         this.$set(this.items, index, imageData);
         const reader = new FileReader();
@@ -228,25 +246,82 @@ export default {
           return;
         }
       }
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i];
-        console.log(item)
-        if (item.title && item.image) {
-          const formData = new FormData();
-          formData.append('name', this.storyTitle);
-          formData.append('title', this.storyName);
-          formData.append('titleImage', item.title);
-
-          // const imageData = this.convertBase64ToBlob(item.image);
-          formData.append('image', item.image);
-          try {
-            const response = await GetDataService.createStory(formData);
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
+      console.log(this.listIdPicture)
+      if (this.items.length >0) {
+        for (let i = 0; i < this.items.length; i++) {
+          const item = this.items[i];
+          console.log(item)
+          if (item.change && item.id) {
+            console.log("change and id");
+            const formData = new FormData();
+            formData.append('id', this.data.id);
+            formData.append('name', this.storyTitle);
+            formData.append('title', this.storyName);
+            formData.append('titleImage', item.title);
+            formData.append('pictureId', item.id);
+            formData.append('image', item.image);
+            if (this.listIdPicture.length > 0) {
+              formData.append('listIdPicture', this.listIdPicture);
+            }
+            try {
+              const response = await GetDataService.updateStory(formData);
+              console.log(response.data);
+            } catch (error) {
+              console.error(error);
+            }
+          } else if (item.change && !item.id) {
+            console.log("change and !id");
+            const formData = new FormData();
+            formData.append('id', this.data.id);
+            formData.append('name', this.storyTitle);
+            formData.append('title', this.storyName);
+            formData.append('titleImage', item.title);
+            formData.append('image', item.image);
+            if (this.listIdPicture.length > 0) {
+              formData.append('listIdPicture', this.listIdPicture);
+            }
+            try {
+              const response = await GetDataService.updateStory(formData);
+              console.log(response.data);
+            } catch (error) {
+              console.error(error);
+            }
+          } else if (!item.change && item.id) {
+            const formData = new FormData();
+            formData.append('id', this.data.id);
+            formData.append('name', this.storyTitle);
+            formData.append('title', this.storyName);
+            formData.append('titleImage', item.title);
+            formData.append('pictureId', item.id);
+            if (this.listIdPicture.length > 0) {
+              formData.append('listIdPicture', this.listIdPicture);
+            }
+            try {
+              const response = await GetDataService.updateStory(formData);
+              console.log(response.data);
+            } catch (error) {
+              console.error(error);
+            }
           }
+          this.listIdPicture = "";
         }
+      } else {
+        const formData = new FormData();
+        formData.append('id', this.data.id);
+        formData.append('name', this.storyTitle);
+        formData.append('title', this.storyName);
+        if (this.listIdPicture.length > 0) {
+          formData.append('listIdPicture', this.listIdPicture);
+        }
+        try {
+          const response = await GetDataService.updateStory(formData);
+          console.log(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+        this.listIdPicture = "";
       }
+
     }
   },
 };
@@ -295,8 +370,7 @@ a:hover {
 
 .modal-container {
   width: 50%;
-  max-height: 80%;
-  min-height: 80%;
+  max-height: 100%;
   margin: 0px auto;
   border-radius: 7px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -308,14 +382,14 @@ a:hover {
 @media screen and (max-width: 1600px) {
   .modal-container {
     width: 60%;
-    height: 80%;
+    height: 90%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .modal-container {
     width: 80%;
-    height: 80%;
+    height: 90%;
   }
 }
 
@@ -324,7 +398,6 @@ a:hover {
     margin-top: -80px;
     width: 95%;
     height: 60%;
-    min-height: 60%;
   }
 }
 

@@ -92,7 +92,7 @@ export default {
             ctx.drawImage(img, offsetX, offsetY, maxSize, maxSize, 0, 0, maxSize, maxSize);
             const dataURL = canvas.toDataURL(file.type);
             this.fileShow = dataURL;
-
+            // convert lại file trước khi gửi về server
             canvas.toBlob(async (blob) => {
               const fileName = file.name; // Preserve the original file name
               const newFile = new File([blob], fileName, { type: file.type });

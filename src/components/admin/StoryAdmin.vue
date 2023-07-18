@@ -46,7 +46,7 @@
             <td style="width: 25%; text-align: center !important;">
               <div class="button-container">
                 <!-- Button with edit icon -->
-                <button class="action-button edit" @click="editItem(item)">
+                <button class="action-button edit" @click="showEditModalModalFn(item)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <!-- Button with delete icon -->
@@ -69,20 +69,29 @@
         :showModal="showDesignModal"
         @close="closeModal"
         v-if="showDesignModal"
-        @create="createStory"
     />
+    <EditStory
+        :showModal="showEditModal"
+        @close="closeModalEdit"
+        :data="story"
+        v-if="showEditModal"
+    />
+
   </div>
 </template>
 
 <script>
 import {GetDataService} from "@/service/get-data-service";
 import AddStory from "@/components/helpers/admin-helpers/AddStory.vue";
+import EditStory from "@/components/helpers/admin-helpers/EditStory.vue";
 
 export default {
   name: "StoryAdmin",
-  components: {AddStory},
+  components: {EditStory, AddStory},
   data() {
     return {
+      story: {},
+      showEditModal: false,
       showDesignModal: false,
       showSnackbar: false,
       snackbarMessage: "",
@@ -97,15 +106,30 @@ export default {
     showDesignModalFn() {
       this.showDesignModal = true;
     },
+    async showEditModalModalFn(item) {
+      this.findByIdStory(item.id)
+      this.showEditModal = true;
+    },
     closeModal() {
       this.showModal = false;
       this.showDesignModal = false;
+      document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    },
+    closeModalEdit() {
+      this.showModal = false;
+      this.showEditModal = false;
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
     getStory() {
       GetDataService.getStory().then((response) => {
         this.items = response.data
         console.log(this.items)
+      });
+    },
+    async findByIdStory(id) {
+      await GetDataService.getStoryById(id).then((response) => {
+        this.story = response.data
+        console.log(this.story)
       });
     },
     getImageUrl(imageName) {
