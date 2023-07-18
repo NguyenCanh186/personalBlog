@@ -84,6 +84,7 @@
 import {GetDataService} from "@/service/get-data-service";
 import AddStory from "@/components/helpers/admin-helpers/AddStory.vue";
 import EditStory from "@/components/helpers/admin-helpers/EditStory.vue";
+import Swal from "sweetalert2";
 
 export default {
   name: "StoryAdmin",
@@ -141,14 +142,32 @@ export default {
     getImageUrl(imageName) {
       return `http://localhost:8080/image/${imageName}`;
     },
-    deleteItem() {
+    async deleteItem(item) {
       // Xử lý sự kiện xóa mục
+      await GetDataService.deleteByStoryById(item.id).then((response) => {
+        Swal.fire({
+          title: 'Đã xóa',
+          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.getStory()
+        console.log(response)
+      });
     },
   },
 };
 </script>
 
 <style scoped>
+.custom-circle {
+  display: inline-block;
+  width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  height: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  border-radius: 50%; /* Tạo vòng tròn */
+  border: 3px solid #00CCCC; /* Màu viền vòng tròn */
+  text-align: center;
+}
 /* Định dạng các phần tử trong bảng */
 .table {
   width: 100%;

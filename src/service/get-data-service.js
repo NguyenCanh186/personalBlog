@@ -23,6 +23,10 @@ export class GetDataService {
         return axios.get(`${this.serverURL}/get-data/story/${id}`)
     }
 
+    static deleteByStoryById(id) {
+        return axios.delete(`${this.serverURL}/story/${id}`, { headers: authHeader() })
+    }
+
     static updateStory(story) {
         return axios.post(`${this.serverURL}/story/update`, story, { headers: authHeader() })
     }

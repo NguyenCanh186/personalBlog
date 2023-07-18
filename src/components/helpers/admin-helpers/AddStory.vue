@@ -123,6 +123,7 @@
 import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
+import Swal from "sweetalert2";
 export default {
   name: "AddStory",
   props: {
@@ -235,6 +236,15 @@ export default {
             console.error(error);
           }
         }
+        if (i === this.items.length - 1) {
+          this.$emit("close", true);
+          await Swal.fire({
+            title: 'Xong',
+            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
       }
     }
   },
@@ -242,6 +252,14 @@ export default {
 </script>
 
 <style scoped>
+.custom-circle {
+  display: inline-block;
+  width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  height: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  border-radius: 50%; /* Tạo vòng tròn */
+  border: 3px solid #00CCCC; /* Màu viền vòng tròn */
+  text-align: center;
+}
 body.modal-open {
   overflow: hidden;
 }

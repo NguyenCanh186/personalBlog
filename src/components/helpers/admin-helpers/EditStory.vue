@@ -308,11 +308,10 @@ export default {
           if (i === this.items.length - 1) {
             this.$emit("close", true);
             await Swal.fire({
-              icon: 'success',
               title: 'Xong',
-              showConfirmButton: false, // Hide the "OK" button
-              timer: 3000,
-              iconHtml: '<i class="fas fa-check-circle" style="color: #00CCCC;"></i>',
+              html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+              showConfirmButton: false,
+              timer: 2000,
             });
           }
         }
@@ -331,13 +330,12 @@ export default {
           console.error(error);
         }
         this.$emit("close", true);
-          await Swal.fire({
-            icon: 'success',
-            title: 'Xong',
-            showConfirmButton: false, // Hide the "OK" button
-            timer: 3000,
-            iconHtml: '<i class="fas fa-check-circle" style="color: #00CCCC;"></i>',
-          });
+        await Swal.fire({
+          title: 'Xong',
+          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+          showConfirmButton: false,
+          timer: 2000,
+        });
         this.listIdPicture = "";
       }
 
@@ -347,6 +345,14 @@ export default {
 </script>
 
 <style scoped>
+.custom-circle {
+  display: inline-block;
+  width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  height: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
+  border-radius: 50%; /* Tạo vòng tròn */
+  border: 3px solid #00CCCC; /* Màu viền vòng tròn */
+  text-align: center;
+}
 body.modal-open {
   overflow: hidden;
 }

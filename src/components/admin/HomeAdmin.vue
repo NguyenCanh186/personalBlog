@@ -43,6 +43,7 @@
 
 import info from "../../../info";
 import {GetDataService as getDataService} from "@/service/get-data-service";
+import Swal from "sweetalert2";
 
 export default {
   name: "HomeAdmin",
@@ -121,7 +122,12 @@ export default {
         formData.append('image', this.file);
       }
       await getDataService.update(formData).then(() => {
-        this.getProfile();
+        Swal.fire({
+          title: 'Xong',
+          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
     },
   },
