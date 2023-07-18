@@ -110,12 +110,18 @@ export default {
       this.findByIdStory(item.id)
       this.showEditModal = true;
     },
-    closeModal() {
+    closeModal(check) {
+      if (check === true) {
+        this.getStory()
+      }
       this.showModal = false;
       this.showDesignModal = false;
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
-    closeModalEdit() {
+    closeModalEdit(check) {
+      if (check === true) {
+        this.getStory()
+      }
       this.showModal = false;
       this.showEditModal = false;
       document.getElementsByTagName("body")[0].classList.remove("modal-open");

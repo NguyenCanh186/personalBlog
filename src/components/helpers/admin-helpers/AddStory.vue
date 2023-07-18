@@ -116,17 +116,6 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
-    <!-- Modal cho việc nhập tiêu đề -->
-<!--    <b-modal v-model="showTitleModal" title="Nhập tiêu đề">-->
-<!--      <input-->
-<!--          type="text"-->
-<!--          v-model="titleInput"-->
-<!--          placeholder="Nhập tiêu đề"-->
-<!--          class="pinput"-->
-<!--          style="transition-delay: 0.2s; text-align: center; line-height: 1.5;"-->
-<!--      />-->
-<!--      <button class="btn-add mt-2" @click="saveTitle">Lưu</button>-->
-<!--    </b-modal>-->
   </div>
 </template>
 

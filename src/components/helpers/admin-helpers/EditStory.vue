@@ -124,6 +124,7 @@
 import index from "vuex";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import { GetDataService } from "@/service/get-data-service";
+import Swal from 'sweetalert2';
 export default {
   name: "EditStory",
   props: {
@@ -304,6 +305,16 @@ export default {
             }
           }
           this.listIdPicture = "";
+          if (i === this.items.length - 1) {
+            this.$emit("close", true);
+            await Swal.fire({
+              icon: 'success',
+              title: 'Xong',
+              showConfirmButton: false, // Hide the "OK" button
+              timer: 3000,
+              iconHtml: '<i class="fas fa-check-circle" style="color: #00CCCC;"></i>',
+            });
+          }
         }
       } else {
         const formData = new FormData();
@@ -319,6 +330,14 @@ export default {
         } catch (error) {
           console.error(error);
         }
+        this.$emit("close", true);
+          await Swal.fire({
+            icon: 'success',
+            title: 'Xong',
+            showConfirmButton: false, // Hide the "OK" button
+            timer: 3000,
+            iconHtml: '<i class="fas fa-check-circle" style="color: #00CCCC;"></i>',
+          });
         this.listIdPicture = "";
       }
 
