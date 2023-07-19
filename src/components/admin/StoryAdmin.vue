@@ -25,13 +25,13 @@
           :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="custom-table">
           <thead>
           <tr>
-            <th>Stt</th>
-            <th>Ảnh</th>
+            <th class="centered">Stt</th>
+            <th class="centered">Ảnh</th>
             <th>Tiêu đề</th>
-            <th>Action</th>
+            <th class="centered">Action</th>
           </tr>
           </thead>
           <tbody>
@@ -160,6 +160,32 @@ export default {
 </script>
 
 <style scoped>
+/* New styles for custom table and centering */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d3d0d0; /* Add a border to the table */
+}
+
+.custom-table th {
+  background-color: #17a2b8;
+  color: white;
+  text-align: center;
+  padding: 8px; /* Add padding to the table headers */
+  border: 1px solid #d3d0d0; /* Add a border to the table headers */
+}
+
+.custom-table td {
+  padding: 8px; /* Add padding to the table cells */
+  border: 1px solid #d3d0d0; /* Add a border to the table headers */
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+
 .custom-circle {
   display: inline-block;
   width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
@@ -168,21 +194,7 @@ export default {
   border: 3px solid #00CCCC; /* Màu viền vòng tròn */
   text-align: center;
 }
-/* Định dạng các phần tử trong bảng */
-.table {
-  width: 100%;
-}
 
-.table th {
-  background-color: #17a2b8;
-  color: white;
-  text-align: center;
-}
-.table td {
-  justify-items: center;
-  justify-content: center;
-  text-align: center;
-}
 .btn {
   border-color: #17a2b8;
   color: #17a2b8;
@@ -247,9 +259,6 @@ export default {
     height: 30px;
     font-size: 13px;
   }
-  /*.table {*/
-  /*  width: 95%;*/
-  /*}*/
 }
 
 .edit {

@@ -395,7 +395,8 @@ a:hover {
 
 .modal-container {
   width: 50%;
-  max-height: 100%;
+  max-height: 80%;
+  min-height: 80%;
   margin: 0px auto;
   border-radius: 7px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -407,7 +408,7 @@ a:hover {
 @media screen and (max-width: 1600px) {
   .modal-container {
     width: 60%;
-    height: 90%;
+    height: 80%;
   }
 }
 
@@ -423,6 +424,7 @@ a:hover {
     margin-top: -80px;
     width: 95%;
     height: 60%;
+    min-height: 60%;
   }
 }
 

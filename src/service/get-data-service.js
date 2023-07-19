@@ -19,8 +19,16 @@ export class GetDataService {
         return axios.get(`${this.serverURL}/get-data/story`)
     }
 
+    static getBlog() {
+        return axios.get(`${this.serverURL}/get-data/getBlog`)
+    }
+
     static getStoryById(id) {
         return axios.get(`${this.serverURL}/get-data/story/${id}`)
+    }
+
+    static getBlogById(id) {
+        return axios.get(`${this.serverURL}/get-data/getBlog/${id}`)
     }
 
     static deleteByStoryById(id) {
@@ -29,5 +37,13 @@ export class GetDataService {
 
     static updateStory(story) {
         return axios.post(`${this.serverURL}/story/update`, story, { headers: authHeader() })
+    }
+
+    static updateBlog(blog) {
+        return axios.post(`${this.serverURL}/blog/update`, blog, { headers: authHeader() })
+    }
+
+    static createBlog(blog) {
+        return axios.post(`${this.serverURL}/blog`, blog, { headers: authHeader() })
     }
 }
