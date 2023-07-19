@@ -1,63 +1,19 @@
 <template>
   <div
     :class="{ 'bg-white': !nightMode, 'bg-dark': nightMode }"
-    class="pt-5 p-st"
+    class=" p-st"
   >
+    <img :src="picture"/>
     <div
-      class="container"
-      data-aos="fade"
-      data-aos-once="true"
-      data-aos-duration="1000"
+        class="container"
+        data-aos="fade"
+        data-aos-once="true"
+        data-aos-duration="1000"
     >
-      <div class="row align-items-center">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
-          <div class="image-container">
-            <img :src="picture"/>
-          </div>
-        </div>
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-          <span
-            class="home-title"
-            :class="{ pgray: !nightMode, 'text-light': nightMode }"
-            >{{ homeTitle }}</span
-          >
-          <div>
-            <div>
-              <p v-html="description"></p>
-            </div>
-            <div class="text-center pb-4">
-              <button
-                  class="btn btn-outline-success mx-2 "
-                  @click="open('linkedin')"
-                  v-tooltip.bottom="'Facebook'"
-              >
-                <i class="fa-brands fa-square-facebook"></i>
-              </button>
-              <button
-                  class="btn btn-outline-info mx-2"
-                  @click="open('github')"
-                  v-tooltip.bottom="'Tóp tóp'"
-              >
-                <i class="fa-brands fa-tiktok"></i>
-              </button>
-              <button
-                  class="btn btn-outline-info mx-2"
-                  @click="open('behance')"
-                  v-tooltip.bottom="'Skype'"
-              >
-                <i class="fa-brands fa-skype"></i>
-              </button>
-              <button
-                  class="btn btn-outline-info mx-2"
-                  @click="open('resume')"
-                  v-tooltip.bottom="'Telegram'"
-              >
-                <i class="fa-brands fa-telegram"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2>Hệ thống tin nhắn SMS quảng cáo và
+        chăm sóc khách hàng</h2>
+      <h5>Sử dụng đơn giản, dễ dàng ngay trên Web. Hỗ trợ hiển thị tên thương hiệu (Brandname)
+        Tích hợp được với Website, phần mềm sẵn có của doanh nghiệp thông qua API.</h5>
     </div>
   </div>
 </template>
@@ -139,8 +95,8 @@ export default {
 }
 
 img {
-  max-width: 800px;
-  max-height: 500px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 @media only screen and (max-width: 580px) {

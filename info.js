@@ -1,7 +1,7 @@
 let info = {
   name: "Canh Nguyen",
   logo_name: "Call Me",
-  flat_picture: require("./src/assets/me.jpg"),
+  flat_picture: require("./src/assets/slide.png"),
   config: {
     use_cookies: true,
     navbar: {

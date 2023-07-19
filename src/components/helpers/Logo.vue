@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      name: info.logo_name,
+      name: 'BrandName',
       dot: ".",
     };
   },

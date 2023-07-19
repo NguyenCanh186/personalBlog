@@ -3,12 +3,12 @@
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
       <Home v-if="currentUser === null" :nightMode="nightMode" />
-      <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
-      <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />
-      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />
-      <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
-      <About v-if="currentUser === null" id="about" :nightMode="nightMode" />
-      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />
+<!--      <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
+<!--      <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
+<!--      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
+<!--      <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />-->
+<!--      <About v-if="currentUser === null" id="about" :nightMode="nightMode" />-->
+<!--      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />-->
       <Footer :nightMode="nightMode" />
     </div>
   </div>
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 #app {
   font-family: "Lobster", sans-serif;
   -webkit-font-smoothing: antialiased;
