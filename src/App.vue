@@ -5,9 +5,10 @@
       <Home v-if="currentUser === null" :nightMode="nightMode" />
       <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
       <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />
+      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />
       <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
-      <About id="about" :nightMode="nightMode" />
-      <Contact id="contact" :nightMode="nightMode" />
+      <About v-if="currentUser === null" id="about" :nightMode="nightMode" />
+      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
     </div>
   </div>
@@ -24,10 +25,12 @@ import Footer from "./components/Footer";
 import info from "../info";
 import HomeAdmin from "@/components/admin/HomeAdmin.vue";
 import StoryAdmin from "@/components/admin/StoryAdmin.vue";
+import BlogAdmin from "@/components/admin/BlogAdmin.vue";
 
 export default {
   name: "App",
   components: {
+    BlogAdmin,
     StoryAdmin,
     HomeAdmin,
     Navbar,

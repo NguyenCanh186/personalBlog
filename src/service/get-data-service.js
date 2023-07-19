@@ -46,4 +46,8 @@ export class GetDataService {
     static createBlog(blog) {
         return axios.post(`${this.serverURL}/blog`, blog, { headers: authHeader() })
     }
+
+    static deleteBlogById(id) {
+        return axios.delete(`${this.serverURL}/blog/${id}`, { headers: authHeader() })
+    }
 }

@@ -256,8 +256,8 @@ export default {
             console.log("change and id");
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyTitle);
-            formData.append('title', this.storyName);
+            formData.append('name', this.storyName);
+            formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             formData.append('pictureId', item.id);
             formData.append('image', item.image);
@@ -274,8 +274,8 @@ export default {
             console.log("change and !id");
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyTitle);
-            formData.append('title', this.storyName);
+            formData.append('name', this.storyName);
+            formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             formData.append('image', item.image);
             if (this.listIdPicture.length > 0) {
@@ -290,8 +290,8 @@ export default {
           } else if (!item.change && item.id) {
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyTitle);
-            formData.append('title', this.storyName);
+            formData.append('name', this.storyName);
+            formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             formData.append('pictureId', item.id);
             if (this.listIdPicture.length > 0) {
@@ -318,8 +318,8 @@ export default {
       } else {
         const formData = new FormData();
         formData.append('id', this.data.id);
-        formData.append('name', this.storyTitle);
-        formData.append('title', this.storyName);
+        formData.append('name', this.storyName);
+        formData.append('title', this.storyTitle);
         if (this.listIdPicture.length > 0) {
           formData.append('listIdPicture', this.listIdPicture);
         }
