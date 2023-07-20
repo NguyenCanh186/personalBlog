@@ -17,8 +17,9 @@
         <span
           class="title text-center"
           :class="{ pgray: !nightMode, 'text-light': nightMode }"
-          >Liên hệ</span
+          >KHÁCH HÀNG CỦA CHÚNG TÔI</span
         >
+        <p>Được sự tin tưởng của hơn 68.000 khách hàng trong đó có cả khách hàng cá nhân và doanh nghiệp,<br> luôn nhận được sự ưu tiên triển khai dịch vụ từ khách hàng so với các hệ thống khác.</p>
       </div>
       <hr
         width="50%"
@@ -26,80 +27,11 @@
       />
       <br />
       <div class="text-center">
-        <div
-          class="mb-3"
-          data-aos="fade-up"
-          data-aos-once="true"
-          data-aos-duration="1000"
-        >
-          <input
-            type="text"
-            name="user_name"
-            v-model="name"
-            placeholder="Nhập cái tên đáng yêu vào đây"
-            class="pinput"
-            :class="{
-              pgray: !nightMode,
-              'pgray-dark': nightMode,
-              'text-light': nightMode,
-            }"
-            style="transition-delay: 0.2s"
-          />
+        <div class="image-container">
+          <img v-for="image in listImg" :key="image.id" :src="image.img" :alt="image.alt" />
         </div>
-
-        <div
-          class="my-3"
-          data-aos="fade-up"
-          data-aos-once="true"
-          data-aos-duration="1000"
-        >
-          <input
-            type="email"
-            name="user_email"
-            v-model="email"
-            placeholder="email"
-            class="pinput"
-            :class="{
-              pgray: !nightMode,
-              'pgray-dark': nightMode,
-              'text-light': nightMode,
-            }"
-            style="transition-delay: 0.4s"
-          />
-        </div>
-
-        <div
-          class="my-3"
-          data-aos="fade-up"
-          data-aos-once="true"
-          data-aos-duration="1000"
-        >
-          <textarea
-            name="message"
-            v-model="text"
-            placeholder="Điều gì thầm kín thì nhắn vào đây nhé. Không thì gửi qua messenger cũng được =))"
-            class="pinput"
-            rows="4"
-            :class="{
-              pgray: !nightMode,
-              'pgray-dark': nightMode,
-              'text-light': nightMode,
-            }"
-            style="transition-delay: 0.6s"
-          ></textarea>
-        </div>
-
-        <button
-          @click.prevent="sendEmail"
-          class="mt-1 btn mb-3"
-          data-aos="fade"
-          data-aos-once="true"
-          data-aos-duration="1000"
-          data-aos-offset="50"
-        >
-          Send
-        </button>
       </div>
+
 
       <Snackbar
         :showSnackbar="showSnackbar"
@@ -112,10 +44,11 @@
 </template>
 
 <script>
-import config from "../../config";
+import config from "../../../config";
 import emailjs from "emailjs-com";
 
-import Snackbar from "./helpers/Snackbar";
+import Snackbar from "../helpers/Snackbar.vue";
+import info from "../../../info";
 
 export default {
   name: "Contact",
@@ -129,6 +62,7 @@ export default {
   },
   data() {
     return {
+      listImg: info.customer,
       email: "",
       name: "",
       text: "",
@@ -202,6 +136,19 @@ export default {
 </script>
 
 <style scoped>
+.image-container {
+  display: flex;
+  flex-wrap: wrap; /* To wrap images into multiple lines if needed */
+  justify-content: center; /* Horizontally center the images */
+  align-items: center; /* Vertically center the images */
+}
+
+/* Tuỳ chỉnh kích thước của hình ảnh nếu cần thiết */
+.image-container img {
+  width: 100px; /* Ví dụ: đặt kích thước 100px cho hình ảnh */
+  height: auto; /* Để tự động điều chỉnh chiều cao dựa trên tỷ lệ */
+  margin: 20px; /* Add a 40px spacing between each image */
+}
 .title {
   font-size: 30px;
   font-weight: 500;

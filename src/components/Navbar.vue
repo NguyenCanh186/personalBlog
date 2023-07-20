@@ -1,7 +1,8 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg navbar-dark bg-info fixed-top p-st"
+      class="navbar navbar-expand-lg navbar-dark fixed-top p-st"
+      style="background-color: white"
     >
       <div class="container">
         <a
@@ -167,7 +168,7 @@ export default {
 
 <style scope>
 .nav-link {
-  color: white !important;
+  color: #3380CB !important;
   font-weight: 500;
 }
 .nav-link:hover{

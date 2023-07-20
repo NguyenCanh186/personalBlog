@@ -85,7 +85,7 @@
           <div class="col-1"></div>
 
           <div class="col-5">
-            <img :src="httm" alt="" class="fit-image" />
+            <img :src="httm2" alt="" class="fit-image" />
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import info from "../../info";
+import info from "../../../info";
 export default {
   name: "Portfolio",
   components: {
@@ -108,6 +108,7 @@ export default {
     return {
       listImg: info.smsMkt,
       httm: info.httm,
+      httm2: info.httm2,
     };
   },
 };
@@ -133,14 +134,14 @@ export default {
 /* Tuỳ chỉnh kích thước của hình ảnh nếu cần thiết */
 .image-container img {
   width: 250px; /* Ví dụ: đặt kích thước 100px cho hình ảnh */
-  height: 330px; /* Để tự động điều chỉnh chiều cao dựa trên tỷ lệ */
+  height: 250px; /* Để tự động điều chỉnh chiều cao dựa trên tỷ lệ */
 }
 .label-number {
   margin: 0 0 15px 20px;
   width: 50px;
   height: 50px;
   position: relative;
-  background-color: #17a2b8;
+  background-color: #3380CB;
   color: #FFF;
   display: flex;
   align-items: center;
@@ -155,7 +156,7 @@ export default {
   width: 90px;
   height: 90px;
   position: absolute;
-  background-color: rgba(67, 194, 194, 0.17);
+  background-color: #448ECB2B;
   z-index: -1;
   border-radius: 50%;
 }

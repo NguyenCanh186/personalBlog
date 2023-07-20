@@ -8,20 +8,21 @@
 <!--      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
       <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
       <About v-if="currentUser === null" id="about" :nightMode="nightMode" />
-<!--      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />-->
+      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
+      <Chat :nightMode="nightMode" />
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import Home from "./components/Home";
-import About from "./components/About";
-import Portfolio from "./components/Portfolio";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-
+import Home from "./components/brand/Slide.vue";
+import About from "./components/brand/WhyChooseUs.vue";
+import Portfolio from "./components/brand/DetailServive.vue";
+import Contact from "./components/brand/Customer.vue";
+import Footer from "./components/brand/Footer.vue";
+import Chat from "./components/brand/Chat.vue";
 import info from "../info";
 import HomeAdmin from "@/components/admin/HomeAdmin.vue";
 import StoryAdmin from "@/components/admin/StoryAdmin.vue";
@@ -39,6 +40,7 @@ export default {
     Portfolio,
     Contact,
     Footer,
+    Chat,
   },
   computed: {
     currentUser() {

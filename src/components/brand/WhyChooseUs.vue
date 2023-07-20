@@ -1,11 +1,7 @@
 <template>
   <div
       class="py-4 p-st"
-      :class="{
-      'bg-light': !nightMode,
-      'bg-dark2': nightMode,
-      'text-light': nightMode,
-    }"
+      style="background-color: #cbe9ff"
   >
     <div class="container">
       <div
@@ -17,43 +13,18 @@
         <span
             class="title text-center"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-        >Blog</span
-        >
+        >TẠI SAO CHỌN </span
+        > <span class="title text-center"><strong style="color: #d54444"> VMG</strong></span>
+        <p>Định hướng là một doanh nghiệp quốc tế với các dịch vụ B2B, VMG luôn xây dựng <br> chất lượng dịch vụ khách hàng thật tốt nhằm đáp ứng các yêu cầu dù là cao nhất.</p>
       </div>
       <hr
           width="50%"
           :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
 
-      <vue-tabs :activeTextColor="!nightMode ? '#535A5E' : '#dfdfdf'">
-        <v-tab>
-          <br />
-          <div class="row">
-            <div
-                class="col-xl-4 col-bg-4 col-md-6 col-sm-12"
-                v-for="(portfolio, idx) in portfolio_info"
-                :key="portfolio.name"
-            >
-              <Card
-                  :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
-                  :portfolio="portfolio"
-                  @show="showModalFn"
-                  data-aos="fade-up"
-                  :nightMode="nightMode"
-                  data-aos-offset="100"
-                  data-aos-delay="10"
-                  data-aos-duration="500"
-                  data-aos-easing="ease-in-out"
-                  data-aos-mirror="true"
-                  data-aos-once="true"
-              />
-            </div>
-          </div>
-          <div class="text-center py-3" v-if="showBtn !== 'show less'">
-            <button class="btn" @click.prevent="showMore">Xem tiếp</button>
-          </div>
-        </v-tab>
-      </vue-tabs>
+      <div class="image-container">
+        <img :src="img" alt="">
+      </div>
     </div>
     <transition name="modal">
       <Modal
@@ -77,10 +48,10 @@
 </template>
 
 <script>
-import Card from "./helpers/Card";
-import Modal from "./helpers/Modal";
-import DesignModal from "./helpers/DesignModal";
-import info from "../../info";
+import Card from "../helpers/Card.vue";
+import Modal from "../helpers/Modal.vue";
+import DesignModal from "../helpers/DesignModal.vue";
+import info from "../../../info";
 
 import { VueTabs, VTab } from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
@@ -103,6 +74,7 @@ export default {
   },
   data() {
     return {
+      img: info.whyChooseUs,
       all_info: info.portfolio,
       desgin_info: info.portfolio_design,
       portfolio_info: [],
@@ -182,6 +154,15 @@ export default {
 </script>
 
 <style scoped>
+.image-container {
+  max-width: 100%; /* Đảm bảo thẻ div chỉ chiếm tối đa 100% chiều rộng của phạm vi cha */
+  overflow: hidden; /* Ẩn bất kỳ nội dung nào vượt quá kích thước của thẻ div */
+}
+
+.image-container img {
+  width: 100%; /* Khi không có giới hạn rõ ràng cho chiều rộng của hình ảnh, nó sẽ tự động co dãn để vừa với thẻ div */
+  height: auto; /* Để tự động điều chỉnh chiều cao dựa trên tỷ lệ */
+}
 .title {
   font-size: 30px;
   font-weight: 500;
@@ -280,19 +261,19 @@ export default {
 }
 
 .btn {
-  border-color: #17a2b8;
-  color: #17a2b8;
+  border-color: #2b91af;
+  color: #2b91af;
 }
 
 .btn:hover {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #2b91af;
+  border-color: #2b91af;
   color: white;
 }
 
 .btn:focus {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #2b91af;
+  border-color: #2b91af;
   color: white;
 }
 </style>

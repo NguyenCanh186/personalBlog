@@ -8,13 +8,23 @@ let info = {
       blur: false
     }
   },
-  httm: require("./src/assets/httm/httm.jpg"),
+  logo: require("./src/assets/logo/vmg.png"),
+  httm: require("./src/assets/httm/Cool robot-bro.png"),
+  httm2: require("./src/assets/httm/Features Overview-cuate.png"),
+  whyChooseUs: require("./src/assets/designs/ccs.png"),
   smsMkt: [
-    { img: require("./src/assets/smsMkt/1662942389_986_Toan-bo-77-anh-anime-lam-avatar-facebook-moi-suu.jpg") },
-    { img: require("./src/assets/smsMkt/Anh-dai-dien-dep-cho-nam-gioi-14.jpg") },
-    { img: require("./src/assets/smsMkt/Hinh-nen-Zalo-ngau.jpg") },
-    { img: require("./src/assets/smsMkt/hinh-anh-avatar-nam-anime-cute-cool-1.jpg") },
-    { img: require("./src/assets/smsMkt/avatar-nam-20-29-10-11-31.jpg") }
+    { img: require("./src/assets/smsMkt/App data-cuate.png") },
+    { img: require("./src/assets/smsMkt/Opinion-cuate.png") },
+    { img: require("./src/assets/smsMkt/Home screen-cuate.png") },
+    { img: require("./src/assets/smsMkt/Receipt-cuate.png") },
+    { img: require("./src/assets/smsMkt/Medical research-cuate.png") },
+  ],
+  customer: [
+    {img: require("./src/assets/Customer/logo-apple-1.png") },
+    {img: require("./src/assets/Customer/samsung.png") },
+    {img: require("./src/assets/Customer/lambo.png") },
+    {img: require("./src/assets/Customer/porsche.jpg") },
+    {img: require("./src/assets/Customer/logo-audi.jpg") },
   ],
   portfolio: [
     {

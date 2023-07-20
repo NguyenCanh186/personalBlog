@@ -1,15 +1,17 @@
 <template>
-  <div class="bg-info" style="margin-top: 30px">
+  <div style="background-color: #3380CB">
     <div class="container py-3">
-      <div class="row pt-1 align-items-center">
-        <div
-          class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pbelow"
-          style="color: white;"
-        >
-          <span>© 2023 Bản quyền của Cảnh Nguyễn</span>
-        </div>
-
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h5 style="color: white">CÔNG TY CỔ PHẦN TRUYỀN THÔNG VMG</h5>
+          <br>
+          <p style="color: #cbe9ff">
+            Trụ sở chính <br>
+            Địa chỉ: Tầng 6 Peakview Tower, 36 Hoàng Cầu, P.Ô Chợ Dừa, Q.Đống Đa, Hà Nội <br>
+            Điện thoại: (04) 3 537 8820 | 19001255 | 0961027266 <br>
+            Fax: (04) 3 772 6091 <br>
+            Email: sale.smsbrand@vmgmedia.vn
+          </p>
           <div class="text-center">
             <button
                 class="btn btn-outline-secondary mx-2 "
@@ -41,18 +43,50 @@
             </button>
           </div>
         </div>
+        <div class="col-1"></div>
+        <div class="col-5">
+          <h5 style="color: white">LIÊN HỆ VỚI CHÚNG TÔI</h5>
+          <br>
+          <div class="d-flex flex-column">
+            <div class="form-group">
+              <label style="color: white" for="formGroupExampleInput">Email</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+            </div>
+            <div class="form-group">
+              <label style="color: white" for="formGroupExampleInput2">Số điện thoại</label>
+              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+            </div>
+            <div class="d-flex justify-content-end"> <!-- Container chứa nút và dịch sang bên phải -->
+              <button style="width: 150px; height: 40px; color: #3380CB; background-color: white" type="submit" class="btn mb-2">Gửi</button>
+            </div>
+          </div>
+
+        </div>
       </div>
+<!--      <div class="row pt-1 align-items-center">-->
+<!--        <div-->
+<!--          class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pbelow"-->
+<!--          style="color: white;"-->
+<!--        >-->
+<!--&lt;!&ndash;          <span>© 2023 Bản quyền của Cảnh Nguyễn</span>&ndash;&gt;-->
+<!--        </div>-->
+
+<!--        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">-->
+
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import info from "../../info";
+import info from "../../../info";
 
 export default {
   name: "Footer",
   data() {
     return {
+      logo: info.httm2,
       linkedin: info.links.linkedin,
       github: info.links.github,
       behance: info.links.behance,
