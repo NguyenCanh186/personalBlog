@@ -32,7 +32,7 @@
                 class="nav-link"
                 href="/portfolio"
                 @click.prevent="$emit('scroll', 'portfolio')"
-                >Story</a
+                >Trang chủ</a
               >
             </li>
             <li class="nav-item mx-2 ">
@@ -40,7 +40,7 @@
                 class="nav-link"
                 href="/about"
                 @click.prevent="$emit('scroll', 'about')"
-                >Blog</a
+                >Tin tức</a
               >
             </li>
             <li class="nav-item mx-2">
@@ -48,15 +48,16 @@
                 class="nav-link"
                 href="/contact"
                 @click.prevent="$emit('scroll', 'contact')"
-                >Contact</a
+                >API</a
               >
             </li>
             <li class="nav-item mx-2" v-if="currentUser === null">
               <a
                   class="nav-link"
                   @click.prevent="showDesignModalFn()"
-              >Login</a
               >
+                Liên hệ
+              </a>
             </li>
             <li class="nav-item mx-2" v-if="currentUser !== null">
               <a

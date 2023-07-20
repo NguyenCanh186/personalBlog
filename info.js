@@ -8,12 +8,14 @@ let info = {
       blur: false
     }
   },
-  links: {
-    linkedin: "https://www.facebook.com/Shurikenger186",
-    github: "https://www.tiktok.com/@ka1896.jp?_t=8aDcPNpf72X&_r=1",
-      behance: "https://join.skype.com/invite/yX3vsxMddME8",
-    resume: "https://drive.google.com/file/d/1W0pzOo1Gb-W70BYKehOfZ4qaJt7m1_7O/view?usp=sharing",
-  },
+  httm: require("./src/assets/httm/httm.jpg"),
+  smsMkt: [
+    { img: require("./src/assets/smsMkt/1662942389_986_Toan-bo-77-anh-anime-lam-avatar-facebook-moi-suu.jpg") },
+    { img: require("./src/assets/smsMkt/Anh-dai-dien-dep-cho-nam-gioi-14.jpg") },
+    { img: require("./src/assets/smsMkt/Hinh-nen-Zalo-ngau.jpg") },
+    { img: require("./src/assets/smsMkt/hinh-anh-avatar-nam-anime-cute-cool-1.jpg") },
+    { img: require("./src/assets/smsMkt/avatar-nam-20-29-10-11-31.jpg") }
+  ],
   portfolio: [
     {
       name: "Quản lý điểm V-Point",
