@@ -36,7 +36,7 @@
       </div>
     </div>
     <div style="text-align: left; margin-top: -50px; color: white">
-      <h5 style="margin-left: 140px"><strong>HOTLINE: 123456789</strong></h5>
+      <h5 style="margin-left: 140px"><strong>HOTLINE: 1900 1225</strong></h5>
     </div>
   </div>
 

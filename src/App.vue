@@ -2,13 +2,10 @@
   <div id="app" :class="{ 'text-dark': !nightMode, 'text-light': nightMode }">
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
-      <Home v-if="currentUser === null" :nightMode="nightMode" />
-<!--      <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
-<!--      <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
-<!--      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />-->
-      <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
-      <About v-if="currentUser === null" id="about" :nightMode="nightMode" />
-      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />
+      <Home :nightMode="nightMode" />
+      <Portfolio id="portfolio" />
+      <About  id="about" :nightMode="nightMode" />
+      <Contact   id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
       <Chat :nightMode="nightMode" />
     </div>
@@ -24,16 +21,10 @@ import Contact from "./components/brand/Customer.vue";
 import Footer from "./components/brand/Footer.vue";
 import Chat from "./components/brand/Chat.vue";
 import info from "../info";
-import HomeAdmin from "@/components/admin/HomeAdmin.vue";
-import StoryAdmin from "@/components/admin/StoryAdmin.vue";
-import BlogAdmin from "@/components/admin/BlogAdmin.vue";
 
 export default {
   name: "App",
   components: {
-    BlogAdmin,
-    StoryAdmin,
-    HomeAdmin,
     Navbar,
     Home,
     About,
