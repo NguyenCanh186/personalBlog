@@ -3,7 +3,7 @@
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
       <Home :nightMode="nightMode" />
-      <Portfolio id="portfolio" />
+      <DetailServive id="portfolio" />
       <About  id="about" :nightMode="nightMode" />
       <Contact   id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
@@ -16,7 +16,7 @@
 import Navbar from "./components/Navbar.vue";
 import Home from "./components/brand/Slide.vue";
 import About from "./components/brand/WhyChooseUs.vue";
-import Portfolio from "./components/brand/DetailServive.vue";
+import DetailServive from "./components/brand/DetailServive.vue";
 import Contact from "./components/brand/Customer.vue";
 import Footer from "./components/brand/Footer.vue";
 import Chat from "./components/brand/Chat.vue";
@@ -28,7 +28,7 @@ export default {
     Navbar,
     Home,
     About,
-    Portfolio,
+    DetailServive,
     Contact,
     Footer,
     Chat,

@@ -2,7 +2,27 @@
   <div style="background-color: #3380CB">
     <div class="container py-3">
       <div class="row">
-        <div class="col-6">
+        <div class="col-md-5 col-12">
+          <h5 style="color: white">LIÊN HỆ VỚI CHÚNG TÔI</h5>
+          <br>
+          <div class="d-flex flex-column">
+            <div class="form-group">
+              <label style="color: white" for="formGroupExampleInput">Email</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+            </div>
+            <div class="form-group">
+              <label style="color: white" for="formGroupExampleInput2">Số điện thoại</label>
+              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+            </div>
+            <div class="d-flex justify-content-end"> <!-- Container chứa nút và dịch sang bên phải -->
+              <button style="width: 150px; height: 40px; color: #3380CB; background-color: white" type="submit" class="btn mb-2">Gửi</button>
+            </div>
+          </div>
+
+        </div>
+        <br><br>
+        <div class="col-1"></div>
+        <div class="col-md-6 col-12">
           <h5 style="color: white">CÔNG TY CỔ PHẦN TRUYỀN THÔNG VMG</h5>
           <br>
           <p style="color: #cbe9ff">
@@ -43,38 +63,9 @@
             </button>
           </div>
         </div>
-        <div class="col-1"></div>
-        <div class="col-5">
-          <h5 style="color: white">LIÊN HỆ VỚI CHÚNG TÔI</h5>
-          <br>
-          <div class="d-flex flex-column">
-            <div class="form-group">
-              <label style="color: white" for="formGroupExampleInput">Email</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-            </div>
-            <div class="form-group">
-              <label style="color: white" for="formGroupExampleInput2">Số điện thoại</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-            </div>
-            <div class="d-flex justify-content-end"> <!-- Container chứa nút và dịch sang bên phải -->
-              <button style="width: 150px; height: 40px; color: #3380CB; background-color: white" type="submit" class="btn mb-2">Gửi</button>
-            </div>
-          </div>
+<!--        <div class="col-1"></div>-->
 
-        </div>
       </div>
-<!--      <div class="row pt-1 align-items-center">-->
-<!--        <div-->
-<!--          class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pbelow"-->
-<!--          style="color: white;"-->
-<!--        >-->
-<!--&lt;!&ndash;          <span>© 2023 Bản quyền của Cảnh Nguyễn</span>&ndash;&gt;-->
-<!--        </div>-->
-
-<!--        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12">-->
-
-<!--        </div>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
@@ -135,7 +126,12 @@ span {
   border-color: white;
   color: gray;
 }
-
+@media screen and (max-width: 767px) {
+  .col-md-6 {
+    /* Đặt kích thước cột 100% chiều rộng trên thiết bị nhỏ hơn 768px */
+    width: 100%;
+  }
+}
 @media screen and (max-width: 580px) {
   .pbelow {
     padding-bottom: 20px;

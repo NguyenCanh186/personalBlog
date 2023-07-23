@@ -9,28 +9,29 @@
   >
     <div class="container mt-3">
       <div
-        class="text-center"
-        data-aos="fade"
-        data-aos-once="true"
-        data-aos-duration="1000"
+          class="text-center"
+          data-aos="fade"
+          data-aos-once="true"
+          data-aos-duration="1000"
       >
-        <span
-          class="title text-center"
-          :class="{ pgray: !nightMode, 'text-light': nightMode }"
-          >Chi tiết các dịch vụ</span
-        >
+    <span
+        class="title text-center"
+        :class="{ pgray: !nightMode, 'text-light': nightMode }"
+    >
+      Chi tiết các dịch vụ
+    </span>
       </div>
       <hr
-        width="50%"
-        :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
+          width="50%"
+          :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
       <br>
       <div class="row">
-        <div class="col-2">
-          <label style="text-align: center" for="" class="label-number ">1</label>
+        <div class="col-md-2 col-12 d-flex align-items-center justify-content-center"> <!-- Thêm các lớp d-flex, align-items-center và justify-content-center -->
+          <label style="text-align: center" for="" class="label-number">1</label>
         </div>
-        <div class="col-10">
-          <h2 style="margin-left: -20px" class="mt-2">Dịch vụ SMS Marketing & Chăm sóc khách hàng...</h2>
+        <div class="col-md-10 col-12">
+          <h2 class="mt-2">Dịch vụ SMS Marketing & Chăm sóc khách hàng.</h2>
         </div>
       </div>
     </div>
