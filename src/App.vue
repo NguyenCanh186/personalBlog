@@ -6,6 +6,7 @@
       <Contact v-if="isContactRoute" :nightMode="nightMode" />
       <News v-if="isNewsRoute" :nightMode="nightMode" />
       <NewsDetail v-if="isNewsDetailRoute" :nightMode="nightMode" />
+      <API v-if="isAPIRoute" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
       <Chat :nightMode="nightMode" />
     </div>
@@ -21,10 +22,12 @@ import News from "./components/brand/News.vue";
 import info from "../info";
 import NewsDetail from "./components/brand/news/NewsDetail.vue";
 import Contact from "@/components/brand/news/Contact.vue";
+import API from "@/components/brand/API.vue";
 
 export default {
   name: "App",
   components: {
+    API,
     Contact,
     Navbar,
     Home,
@@ -45,6 +48,9 @@ export default {
     },
     isNewsDetailRoute() {
       return this.$route.path.startsWith("/newsDetail/"); // Kiểm tra đường dẫn bắt đầu bằng "/newsDetail/"
+    },
+    isAPIRoute() {
+      return this.$route.path === "/api";
     },
   },
   data() {

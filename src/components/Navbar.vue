@@ -47,8 +47,8 @@
             <li class="nav-item mx-2">
               <a
                 class="nav-link"
-                href="/contact"
-                @click.prevent="$emit('scroll', 'contact')"
+                href="/api"
+                @click.prevent="goToApi"
                 >API</a
               >
             </li>
@@ -123,6 +123,9 @@ export default {
     },
     goContact() {
       this.$router.push('/contact').catch(() => {});
+    },
+    goToApi() {
+      this.$router.push('/api').catch(() => {});
     },
     switchMode() {
       this.localNightMode = !this.localNightMode;
