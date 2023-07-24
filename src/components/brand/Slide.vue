@@ -12,7 +12,7 @@
         data-aos-duration="1000"
         style="
         position: absolute;
-        top: 50%;
+        top: 9%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: #ffffff;
@@ -27,7 +27,7 @@
         thông qua API.
       </h5>
       <div class="mt-4">
-        <button class="btn" style="margin-right: 15px;">
+        <button class="btn" style="margin-right: 15px;" @click="goContact">
           Đăng ký ngay
         </button>
         <button class="btn">
@@ -38,8 +38,10 @@
     <div style="text-align: left; margin-top: -50px; color: white">
       <h5 style="margin-left: 140px"><strong>HOTLINE: 1900 1225</strong></h5>
     </div>
+    <DetailServive />
+    <WhyChooseUs />
+    <Customer />
   </div>
-
 </template>
 
 <style scoped>
@@ -48,14 +50,25 @@
 
 <script>
 import info from "../../../info";
+import Customer from "@/components/brand/Customer.vue";
+import DetailServive from "@/components/brand/DetailServive.vue";
+import WhyChooseUs from "@/components/brand/WhyChooseUs.vue";
 export default {
   name: "Home",
   components: {
+    DetailServive,
+    WhyChooseUs,
+    Customer,
   },
   data() {
     return {
       picture: info.flat_picture,
     };
+  },
+  methods: {
+    goContact() {
+      this.$router.push('/contact').catch(() => {});
+    },
   },
 };
 </script>

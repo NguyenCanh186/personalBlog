@@ -8,6 +8,7 @@ let info = {
       blur: false
     }
   },
+  contact: require("./src/assets/Contact us-pana.png"),
   logo: require("./src/assets/logo/vmg.png"),
   httm: require("./src/assets/httm/Cool robot-bro.png"),
   httm2: require("./src/assets/httm/Features Overview-cuate.png"),
@@ -28,94 +29,84 @@ let info = {
   ],
   portfolio: [
     {
+      id: 1,
       name: "Quản lý điểm V-Point",
       pictures: [
         {
           img: require("./src/assets/portfolio/diary/trangchu.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/themdiem.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/nhapexcel.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/nhapexcel2.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/thongtindiem2.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/quanlynguoidung.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/themmoinguoidung.jpg")
-        },
-        {
-          img: require("./src/assets/portfolio/diary/quanlyphongban.jpg")
-        },
+        }
       ],
-      technologies: ["Spring boot", "Spring security", "SQL", "Database", "VueJS2", "Bootstrap"],
-      category: "Web App",
-      date: "06/2022 - 08/2022",
-      github:
-          "https://github.com/NguyenCanh186/V-PointTool-1",
-      visit: "https://github.com/NguyenCanh186/V-PointTool-1",
+      category: "Tin khách hàng",
+      date: "24/7/2023",
+      description:
+          "Với hơn 20 năm hoạt động và phát triển, VTSG xứng tầm là một trong những công ty đứng đầu trong lĩnh vực vận chuyển và chuyển phát hàng đầu tại miền Nam - Việt Nam.\n" +
+          "\n" +
+          "VTSAIGON - Khẳng định chất lượng thương hiệu\n"
+    },
+    {
+      id: 2,
+      name: "Quản lý điểm V-Point",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/diary/trangchu.jpg")
+        }
+      ],
+      category: "Tin khách hàng",
+      date: "24/7/2023",
       description:
           "Quản lý điểm V-point là hệ thống giúp phòng nhân lực của công ty chấm điểm được các nhân viên dựa trên chỉ số KPI công việc, các hoạt động đào tạo, tham gia đào tạo.... Từ điểm đó, nhân viên có thể nhận được các gói phúc lợi khác nhau.  "
     },
     {
+      id: 3,
+      name: "Quản lý điểm V-Point",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/diary/trangchu.jpg")
+        }
+      ],
+      category: "Tin khách hàng",
+      date: "24/7/2023",
+      description:
+          "Quản lý điểm V-point là hệ thống giúp phòng nhân lực của công ty chấm điểm được các nhân viên dựa trên chỉ số KPI công việc, các hoạt động đào tạo, tham gia đào tạo.... Từ điểm đó, nhân viên có thể nhận được các gói phúc lợi khác nhau.  "
+    },
+    {
+      id: 4,
+      name: "Quản lý điểm V-Point",
+      pictures: [
+        {
+          img: require("./src/assets/portfolio/diary/trangchu.jpg")
+        }
+      ],
+      category: "Tin khách hàng",
+      date: "24/7/2023",
+      description:
+          "Quản lý điểm V-point là hệ thống giúp phòng nhân lực của công ty chấm điểm được các nhân viên dựa trên chỉ số KPI công việc, các hoạt động đào tạo, tham gia đào tạo.... Từ điểm đó, nhân viên có thể nhận được các gói phúc lợi khác nhau.  "
+    },
+    {
+      id: 5,
       name: "Xếp hạng tín dụng TP bank",
       pictures: [
         {
           img: require("./src/assets/portfolio/online examination/login.png")
         },
-        {
-          img: require("./src/assets/portfolio/online examination/khoitaohoso.png")
-        },
-        {
-          img: require("./src/assets/portfolio/online examination/dinhdanhkhachhang.png")
-        },
-        {
-          img: require("./src/assets/portfolio/online examination/quanlynhomnganh.png")
-        },
-        {
-          img: require("./src/assets/portfolio/online examination/giahanchamdiem.png")
-        },
-        {
-          img: require("./src/assets/portfolio/online examination/xephangvono.png")
-        }
       ],
       technologies: ["Spring boot", "Spring security", "SQL", "Database", "VueJS2", "Bootstrap"],
       category: "Web App",
       date: "08/2022 - hiện tại",
-      github: "https://github.com/",
-      visit: "https://github.com/",
       description:
           "Xếp hạng tín dụng TP bank là hệ thống xếp hạng các khách hàng của ngân hàng TP bank dựa trên vốn chủ đầu tư, báo cáo tài chính, tổng tài sản... để có thể đưa ra các khoản vay thích hợp "
     },
     {
+      id: 6,
       name: "Blog cá nhân",
       pictures: [
         {
           img: require("./src/assets/portfolio/myflix.com/trangchu.png")
         },
-        {
-          img: require("./src/assets/portfolio/myflix.com/story.png")
-        },
-        {
-          img: require("./src/assets/portfolio/myflix.com/blogcanhan.png")
-        },
-        {
-          img: require("./src/assets/portfolio/myflix.com/lienhe.png")
-        },
       ],
       technologies: ["VueJS", "Bootstrap"],
       category: "Web App",
       date: "Dự án cá nhân",
-      github:
-          "https://github.com/NguyenCanh186/personalBlog",
-      visit: "https://canhnguyensblog.netlify.app/",
       description:
           "Nơi lưu trữ những khoảnh khắc và những suy nghĩ của mình"
     },

@@ -1,7 +1,11 @@
 <template>
   <div
       class="py-4 p-st"
-      style="background-color: #cbe9ff"
+      :class="{
+      'bg-light': !nightMode,
+      'bg-dark2': nightMode,
+      'text-light': nightMode,
+    }"
   >
     <div class="container">
       <div
@@ -13,18 +17,41 @@
         <span
             class="title text-center"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-        >TẠI SAO CHỌN </span
-        > <span class="title text-center"><strong style="color: #d54444"> VMG</strong></span>
-        <p>Định hướng là một doanh nghiệp quốc tế với các dịch vụ B2B, VMG luôn xây dựng <br> chất lượng dịch vụ khách hàng thật tốt nhằm đáp ứng các yêu cầu dù là cao nhất.</p>
+        >
+          Tin khách hàng
+        </span>
       </div>
       <hr
           width="50%"
           :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
 
-      <div class="image-container">
-        <img :src="img" alt="">
-      </div>
+          <br />
+          <div class="row">
+            <div
+                class="col-xl-4 col-bg-4 col-md-6 col-sm-12"
+                v-for="(portfolio, idx) in portfolio_info"
+                :key="portfolio.name"
+            >
+              <Card
+                  :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
+                  :portfolio="portfolio"
+                  @show="showModalFn"
+                  data-aos="fade-up"
+                  :nightMode="nightMode"
+                  data-aos-offset="100"
+                  data-aos-delay="10"
+                  data-aos-duration="500"
+                  data-aos-easing="ease-in-out"
+                  data-aos-mirror="true"
+                  data-aos-once="true"
+              />
+            </div>
+          </div>
+          <div class="text-center py-3">
+            <button class="btn mr-2" v-if="number < all_info.length" @click.prevent="showMore">Xem tiếp</button>
+            <button class="btn" v-if="number > 3" @click.prevent="showLess">Thu gọn</button>
+          </div>
     </div>
     <transition name="modal">
       <Modal
@@ -48,22 +75,20 @@
 </template>
 
 <script>
-import Card from "../helpers/Card.vue";
-import Modal from "../helpers/Modal.vue";
-import DesignModal from "../helpers/DesignModal.vue";
-import info from "../../../info";
-import { VueTabs, VTab } from "vue-nav-tabs";
+import Card from "../../helpers/Card.vue";
+import Modal from "../../helpers/Modal.vue";
+import DesignModal from "../../helpers/DesignModal.vue";
+import info from "../../../../info";
+
 import "vue-nav-tabs/themes/vue-tabs.css";
 
 import "vueperslides/dist/vueperslides.css";
 
 export default {
-  name: "Portfolio",
+  name: "CustomerNews",
   components: {
     Card,
     Modal,
-    VueTabs,
-    VTab,
     DesignModal,
   },
   props: {
@@ -73,7 +98,6 @@ export default {
   },
   data() {
     return {
-      img: info.whyChooseUs,
       all_info: info.portfolio,
       desgin_info: info.portfolio_design,
       portfolio_info: [],
@@ -124,6 +148,10 @@ export default {
       this.design_modal_info = design_portfolio;
       this.showDesignModal = true;
     },
+    showLess() {
+      this.number = 3;
+      this.showBtn = "Thu gọn";
+    },
     showMore() {
       if (this.number != this.all_info.length) {
         this.number += 3;
@@ -139,7 +167,7 @@ export default {
 
       if (this.number == this.all_info.length && this.shower == 0) {
         this.shower = 1;
-        this.showBtn = "show less";
+        this.showBtn = "Thu gọn";
       } else if (this.number == this.all_info.length && this.shower == 1) {
         var elementPosition = document.getElementById("portfolio").offsetTop;
         window.scrollTo({ top: elementPosition + 5, behavior: "smooth" });
@@ -153,15 +181,6 @@ export default {
 </script>
 
 <style scoped>
-.image-container {
-  max-width: 100%; /* Đảm bảo thẻ div chỉ chiếm tối đa 100% chiều rộng của phạm vi cha */
-  overflow: hidden; /* Ẩn bất kỳ nội dung nào vượt quá kích thước của thẻ div */
-}
-
-.image-container img {
-  width: 100%; /* Khi không có giới hạn rõ ràng cho chiều rộng của hình ảnh, nó sẽ tự động co dãn để vừa với thẻ div */
-  height: auto; /* Để tự động điều chỉnh chiều cao dựa trên tỷ lệ */
-}
 .title {
   font-size: 30px;
   font-weight: 500;
@@ -188,19 +207,6 @@ export default {
   background-color: #8585ad;
   border-color: #8585ad;
   color: white;
-}
-
-/deep/ .vue-tabs .nav-tabs {
-  border: none;
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-
-  justify-content: center;
-}
-
-/deep/ .vue-tabs .tabs__link {
-  color: #a0a0a0;
 }
 
 /deep/ .vue-tabs .nav-tabs > li.active > a {
@@ -240,39 +246,21 @@ export default {
   transition: all 0.5s;
 }
 
-
-.dimg:hover .design-img {
-  position: relative;
-  border-radius: 15px;
-  opacity: 0.1;
-  cursor: pointer;
-}
-
-.dimg:hover .middle {
-  opacity: 1;
-}
-
-/deep/.vueperslide {
-  border-radius: 10px !important;
-}
-/deep/.vueperslides__parallax-wrapper {
-  border-radius: 10px !important;
-}
-
 .btn {
-  border-color: #2b91af;
-  color: #2b91af;
+  border-color: #17a2b8;
+  color: #17a2b8;
 }
 
 .btn:hover {
-  background-color: #2b91af;
-  border-color: #2b91af;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 
 .btn:focus {
-  background-color: #2b91af;
-  border-color: #2b91af;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
+
 </style>

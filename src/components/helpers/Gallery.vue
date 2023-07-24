@@ -13,7 +13,7 @@
       >
         <img
           :src="i.img"
-          style="width:100%"
+          style="width:60%"
           :id="`gi${idx}`"
           @click="showImg(idx)"
           class="g-img"
@@ -79,6 +79,9 @@ export default {
   flex-wrap: wrap;
   padding: 0 4px;
 }
+.pcolumn {
+  text-align: center;
+}
 
 .pcolumn img {
   border-radius: 5px;
@@ -110,7 +113,6 @@ export default {
   transition: all 0.5s;
 }
 .g-img:hover {
-  opacity: 0.7;
 }
 
 /* The Modal (background) */

@@ -46,13 +46,12 @@
                 >{{ tech }}</span
               >
             </div>
-
-            <div style="text-align: justify;">
-              <span v-html="portfolio.description"></span>
-            </div>
-            <hr />
             <div>
               <Gallery :images="portfolio.pictures" />
+            </div>
+            <hr />
+            <div style="text-align: justify;">
+              <span v-html="portfolio.description"></span>
             </div>
           </div>
 
@@ -70,7 +69,6 @@
 </template>
 
 <script>
-import Carousel from "./Carousel";
 import Gallery from "./Gallery";
 
 export default {
@@ -143,8 +141,8 @@ a:hover {
 }
 
 .modal-container {
-  width: 40%;
-  max-height: 70%;
+  width: 70%;
+  max-height: 90%;
   margin: 0px auto;
   border-radius: 7px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);

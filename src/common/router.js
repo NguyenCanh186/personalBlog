@@ -1,65 +1,19 @@
 import Vue from "vue";
-import Router from "vue-router";
-import management from "@/components/admin/management.vue";
+import VueRouter from "vue-router";
+import NewsDetail from "@/components/brand/news/NewsDetail.vue";
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-const router = new Router({
-    mode: "history",
-    routes: [
+const routes = [
+    // Các route khác...
+    {
+        path: "/newsDetail/:id", // Dấu hai chấm (:) đánh dấu đây là dynamic route parameter
+        component: NewsDetail,
+        props: true, // Cho phép sử dụng id như một prop trong component NewsDetail
+    },
+];
 
-        {
-            path: '/',
-            redirect: '/login'
-        },
-        {
-            path: '/admin',
-            component: management,
-            children: [
-                {
-                    path: 'home',
-                    name: 'home',
-                    component: () => import("@/components/admin/layout/HomeComponent"),
-                },
-                {
-                    path: 'v-point-manager',
-                    name: 'VPointManager',
-                    component: () => import("@/components/admin/VPointManager"),
-                },
-                {
-                    path: 'detail/:idUser/:year',
-                    name: 'detail',
-                    component: () => import("@/components/admin/Detail"),
-                },
-                {
-                    path: 'AdminSeeDetailVPoint/:year/:month/:idUser',
-                    name: 'DetailPoint',
-                    component: () => import("@/components/admin/DetailPoint"),
-                },
-
-            ]
-        },
-    ]
-});
-
-router.beforeEach((to, from, next) => {
-    const publicPages = ['/login'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
-    const user = JSON.parse(loggedIn)
-    if (authRequired && !loggedIn) {
-        next('/login');
-    } else {
-        if (to.path.startsWith('/admin')) {
-            if (user !== null && user.roles[0].authority === 'ROLE_ADMIN') {
-                next();
-            } else {
-                next('/access');
-            }
-        } else {
-            next()
-        }
-    }
-
+const router = new VueRouter({
+    routes,
 });
 export default router

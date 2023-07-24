@@ -2,10 +2,10 @@
   <div id="app" :class="{ 'text-dark': !nightMode, 'text-light': nightMode }">
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
-      <Home :nightMode="nightMode" />
-      <DetailServive id="portfolio" />
-      <About  id="about" :nightMode="nightMode" />
-      <Contact   id="contact" :nightMode="nightMode" />
+      <Home v-if="isHomeRoute" :nightMode="nightMode" />
+      <Contact v-if="isContactRoute" :nightMode="nightMode" />
+      <News v-if="isNewsRoute" :nightMode="nightMode" />
+      <NewsDetail v-if="isNewsDetailRoute" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
       <Chat :nightMode="nightMode" />
     </div>
@@ -15,27 +15,36 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Home from "./components/brand/Slide.vue";
-import About from "./components/brand/WhyChooseUs.vue";
-import DetailServive from "./components/brand/DetailServive.vue";
-import Contact from "./components/brand/Customer.vue";
 import Footer from "./components/brand/Footer.vue";
 import Chat from "./components/brand/Chat.vue";
+import News from "./components/brand/News.vue";
 import info from "../info";
+import NewsDetail from "./components/brand/news/NewsDetail.vue";
+import Contact from "@/components/brand/news/Contact.vue";
 
 export default {
   name: "App",
   components: {
+    Contact,
     Navbar,
     Home,
-    About,
-    DetailServive,
-    Contact,
     Footer,
     Chat,
+    News,
+    NewsDetail
   },
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
+    isHomeRoute() {
+      return this.$route.path === "/";
+    },
+    isNewsRoute() {
+      return this.$route.path === "/news";
+    },
+    isContactRoute() {
+      return this.$route.path === "/contact";
+    },
+    isNewsDetailRoute() {
+      return this.$route.path.startsWith("/newsDetail/"); // Kiểm tra đường dẫn bắt đầu bằng "/newsDetail/"
     },
   },
   data() {
@@ -102,24 +111,8 @@ export default {
   position: relative;
 }
 
-.pgray {
-  color: #535a5e;
-}
-
-.pblue {
-  color: #759CC9;
-}
-
-.bg-dark2 {
-  background-color: #262c30 !important;
-}
-
 .text-light {
   color: #d3d2d2 !important;
-}
-
-.p-st {
-  transition: all 0.5s !important;
 }
 
 /* To set scrollbar width */

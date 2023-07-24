@@ -44,9 +44,6 @@
 </template>
 
 <script>
-import config from "../../../config";
-import emailjs from "emailjs-com";
-
 import Snackbar from "../helpers/Snackbar.vue";
 import info from "../../../info";
 
@@ -79,58 +76,6 @@ export default {
         }, 1000);
       }
     },
-    sendEmail() {
-      if (!this.email || !this.name || !this.text) {
-        this.showSnackbar = true;
-        if (!this.email && !this.name && !this.text){
-          this.snackbarMessage = "Không nhập cái gì thì gửi bằng niềm tin à";
-        } else if (!this.name){
-          this.snackbarMessage = "Không nhập tên thì tôi biết bạn là ai :(";
-        } else if (!this.email){
-          this.snackbarMessage = "Quên không nhập mail kìa bạn êiiii";
-        } else if (!this.text){
-          this.snackbarMessage = "Định gửi cho tôi cái mail trắng trơn hả " + this.name;
-        }
-        this.snackbarColor = "#64808E";
-      } else {
-        var obj = {
-          user_email: this.email,
-          from_name: this.name,
-          message_html: this.text,
-          to_name: "Cảnh Nguyễn",
-        };
-
-        emailjs
-          .send(
-            config.emailjs.serviceID,
-            config.emailjs.templateID,
-            obj,
-            config.emailjs.userID
-          )
-          .then(
-            (result) => {
-              result.text === "OK"
-                ? console.log("Email sent successfully")
-                : console.log(result.text);
-              this.showSnackbar = true;
-              this.snackbarMessage = "Cảm ơn " + this.name + " nha!" +  "Mình sẽ phản hồi sớm nhất.";
-              this.snackbarColor = "#1aa260";
-
-              this.email = "";
-              this.text = "";
-              this.name = "";
-            },
-            (error) => {
-              error.text === "Opps! Something went wrong"
-                ? console.log("Email sent failed")
-                : console.log(error.text);
-              this.showSnackbar = true;
-              this.snackbarMessage = "Ôi bạn ơi! Lỗi này Cảnh chưa kịp fix.";
-              this.snackbarColor = "#64808E";
-            }
-          );
-      }
-    },
   },
 };
 </script>
@@ -152,65 +97,5 @@ export default {
 .title {
   font-size: 30px;
   font-weight: 500;
-}
-.title1 {
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.title2 {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.title3 {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.pinput {
-  font-size: 18px;
-  outline: none;
-  border: none;
-  border-radius: 7px;
-  padding: 10px;
-  width: 50%;
-  transition: all 1s;
-  background-color: #97FFFF;
-}
-
-.btn {
-  border-color: #00CCCC;
-  color: #00CCCC;
-  width: 50%;
-}
-
-.btn:hover {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
-  color: white;
-}
-
-.btn:focus {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
-  color: white;
-}
-
-.pgray-dark {
-  background-color: #3c4148 !important;
-}
-
-@media screen and (max-width: 1000px) {
-  .pinput {
-    width: 90%;
-  }
-  .pinput {
-    width: 90%;
-  }
-
-  .btn {
-    width: 90%;
-  }
 }
 </style>

@@ -58,7 +58,7 @@ export default {
       window.open(url, "_blank");
     },
     showModal() {
-      this.$emit("show", this.portfolio);
+      this.$router.push('/newsDetail/' + this.portfolio.id)
     },
   },
 };
