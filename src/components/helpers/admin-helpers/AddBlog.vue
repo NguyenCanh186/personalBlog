@@ -155,14 +155,21 @@ export default {
       formData.append("title", this.name);
       formData.append("fileImage", this.file);
       formData.append("content", this.content);
-      GetDataService.createBlog(formData).then(async () => {
-        this.$emit("close", true);
-        await Swal.fire({
-          title: 'Xong',
-          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
-          showConfirmButton: false,
-          timer: 2000,
-        });
+      GetDataService.createBlog(formData).then(async (response) => {
+        if (response === "done") {
+          this.$emit("close", true);
+          await Swal.fire({
+            title: 'Xong',
+            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          this.showSnackbar = true;
+          this.snackbarMessage = "Tiêu đề đã tồn tại!";
+          this.snackbarColor = "#64808E";
+        }
+
       });
     }
   },

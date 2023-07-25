@@ -70,6 +70,12 @@
         @close="closeModal"
         v-if="showDesignModal"
     />
+    <EditBlog
+        :showModal="showEditModal"
+        @close="closeModalEdit"
+        :data="blog"
+        v-if="showEditModal"
+    />
   </div>
 </template>
 
@@ -78,10 +84,11 @@ import {GetDataService} from "@/service/get-data-service";
 
 import Swal from "sweetalert2";
 import AddBlog from "@/components/helpers/admin-helpers/AddBlog.vue";
+import EditBlog from "@/components/helpers/admin-helpers/EditBlog.vue";
 
 export default {
   name: "BlogAdmin",
-  components: {AddBlog},
+  components: {AddBlog, EditBlog},
   data() {
     return {
       blog: {},
@@ -101,7 +108,7 @@ export default {
       this.showDesignModal = true;
     },
     async showEditModalModalFn(item) {
-      this.findByIdBlog(item.id)
+      await this.findByIdBlog(item.id)
       this.showEditModal = true;
     },
     closeModal(check) {
@@ -122,9 +129,7 @@ export default {
     },
     getBlog() {
       GetDataService.getBlog().then((response) => {
-        console.log(response.data)
         this.items = response.data
-        console.log(this.items)
       });
     },
     async findByIdBlog(id) {

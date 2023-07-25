@@ -47,7 +47,7 @@
                 <vueper-slide
                   v-for="(slide, i) in design.pictures"
                   :key="i"
-                  :image="slide.img"
+                  :image="`http://localhost:8080/image/${slide.img}`"
                 />
               </vueper-slides>
               <div
@@ -148,6 +148,7 @@ import "vue-nav-tabs/themes/vue-tabs.css";
 
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
+import {GetDataService} from "@/service/get-data-service";
 
 export default {
   name: "Portfolio",
@@ -168,7 +169,7 @@ export default {
   data() {
     return {
       all_info: info.portfolio,
-      desgin_info: info.portfolio_design,
+      desgin_info: [],
       portfolio_info: [],
       showModal: false,
       showDesignModal: false,
@@ -182,27 +183,31 @@ export default {
         '<div class="example-slide">Slide 2</div>',
         '<div class="example-slide">Slide 3</div>',
       ],
+      story: [],
     };
   },
   created() {
-    for (var i = 0; i < this.number; i++) {
-      this.portfolio_info.push(this.all_info[i]);
-    }
+    this.getStory();
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
     }
   },
-  watch: {
-    number() {
-      this.portfolio_info = [];
-      for (var i = 0; i < this.number; i++) {
-        this.portfolio_info.push(this.all_info[i]);
-      }
-    },
-  },
   methods: {
+    getStory() {
+      GetDataService.getStory().then((response) => {
+        this.story = response.data;
+        for (let i = 0; i < this.story.length; i++) {
+          let design = { name: this.story[i].name, title: this.story[i].title, pictures: [] };
+          for (let j = 0; j < this.story[i].storyPictures.length; j++) {
+            let pictures = { img: this.story[i].storyPictures[j].image, title: this.story[i].storyPictures[j].title };
+            design.pictures.push(pictures);
+          }
+          this.desgin_info.push(design);
+        }
+      });
+    },
     next() {
       this.$refs.flickity.next();
     },

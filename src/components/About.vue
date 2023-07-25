@@ -86,6 +86,7 @@ import { VueTabs, VTab } from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
 
 import "vueperslides/dist/vueperslides.css";
+import {GetDataService} from "@/service/get-data-service";
 
 export default {
   name: "Portfolio",
@@ -104,8 +105,8 @@ export default {
   data() {
     return {
       all_info: info.portfolio,
-      desgin_info: info.portfolio_design,
       portfolio_info: [],
+      blog: [],
       showModal: false,
       showDesignModal: false,
       modal_info: {},
@@ -120,9 +121,7 @@ export default {
     };
   },
   created() {
-    for (var i = 0; i < this.number; i++) {
-      this.portfolio_info.push(this.all_info[i]);
-    }
+    this.getBlog()
   },
   watch: {
     number() {
@@ -133,6 +132,23 @@ export default {
     },
   },
   methods: {
+    async getBlog() {
+      try {
+        const response = await GetDataService.getBlog();
+        this.blog = response.data;
+
+        for (let i = 0; i < this.blog.length; i++) {
+          let blog = { name: this.blog[i].title, pictures: [], description: this.blog[i].content };
+          let img = this.blog[i].image
+          blog.pictures.push(img);
+          this.portfolio_info.push(blog);
+        }
+      } catch (error) {
+        // Xử lý lỗi nếu có
+        console.error("Lỗi khi lấy dữ liệu từ API:", error);
+      }
+      console.log(this.portfolio_info)
+    },
     next() {
       this.$refs.flickity.next();
     },

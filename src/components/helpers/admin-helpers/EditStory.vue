@@ -145,6 +145,7 @@ export default {
       showSnackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
+      currentStory: [],
     };
   },
     components: {
@@ -157,6 +158,9 @@ export default {
   },
   created() {
     this.convertData()
+    GetDataService.getStory().then((response) => {
+      this.currentStory = response.data
+    });
     },
   methods: {
     close() {
@@ -224,6 +228,14 @@ export default {
       }
     },
     async submitData() {
+      for (let i = 0; i < this.currentStory.length; i++) {
+        if (this.storyName.trim() === this.currentStory[i].name && this.storyName.trim() !== this.data.name) {
+          this.showSnackbar = true;
+          this.snackbarMessage = "Tên đã tồn tại!";
+          this.snackbarColor = "#64808E";
+          return;
+        }
+      }
       if (!this.storyName.trim() || !this.storyTitle.trim()) {
         // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
         this.showSnackbar = true;

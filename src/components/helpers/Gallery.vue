@@ -2,6 +2,7 @@
   <div style="overflow: auto;">
     <div class="prow">
       <div
+          style="text-align: center"
         class="pcolumn"
         v-for="(i, idx) in images"
         :key="i.title"
@@ -12,8 +13,8 @@
         }"
       >
         <img
-          :src="i.img"
-          style="width:100%"
+          :src="`http://localhost:8080/image/${images[0]}`"
+          style="width:60%"
           :id="`gi${idx}`"
           @click="showImg(idx)"
           class="g-img"

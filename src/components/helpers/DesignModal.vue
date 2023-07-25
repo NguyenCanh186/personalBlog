@@ -30,7 +30,7 @@
               class="mb-2 date"
               :class="{ 'text-light': nightMode, pbgray: nightMode }"
             >
-              <span>{{ portfolio.date }} • {{ portfolio.category }}</span>
+              <span>{{ portfolio.title }}</span>
             </div>
             <div class="pb-1 bheight">
               <span
@@ -166,7 +166,7 @@ a:hover {
 @media screen and (max-width: 580px) {
   .modal-container {
     width: 90%;
-    height: 100%;
+    height: 70%;
   }
 }
 

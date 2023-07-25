@@ -12,7 +12,7 @@
         >
           <div class="title1 px-4 pt-3">
             <span :class="{ 'text-light': nightMode }">
-                Thêm mới Story
+                Cập nhật Blog
               </span>
             <a
                 class="pull-right"
@@ -36,76 +36,36 @@
                   id="name"
                   type="text"
                   name="name"
-                  v-model="storyName"
-                  placeholder="Nhập tên Story"
+                  v-model="name"
+                  placeholder="Nhập tên Blog"
                   class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
+                  style="transition-delay: 0.2s; line-height: 1.5"
               />
               <br>
-              <label for="title">Tiêu đề:</label> <br>
-              <input
+              <label for="file">Chọn ảnh:</label>
+              <br>
+              <img v-if="fileShow" :src="fileShow" alt="Ảnh" class="image-preview"/>
+              <img v-else :src="`http://localhost:8080/image/${fileCurrent}`" alt="Ảnh" class="image-preview">
+              <input type="file" id="file" @change="handleFileChange($event)">
+              <br>
+              <label for="title">Nội dung:</label> <br>
+              <textarea
                   id="title"
                   type="text"
                   name="title"
-                  v-model="storyTitle"
-                  placeholder="Nhập tên tiêu đề"
+                  v-model="content"
+                  placeholder="Nhập nội dung"
                   class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
-              />
-              <br><br>
-              <table>
-                <thead>
-                <tr>
-                  <th style="width: 5%">Stt</th>
-                  <th style="width: 30%; text-align: center">Ảnh</th>
-                  <th style="width: 60%">Title</th>
-                  <th style="width: 5%">Xóa</th> <!-- Add the "Xóa" header -->
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(item, index) in items" :key="item.id">
-                  <td>{{ index + 1 }}</td>
-                  <td style="width: 30%; text-align: center">
-                    <div class="image-container">
-                      <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
-                      <label v-if="!item.image" class="btn btn-file">
-                        <span v-if="!item.image">Chọn ảnh</span>
-                        <input type="file" @change="handleFileChange(index, $event)" />
-                      </label>
-                      <label v-else class="btn btn-file-change">
-                        <span><i class="fas fa-camera"></i></span>
-                        <input type="file" @change="handleFileChange(index, $event)" />
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <input class="form-control" type="text" v-model="item.title" />
-                  </td>
-                  <td>
-                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
-                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="d-flex flex-column align-items-center">
-                <button class="btn-add-row mt-2 rounded-circle" @click="addRow">
-                  <i class="fa fa-plus"></i>
-                </button>
-              </div>
+                  style="transition-delay: 0.2s; width: 100%; line-height: 1.5; font-size: 14px;" rows="6"
+              ></textarea>
             </div>
-
           </div>
           <div class="text-center pb-3">
             <hr
                 class="mt-1 mb-4"
                 :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
-            <button class="btn-add w-25" @click="submitData">Thêm mới</button>
+            <button class="btn-add w-25" @click="submitData">Cập nhật</button>
           </div>
         </div>
       </div>
@@ -125,22 +85,26 @@ import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import Swal from "sweetalert2";
 export default {
-  name: "AddStory",
+  name: "AddBlog",
   props: {
     showModal: {
       type: Boolean,
     },
+    data: {
+      type: Object,
+    },
   },
   data() {
     return {
-      items: [],
-      storyName: "",
-      storyTitle: "",
-      nextId: 1,
+      name: "",
+      content: "",
+      file: null,
+      fileShow: null,
+      fileCurrent: null,
       showSnackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
-      currentStory: [],
+      currentBlog: [],
     };
   },
   components: {
@@ -152,43 +116,30 @@ export default {
     }
   },
   created() {
-    GetDataService.getStory().then((response) => {
-      this.currentStory = response.data
+    this.convertData();
+    GetDataService.getBlog().then((response) => {
+      this.currentBlog = response.data
     });
   },
   methods: {
+    async convertData() {
+      this.name = this.data.title;
+      this.content = this.data.content;
+      // this.fileShow = this.data.image;
+      this.fileCurrent = this.data.image;
+    },
     close() {
       this.$emit("close");
     },
-    deleteRow(id) {
-      console.log(this.items);
-      console.log(id);
-      this.items = this.items.filter(item => item.id !== id);
-    },
-    addRow() {
-      this.items.push({
-        id: this.nextId, // Sử dụng biến đếm để tạo id
-        title: "",
-        image: null,
-        imageShow: null,
-      });
-      this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
-    },
-    async handleFileChange(index, event) {
+    handleFileChange(event) {
       const file = event.target.files[0];
+
       if (file) {
-        const imageData = {
-          ...this.items[index],
-          title: this.items[index].title,
-          image: file, // Gán URL cho thuộc tính image
-        };
-        this.$set(this.items, index, imageData);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const imageURL = e.target.result;
-          this.items[index].imageShow = imageURL;
-        };
-        reader.readAsDataURL(file);
+        this.file = file; // Gán file được chọn cho thuộc tính file
+        this.fileShow = URL.createObjectURL(file); // Gán URL của ảnh cho thuộc tính fileShow
+      } else {
+        this.fileCurrent = this.data.image;
+        this.fileShow = null; // Nếu không có ảnh được chọn, gán giá trị null cho fileShow
       }
     },
     closeSnackbar(val) {
@@ -199,56 +150,30 @@ export default {
       }
     },
     async submitData() {
-      for (let i = 0; i < this.currentStory.length; i++) {
-        if (this.storyName.trim() === this.currentStory[i].name) {
-          this.showSnackbar = true;
-          this.snackbarMessage = "Tên đã tồn tại!";
-          this.snackbarColor = "#64808E";
-          return;
-        }
-      }
-      if (!this.storyName.trim() || !this.storyTitle.trim()) {
+      if (!this.name.trim() || !this.content.trim()) {
         // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
         this.showSnackbar = true;
         this.snackbarMessage = "Vui lòng nhập đầy đủ thông tin!";
         this.snackbarColor = "#64808E";
         return;
       }
-      if (this.items.length === 0) {
-        this.showSnackbar = true;
-        this.snackbarMessage = "Vui lòng chọn ít nhất một ảnh!";
-        this.snackbarColor = "#64808E";
-        return;
-      }
-
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i];
-        if (!item.image || !item.title.trim()) {
+      for (let i = 0; i < this.currentBlog.length; i++) {
+        if (this.currentBlog[i].title === this.name.trim() && this.name.trim() !== this.data.title) {
           this.showSnackbar = true;
-          this.snackbarMessage = "Vui lòng điền đủ thông tin ảnh và title cho\ntất cả các mục!";
+          this.snackbarMessage = "Tên Blog đã tồn tại!";
           this.snackbarColor = "#64808E";
           return;
         }
       }
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i];
-        console.log(item)
-        if (item.title && item.image) {
-          const formData = new FormData();
-          formData.append('title', this.storyTitle);
-          formData.append('name', this.storyName);
-          formData.append('titleImage', item.title);
-
-          // const imageData = this.convertBase64ToBlob(item.image);
-          formData.append('image', item.image);
-          try {
-            const response = await GetDataService.createStory(formData);
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-        if (i === this.items.length - 1) {
+      const formData = new FormData();
+      formData.append("id", this.data.id);
+      formData.append("title", this.name);
+      if  (this.file) {
+        formData.append("fileImage", this.file);
+      }
+      formData.append("content", this.content);
+      GetDataService.updateBlog(formData).then(async (response) => {
+        if (response === "Xong") {
           this.$emit("close", true);
           await Swal.fire({
             title: 'Xong',
@@ -256,8 +181,13 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
+        } else {
+          this.showSnackbar = true;
+          this.snackbarMessage = "Có lỗi xảy ra!";
+          this.snackbarColor = "#64808E";
         }
-      }
+
+      });
     }
   },
 };
@@ -440,13 +370,13 @@ button {
 
 /* Định dạng kích thước ảnh */
 .image-preview {
-  max-width: 30%;
-  max-height: 30%;
+  max-width: 20%;
+  max-height: 20%;
 }
 @media only screen and (max-width: 580px) {
   .image-preview {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 45%;
+    max-height: 45%;
   }
 }
 /* ... */

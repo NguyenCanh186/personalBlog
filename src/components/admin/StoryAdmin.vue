@@ -30,7 +30,7 @@
           <tr>
             <th class="centered">Stt</th>
             <th class="centered">Ảnh</th>
-            <th>Tiêu đề</th>
+            <th>Tên story</th>
             <th class="centered">Action</th>
           </tr>
           </thead>
@@ -42,7 +42,7 @@
               <!-- Hiển thị ảnh -->
               <img :src="getImageUrl(item.storyPictures[0].image)" alt="Ảnh" width="100" height="100" />
             </td>
-            <td style="width: 50%">{{ item.title }}</td>
+            <td style="width: 50%">{{ item.name }}</td>
             <td style="width: 25%; text-align: center !important;">
               <div class="button-container">
                 <!-- Button with edit icon -->
@@ -108,7 +108,7 @@ export default {
       this.showDesignModal = true;
     },
     async showEditModalModalFn(item) {
-      this.findByIdStory(item.id)
+      await this.findByIdStory(item.id)
       this.showEditModal = true;
     },
     closeModal(check) {
@@ -143,17 +143,30 @@ export default {
       return `http://localhost:8080/image/${imageName}`;
     },
     async deleteItem(item) {
-      // Xử lý sự kiện xóa mục
-      await GetDataService.deleteByStoryById(item.id).then((response) => {
-        Swal.fire({
-          title: 'Đã xóa',
-          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        this.getStory()
-        console.log(response)
+      const swalResult = await Swal.fire({
+        title: 'Xóa thật hả',
+        html: '<div class="custom-circle"><i class="fas fa-exclamation-circle" style="color: #FF0000; font-size: 60px;"></i></div>',
+        showCancelButton: true,
+        confirmButtonText: 'Ừ',
+        cancelButtonText: 'Thôi :(',
+        reverseButtons: true,
+        customClass: {
+          cancelButton: 'swal-button',
+          confirmButton: 'swal-button swal-button--confirm',
+        },
       });
+      if (swalResult.isConfirmed) {
+        await GetDataService.deleteByStoryById(item.id).then((response) => {
+          Swal.fire({
+            title: 'Đã xóa',
+            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          this.getStory()
+          console.log(response)
+        });
+      }
     },
   },
 };

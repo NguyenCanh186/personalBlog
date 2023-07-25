@@ -1,6 +1,15 @@
+import axios from "axios";
+
+export class GetDataService {
+  static serverURL = `http://localhost:8080`
+
+  static getProfile() {
+    return axios.get(`${this.serverURL}/get-data/profile`)
+  }
+}
 let info = {
   name: "Canh Nguyen",
-  logo_name: "Call Me",
+  logo_name: "Cảnh Nguyễn",
   flat_picture: require("./src/assets/me.jpg"),
   config: {
     use_cookies: true,
