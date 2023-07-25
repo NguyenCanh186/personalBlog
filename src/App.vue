@@ -21,7 +21,7 @@ import Chat from "./components/brand/Chat.vue";
 import News from "./components/brand/News.vue";
 import info from "../info";
 import NewsDetail from "./components/brand/news/NewsDetail.vue";
-import Contact from "@/components/brand/news/Contact.vue";
+import Contact from "@/components/brand/Contact.vue";
 import API from "@/components/brand/API.vue";
 
 export default {

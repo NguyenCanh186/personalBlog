@@ -6,16 +6,9 @@
         data-aos-once="true"
         data-aos-duration="1000"
     >
-        <span
-            class="title text-center"
-        >
-          Liên hệ
-        </span>
-      <p>Vì đặc thù mỗi tính năng và nhóm đối tượng khác nhau, bạn hãy liên hệ với chúng tôi để có giá tốt nhất.</p>
+        <p><strong>Vui lòng để lại thông tin, chúng tôi sẽ liên lạc với bạn</strong></p>
+      <p style="margin-top: -10px">Chúng tôi rất trân trọng sự quan tâm mà bạn đang dành cho dịch vụ tin nhắn thương hiệu SMS Brandname của VMD MEDIA.</p>
     </div>
-    <hr
-        width="50%"
-    />
     <div class="row">
       <div class="col-6">
         <img :src="contact" alt="" class="img-responsive">
@@ -49,7 +42,7 @@
 </template>
 
 <script>
-import info from "../../../../info";
+import info from "../../../info";
 
 export default {
   name: "Contact",
