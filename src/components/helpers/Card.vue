@@ -9,17 +9,17 @@
       }"
     >
       <div style="height: 180px;">
+        <h5 class="title2">{{ portfolio.name }}</h5>
         <img
           class="card-img-top"
           :src="portfolio.pictures[0].img"
           alt="Card image cap"
         />
       </div>
-      <div class="card-body pborder-top">
-        <h5 class="title2">{{ portfolio.name }}</h5>
+      <div class="card-body">
         <div>
           <p
-            class="title3 m-0 pb-2 pheight pt-1"
+            class=""
             v-html="
               portfolio.description.length > 100
                 ? portfolio.description.substring(0, 105) + '...'
@@ -28,15 +28,17 @@
           >
           </p>
         </div>
-        <div class="text-center mt-2">
-          <button
-            href=""
-            class="btn-sm btn btn-outline-secondary no-outline"
-            @click.prevent="showModal"
-          >
-            Xem thêm
-          </button>
-        </div>
+        <hr style="width: 90%">
+        <p>Ngày đăng: {{portfolio.date}}</p>
+<!--        <div class="text-center mt-2">-->
+<!--          <button-->
+<!--            href=""-->
+<!--            class="btn-sm btn btn-outline-secondary no-outline"-->
+<!--            @click.prevent="showModal"-->
+<!--          >-->
+<!--            Xem thêm-->
+<!--          </button>-->
+<!--        </div>-->
       </div>
     </div>
   </div>
@@ -72,7 +74,9 @@ img {
   max-height: 100%;
   object-fit: cover;
 }
-
+.card-body {
+  margin-top: 30px;
+}
 .img-div img {
   /* object-fit: cover;
     overflow: hidden; */
@@ -83,34 +87,14 @@ img {
     max-width: 300px !important; */
 }
 
-.bheight {
-  height: 65px;
-  overflow: auto;
-}
-
-.pheight {
-  height: 80px;
-  max-height: 90px;
-  overflow: auto;
-  text-align: justify;
-}
-
-div.img-div {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-.pborder-top {
-  border-top: 1px solid rgb(193, 193, 193);
-}
-
 .pcard {
   background-color: rgb(255, 255, 255);
   border-radius: 7px;
   border: none;
   box-shadow: 1px 1px 12px rgb(233, 233, 233);
   transition: all 0.5s;
-  height: 380px;
+  height: 370px;
+  width: 360px;
 }
 
 .pcard:hover {

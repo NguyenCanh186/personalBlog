@@ -8,44 +8,47 @@
     }"
   >
     <div class="container">
-      <div
-          class="text-center"
-          data-aos="fade"
-          data-aos-once="true"
-          data-aos-duration="1000"
-      >
-        <span
-            class="title text-center"
-            :class="{ pgray: !nightMode, 'text-light': nightMode }"
-        >
-          Tin khách hàng
-        </span>
-      </div>
-      <hr
-          width="50%"
-          :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
-      />
+<!--      <div-->
+<!--          class="text-center"-->
+<!--          data-aos="fade"-->
+<!--          data-aos-once="true"-->
+<!--          data-aos-duration="1000"-->
+<!--      >-->
+<!--        <span-->
+<!--            class="title text-center"-->
+<!--            :class="{ pgray: !nightMode, 'text-light': nightMode }"-->
+<!--        >-->
+<!--          Tin khuyến mại-->
+<!--        </span>-->
+<!--      </div>-->
+<!--      <hr-->
+<!--          width="50%"-->
+<!--          :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"-->
+<!--      />-->
 
-      <br />
+<!--      <br />-->
       <div class="row">
         <div
             class="col-xl-4 col-bg-4 col-md-6 col-sm-12"
             v-for="(portfolio, idx) in portfolio_info"
             :key="portfolio.name"
+            @click="showModalDetail(portfolio.id)"
         >
-          <Card
-              :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
-              :portfolio="portfolio"
-              @show="showModalFn"
-              data-aos="fade-up"
-              :nightMode="nightMode"
-              data-aos-offset="100"
-              data-aos-delay="10"
-              data-aos-duration="500"
-              data-aos-easing="ease-in-out"
-              data-aos-mirror="true"
-              data-aos-once="true"
-          />
+          <div class="card-container"> <!-- Thêm container và lớp CSS vào đây -->
+            <Card
+                :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
+                :portfolio="portfolio"
+                @show="showModalFn"
+                data-aos="fade-up"
+                :nightMode="nightMode"
+                data-aos-offset="100"
+                data-aos-delay="10"
+                data-aos-duration="500"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
+            />
+          </div>
         </div>
       </div>
       <div class="text-center py-3">
@@ -105,7 +108,7 @@ export default {
       showDesignModal: false,
       modal_info: {},
       design_modal_info: {},
-      number: 3,
+      number: 6,
       shower: 0,
       data: [
         '<div class="example-slide">Slide 1</div>',
@@ -128,6 +131,11 @@ export default {
     },
   },
   methods: {
+    showModalDetail(portfolioId) {
+      // Navigate to the desired route passing the portfolioId
+      console.log(123)
+      this.$router.push('/newsDetail/' + portfolioId);
+    },
     next() {
       this.$refs.flickity.next();
     },
@@ -262,5 +270,11 @@ export default {
   border-color: #17a2b8;
   color: white;
 }
+.card-container {
+  transition: opacity 0.3s ease;
+}
 
+.card-container:hover {
+  opacity: 0.5;
+}
 </style>

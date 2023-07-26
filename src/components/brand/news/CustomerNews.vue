@@ -26,32 +26,35 @@
           :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
       />
 
-          <br />
-          <div class="row">
-            <div
-                class="col-xl-4 col-bg-4 col-md-6 col-sm-12"
-                v-for="(portfolio, idx) in portfolio_info"
-                :key="portfolio.name"
-            >
-              <Card
-                  :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
-                  :portfolio="portfolio"
-                  @show="showModalFn"
-                  data-aos="fade-up"
-                  :nightMode="nightMode"
-                  data-aos-offset="100"
-                  data-aos-delay="10"
-                  data-aos-duration="500"
-                  data-aos-easing="ease-in-out"
-                  data-aos-mirror="true"
-                  data-aos-once="true"
-              />
-            </div>
+      <br />
+      <div class="row">
+        <div
+            class="col-xl-4 col-bg-4 col-md-6 col-sm-12"
+            v-for="(portfolio, idx) in portfolio_info"
+            :key="portfolio.name"
+            @click="showModalDetail(portfolio.id)"
+        >
+          <div class="card-container"> <!-- Thêm container và lớp CSS vào đây -->
+            <Card
+                :style="{ 'transition-delay': (idx % 3) / 4.2 + 's' }"
+                :portfolio="portfolio"
+                @show="showModalFn"
+                data-aos="fade-up"
+                :nightMode="nightMode"
+                data-aos-offset="100"
+                data-aos-delay="10"
+                data-aos-duration="500"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
+            />
           </div>
-          <div class="text-center py-3">
-            <button class="btn mr-2" v-if="number < all_info.length" @click.prevent="showMore">Xem tiếp</button>
-            <button class="btn" v-if="number > 3" @click.prevent="showLess">Thu gọn</button>
-          </div>
+        </div>
+      </div>
+      <div class="text-center py-3">
+        <button class="btn mr-2" v-if="number < all_info.length" @click.prevent="showMore">Xem tiếp</button>
+        <button class="btn" v-if="number > 3" @click.prevent="showLess">Thu gọn</button>
+      </div>
     </div>
     <transition name="modal">
       <Modal
@@ -85,7 +88,7 @@ import "vue-nav-tabs/themes/vue-tabs.css";
 import "vueperslides/dist/vueperslides.css";
 
 export default {
-  name: "CustomerNews",
+  name: "PromotionsNews",
   components: {
     Card,
     Modal,
@@ -128,6 +131,11 @@ export default {
     },
   },
   methods: {
+    showModalDetail(portfolioId) {
+      // Navigate to the desired route passing the portfolioId
+      console.log(123)
+      this.$router.push('/newsDetail/' + portfolioId);
+    },
     next() {
       this.$refs.flickity.next();
     },
@@ -262,5 +270,11 @@ export default {
   border-color: #17a2b8;
   color: white;
 }
+.card-container {
+  transition: opacity 0.3s ease;
+}
 
+.card-container:hover {
+  opacity: 0.5;
+}
 </style>

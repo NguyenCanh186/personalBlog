@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import Home from "./components/brand/Slide.vue";
+import Navbar from "./components/brand/Navbar.vue";
+import Home from "./components/brand/home/Slide.vue";
 import Footer from "./components/brand/Footer.vue";
-import Chat from "./components/brand/Chat.vue";
-import News from "./components/brand/News.vue";
+import Chat from "./components/brand/home/Chat.vue";
+import News from "./components/brand/news/News.vue";
 import info from "../info";
 import NewsDetail from "./components/brand/news/NewsDetail.vue";
-import Contact from "@/components/brand/Contact.vue";
-import API from "@/components/brand/API.vue";
+import Contact from "@/components/brand/home/Contact.vue";
+import API from "@/components/brand/home/API.vue";
 
 export default {
   name: "App",

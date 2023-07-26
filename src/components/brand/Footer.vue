@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #3380CB; color: white">
+  <div class="mt-5" style="background-color: #3380CB; color: white">
     <div class="container py-3">
       <div class="row">
         <div class="col-md-6 col-12">
