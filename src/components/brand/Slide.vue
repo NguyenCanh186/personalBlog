@@ -6,37 +6,36 @@
   >
     <img :src="picture" style="width: 100%; height: auto; margin-top: -15px" />
     <div
-        class="container1 custom-container"
+        class="container custom-container"
         data-aos="fade"
         data-aos-once="true"
         data-aos-duration="1000"
         style="
-        position: absolute;
-        top: 9%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #ffffff;
-        padding: 20px;
-        /* Đặt các thuộc tính khác cho phần tử con */
-      "
-    >
-      <h1 style="font-size: 50px">Hệ thống tin nhắn SMS quảng cáo và <br> chăm sóc khách hàng</h1>
-      <h5>
-        Sử dụng đơn giản, dễ dàng ngay trên Web. Hỗ trợ hiển thị tên thương hiệu
-        (Brandname) <br> Tích hợp được với Website, phần mềm sẵn có của doanh nghiệp
-        thông qua API.
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    padding: 20px;
+    height: auto;">
+      <h1 style="font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 42px;">Hệ thống tin nhắn thương hiệu SMS Brandname VMG </h1>
+      <h5 style="font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 40px;">
+        Hỗ trợ hiển thị tên thương hiệu (Brandname) khi gửi tin nhắn Quảng cáo và <br> tin nhắn Chăm sóc khách hàng
       </h5>
       <div class="mt-4">
         <button class="btn" style="margin-right: 15px;" @click="goContact">
-          Đăng ký ngay
+          ĐĂNG KÝ NGAY
         </button>
         <button class="btn">
-          Tìm hiểu thêm
+          TIN KHUYẾN MÃI
         </button>
       </div>
-    </div>
-    <div style="text-align: left; margin-top: -50px; color: white">
-      <h5 style="margin-left: 140px"><strong>HOTLINE: 1900 1225</strong></h5>
     </div>
     <DetailServive />
     <WhyChooseUs />
@@ -74,16 +73,17 @@ export default {
 </script>
 
 <style scoped>
-.container1 {
-  margin-left: -400px !important;
-  text-align: left;
-}
 .custom-container {
 
   color: #ffffff;
 }
 
 .btn {
+  width: 218px;
+  padding: 16px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   border-color: #ffffff;
   background-color: white;
   color: #3380CB;

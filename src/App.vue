@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Inter');
 #app {
   font-family: "Lobster", sans-serif;
   -webkit-font-smoothing: antialiased;
