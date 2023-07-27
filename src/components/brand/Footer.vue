@@ -48,10 +48,18 @@
           <br>
           <p><strong>MENU</strong></p>
           <ul>
-            <li>Trang chủ</li>
-            <li>Tin tức</li>
-            <li>API</li>
-            <li>Liên hệ</li>
+            <li>
+              <a @click.prevent="goToHome" style="cursor: pointer">Trang chủ</a>
+            </li>
+            <li>
+              <a @click.prevent="goToNewsPage" style="cursor: pointer">Tin tức</a>
+            </li>
+            <li>
+              <a @click.prevent="goToApi" style="cursor: pointer">API</a>
+            </li>
+            <li>
+              <a @click.prevent="goContact" style="cursor: pointer">Liên hệ</a>
+            </li>
           </ul>
         </div>
         <br><br>
@@ -141,6 +149,18 @@ export default {
           break;
       }
     },
+    goToNewsPage() {
+      this.$router.push('/news').catch(() => {});
+    },
+    goToHome() {
+      this.$router.push('/').catch(() => {});
+    },
+    goContact() {
+      this.$router.push('/contact').catch(() => {});
+    },
+    goToApi() {
+      this.$router.push('/api').catch(() => {});
+    },
   },
 };
 </script>
@@ -166,6 +186,9 @@ span {
   background-color: white;
   border-color: white;
   color: gray;
+}
+.nav-link {
+  color: #ffffff !important;
 }
 @media screen and (max-width: 767px) {
   .col-md-6 {

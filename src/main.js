@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import VueParallaxJs from 'vue-parallax-js'
@@ -32,6 +31,5 @@ new Vue({
     AOS.init()
   },
   router,
-  store,
   render: h => h(App),
 }).$mount('#app')
