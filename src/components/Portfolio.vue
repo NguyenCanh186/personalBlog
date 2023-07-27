@@ -126,7 +126,7 @@
       />
     </transition>
     <transition name="modal">
-      <DesignModal
+      <DesignModalStory
         :showModal="showDesignModal"
         @close="closeModal"
         v-if="showDesignModal"
@@ -140,7 +140,6 @@
 <script>
 import Card from "./helpers/Card";
 import Modal from "./helpers/Modal";
-import DesignModal from "./helpers/DesignModal";
 import info from "../../info";
 
 import { VueTabs, VTab } from "vue-nav-tabs";
@@ -149,6 +148,7 @@ import "vue-nav-tabs/themes/vue-tabs.css";
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import {GetDataService} from "@/service/get-data-service";
+import DesignModalStory from "@/components/helpers/DesignModalStory.vue";
 
 export default {
   name: "Portfolio",
@@ -159,7 +159,7 @@ export default {
     VTab,
     VueperSlides,
     VueperSlide,
-    DesignModal,
+    DesignModalStory,
   },
   props: {
     nightMode: {

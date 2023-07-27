@@ -3,8 +3,8 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div
-          class="modal-container"
-          :class="{
+            class="modal-container"
+            :class="{
             'bg-light': !nightMode,
             'bg-dark': nightMode,
             'text-light': nightMode,
@@ -12,33 +12,33 @@
         >
           <div class="title1 px-4 pt-3">
             <span :class="{ 'text-light': nightMode }">{{
-              portfolio.name
-            }}</span>
+                portfolio.name
+              }}</span>
             <a
-              class="pull-right"
-              style="font-size: 18px;"
-              @click="$emit('close')"
-              ><i class="fas fa-times"></i
+                class="pull-right"
+                style="font-size: 18px;"
+                @click="$emit('close')"
+            ><i class="fas fa-times"></i
             ></a>
             <hr
-              class="my-1"
-              :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
+                class="my-1"
+                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
           </div>
           <div class="modal-body my-0 pb-0 px-4 pt-0">
             <div
-              class="mb-2 date"
-              :class="{ 'text-light': nightMode, pbgray: nightMode }"
+                class="mb-2 date"
+                :class="{ 'text-light': nightMode, pbgray: nightMode }"
             >
               <span>{{ portfolio.title }}</span>
             </div>
             <div class="pb-1 bheight">
               <span
-                class="badge mr-2 mb-2"
-                v-for="tech in portfolio.technologies"
-                :key="tech"
-                :class="{ 'bg-dark4': nightMode }"
-                >{{ tech }}</span
+                  class="badge mr-2 mb-2"
+                  v-for="tech in portfolio.technologies"
+                  :key="tech"
+                  :class="{ 'bg-dark4': nightMode }"
+              >{{ tech }}</span
               >
             </div>
 
@@ -47,14 +47,14 @@
             </div>
             <hr />
             <div>
-              <Gallery :images="portfolio.pictures" :design="true" />
+              <GalleryStory :images="portfolio.pictures" :design="true" />
             </div>
           </div>
 
           <div class="text-center pb-3">
             <hr
-              class="mt-1 mb-3"
-              :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
+                class="mt-1 mb-3"
+                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
             <button class="btn w-25" @click="$emit('close')">close</button>
           </div>
@@ -65,12 +65,13 @@
 </template>
 
 <script>
-import Gallery from "./Gallery";
+
+import GalleryStory from "@/components/helpers/GalleryStory.vue";
 
 export default {
   name: "Modal",
   components: {
-    Gallery,
+    GalleryStory,
   },
   props: {
     showModal: {
