@@ -12,7 +12,7 @@
       <div class="row align-items-center">
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
           <div class="image-container">
-            <img :src="picture"/>
+            <img :src="`http://localhost:8080/image/${picture}`"/>
           </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
@@ -96,6 +96,7 @@ export default {
     getProfile() {
       getDataService.getProfile().then((response) => {
         this.profile = response.data;
+        this.picture = this.profile.image;
         this.homeTitle = this.profile.title;
         this.description = this.profile.description;
       });
