@@ -39,7 +39,7 @@ export default {
   font-size: 40px;
   position: fixed !important;
   bottom: 20px !important;
-  left: 20px !important;
+  right: 120px !important;
   color: #3380CB;
   background-color: #ffffff;
   padding: 10px 20px;
