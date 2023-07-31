@@ -9,7 +9,7 @@
       }"
     >
       <div style="height: 180px;">
-        <h5 class="title2">{{ portfolio.name }}</h5>
+        <h5 class="title2 mt-2 ml-3">{{ truncatedTitle }}</h5>
         <img
           class="card-img-top"
           :src="portfolio.pictures[0].img"
@@ -30,15 +30,6 @@
         </div>
         <hr style="width: 90%">
         <p>Ngày đăng: {{portfolio.date}}</p>
-<!--        <div class="text-center mt-2">-->
-<!--          <button-->
-<!--            href=""-->
-<!--            class="btn-sm btn btn-outline-secondary no-outline"-->
-<!--            @click.prevent="showModal"-->
-<!--          >-->
-<!--            Xem thêm-->
-<!--          </button>-->
-<!--        </div>-->
       </div>
     </div>
   </div>
@@ -53,6 +44,16 @@ export default {
     },
     nightMode: {
       type: Boolean,
+    },
+  },
+  computed: {
+    // Tạo computed property để hiển thị title đã được cắt nếu cần
+    truncatedTitle() {
+      if (this.portfolio.name.length > 35) {
+        return this.portfolio.name.substring(0, 35) + '...';
+      } else {
+        return this.portfolio.name;
+      }
     },
   },
   methods: {

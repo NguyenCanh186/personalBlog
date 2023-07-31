@@ -1,35 +1,28 @@
 <template>
   <div
       class="py-4 p-st"
-      :class="{
-      'bg-light': !nightMode,
-      'bg-dark2': nightMode,
-      'text-light': nightMode,
-    }"
   >
-    <div class="container">
-      <div
-          class="text-center"
-          data-aos="fade"
-          data-aos-once="true"
-          data-aos-duration="1000"
+    <div style="text-align: center; margin-top: -35px">
+      <img
+          style="width: 100%; height: auto; object-fit: contain; margin-left: auto;"
+          :src="detail.pictures[0].img"
       >
+    </div>
+    <br>
+    <div
+        class="text-center"
+        data-aos="fade"
+        data-aos-once="true"
+        data-aos-duration="1000"
+    >
         <span
             class="title text-center"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
         >
           {{ detail.name }}
         </span>
-        <br>
-        <span style="font-style: italic;">{{ detail.category }} | {{detail.date}}</span>
-      </div>
-      <hr
-          width="50%"
-          :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
-      />
-      <div style="text-align: center;">
-        <img style="width: 90%; margin-left: auto" :src="detail.pictures[0].img">
-      </div>
+    </div>
+    <div class="container">
       <br />
       <p>{{ detail.description}}</p>
     </div>
