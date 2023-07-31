@@ -45,7 +45,7 @@
             </div>
             <hr />
             <div style="text-align: justify;">
-              <span v-html="portfolio.description"></span>
+              <pre style="font-family: Lobster, sans-serif" >{{portfolio.description}}</pre>
             </div>
           </div>
 
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import Carousel from "./Carousel";
 import Gallery from "./Gallery";
 
 export default {

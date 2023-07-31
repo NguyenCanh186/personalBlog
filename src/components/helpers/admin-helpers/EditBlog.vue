@@ -173,7 +173,7 @@ export default {
       }
       formData.append("content", this.content);
       GetDataService.updateBlog(formData).then(async (response) => {
-        if (response === "Xong") {
+        if (response.data === "Xong") {
           this.$emit("close", true);
           await Swal.fire({
             title: 'Xong',
