@@ -122,7 +122,7 @@
 
 <script>
 import index from "vuex";
-import Snackbar from "@/components/helpers/Snackbar.vue";
+import Snackbar from "@/components/Snackbar.vue";
 import { GetDataService } from "@/service/get-data-service";
 import Swal from 'sweetalert2';
 export default {

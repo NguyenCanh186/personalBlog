@@ -86,7 +86,7 @@
 <script>
 import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
-import Snackbar from "@/components/helpers/Snackbar.vue";
+import Snackbar from "@/components/Snackbar.vue";
 import Swal from "sweetalert2";
 export default {
   name: "AddBlog",
