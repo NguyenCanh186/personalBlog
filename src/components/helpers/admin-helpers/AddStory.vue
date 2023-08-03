@@ -11,18 +11,18 @@
           }"
         >
           <div class="title1 px-4 pt-3">
-            <span :class="{ 'text-light': nightMode }">
-                Thêm mới Story
+            <span>
+                Thêm mới bài viết
               </span>
             <a
                 class="pull-right"
                 style="font-size: 18px;"
                 @click="close()"
-            ><i class="fas fa-times"></i
-            ></a>
+            >
+              <i class="fas fa-times"></i>
+            </a>
             <hr
                 class="my-1"
-                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
           </div>
           <div style="padding: 30px" class="modal-body my-0 pb-0 px-4 pt-0">
@@ -31,18 +31,21 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <label for="name">Tên:</label> <br>
-              <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  v-model="storyName"
-                  placeholder="Nhập tên Story"
-                  class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
-              />
+              <label for="name">Ảnh bìa:</label> <br>
+              <img v-if="cover" :src="coverShow" alt="Preview" class="image-preview" />
+              <label v-if="!cover" class="btn btn-file">
+                <span>Chọn ảnh</span>
+                <input type="file" @change="handleFileChange(index, $event)" />
+              </label>
+              <div v-else>
+                <label  class="btn btn-file-change">
+                  <span><i class="fas fa-camera"></i></span>
+                  <input type="file" @change="handleFileChange(index, $event)" />
+                </label>
+                <label style="margin-left: 65px"  class="btn btn-file-change">
+                  <span><i class="fas fa-trash" @click="deleteFileChange(index)"></i></span>
+                </label>
+              </div>
               <br>
               <label for="title">Tiêu đề:</label> <br>
               <input
@@ -58,36 +61,27 @@
               />
               <br><br>
               <table>
-                <thead>
-                <tr>
-                  <th style="width: 5%">Stt</th>
-                  <th style="width: 30%; text-align: center">Ảnh</th>
-                  <th style="width: 60%">Title</th>
-                  <th style="width: 5%">Xóa</th> <!-- Add the "Xóa" header -->
-                </tr>
-                </thead>
                 <tbody>
                 <tr v-for="(item, index) in items" :key="item.id">
-                  <td>{{ index + 1 }}</td>
-                  <td style="width: 30%; text-align: center">
+                  <td style="width: 100%; text-align: center">
+                    <!-- Image container and input -->
                     <div class="image-container">
                       <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
                         <span v-if="!item.image">Chọn ảnh</span>
                         <input type="file" @change="handleFileChange(index, $event)" />
                       </label>
-                      <label v-else class="btn btn-file-change">
-                        <span><i class="fas fa-camera"></i></span>
-                        <input type="file" @change="handleFileChange(index, $event)" />
-                      </label>
+                      <div v-else>
+                        <label  class="btn btn-file-change">
+                          <span><i class="fas fa-camera"></i></span>
+                          <input type="file" @change="handleFileChange(index, $event)" />
+                        </label>
+                        <label style="margin-left: 65px"  class="btn btn-file-change">
+                          <span><i class="fas fa-trash" @click="deleteFileChange(index)"></i></span>
+                        </label>
+                      </div>
                     </div>
-                  </td>
-                  <td>
-                    <input class="form-control" type="text" v-model="item.title" />
-                  </td>
-                  <td>
-                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
-                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                    <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
                   </td>
                 </tr>
                 </tbody>
@@ -103,7 +97,6 @@
           <div class="text-center pb-3">
             <hr
                 class="mt-1 mb-4"
-                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
             <button class="btn-add w-25" @click="submitData">Thêm mới</button>
           </div>
@@ -133,6 +126,8 @@ export default {
   },
   data() {
     return {
+      cover: null,
+      coverShow: null,
       items: [],
       storyName: "",
       storyTitle: "",
@@ -190,6 +185,10 @@ export default {
         };
         reader.readAsDataURL(file);
       }
+    },
+    async deleteFileChange(index) {
+          this.items[index].imageShow = null;
+          this.items[index].image = null;
     },
     closeSnackbar(val) {
       if (!val) {
@@ -491,7 +490,7 @@ button {
 .image-container .btn-file-change {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;

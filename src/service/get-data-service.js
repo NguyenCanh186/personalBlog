@@ -19,8 +19,8 @@ export class GetDataService {
         return axios.get(`${this.serverURL}/get-data/story/${id}`)
     }
 
-    static getBlogById(id) {
-        return axios.get(`${this.serverURL}/get-data/getBlog/${id}`)
+    static getNewsById(id) {
+        return axios.get(`${this.serverURL}/get-data/news/${id}`)
     }
 
     static deleteByStoryById(id) {

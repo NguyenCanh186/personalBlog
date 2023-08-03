@@ -62,7 +62,7 @@
     <EditStory
         :showModal="showEditModal"
         @close="closeModalEdit"
-        :data="story"
+        :data="news"
         v-if="showEditModal"
     />
   </div>
@@ -89,7 +89,7 @@ export default {
   },
   data() {
     return {
-      blog: {},
+      news: {},
       showEditModal: false,
       showDesignModal: false,
       showSnackbar: false,
@@ -136,8 +136,7 @@ export default {
     },
     async findByIdBlog(id) {
       await GetDataService.getNewsById(id).then((response) => {
-        this.blog = response.data
-        console.log(this.blog)
+        this.news = response.data
       });
     },
     getImageUrl(imageName) {

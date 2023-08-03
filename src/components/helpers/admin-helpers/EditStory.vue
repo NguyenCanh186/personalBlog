@@ -12,7 +12,7 @@
         >
           <div class="title1 px-4 pt-3">
             <span :class="{ 'text-light': nightMode }">
-                Thêm mới Story
+                Chỉnh sửa tin tức
               </span>
             <a
                 class="pull-right"
@@ -31,20 +31,9 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <label for="name">Tên:</label> <br>
-              <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  v-model="storyName"
-                  placeholder="Nhập tên Story"
-                  class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
-              />
-              <br>
-              <label for="title">Tiêu đề:</label> <br>
+              <img :src="`http://localhost:8080/image/${data.cover}`" alt="" style="width: 100%">
+              <br><br>
+              <label for="title">Tên bài viết:</label>
               <input
                   id="title"
                   type="text"
