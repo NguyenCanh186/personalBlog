@@ -189,16 +189,18 @@ export default {
       this.$emit("close");
     },
     deleteRow(idRow) {
-      console.log(123)
       let itemcheck = null
+      console.log(idRow)
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].idRow === idRow) {
           itemcheck = this.items[i]
         }
       }
-      if (itemcheck.id !== null) {
+      console.log(itemcheck)
+      if (itemcheck !== null) {
         this.listIdPicture += itemcheck.id + ","
       }
+      console.log(this.listIdPicture)
       this.items = this.items.filter(item => item.idRow !== idRow);
     },
     async convertData() {
@@ -207,21 +209,23 @@ export default {
       this.category = this.data.category;
       this.storyTitle = this.data.title;
       for (let i = 0; i < this.items.length; i++) {
-        this.items[i].idRow = this.nextId;
+        this.items[i].idRow = this.items[i].id;
         this.items[i].imageShow = this.items[i].image;
         this.items[i].change = false;
-        console.log(this.items[i])
-        this.nextId++;
+        if (this.items.length -1 === i) {
+          this.nextId = this.items[i].id +1
+        }
       }
+      console.log(this.items)
     },
     addRow() {
       this.items.push({
-        idRow: this.nextId, // Sử dụng biến đếm để tạo id
+        idRow: null, // Sử dụng biến đếm để tạo id
         title: "",
         image: null,
         imageShow: null,
         change: false,
-        id: null,
+        id: this.nextId,
       });
       this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
     },
