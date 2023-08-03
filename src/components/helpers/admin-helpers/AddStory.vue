@@ -37,15 +37,10 @@
                 <span>Chọn ảnh</span>
                 <input type="file" @change="handleFileChange(index, $event)" />
               </label>
-              <div v-else>
-                <label  class="btn btn-file-change">
-                  <span><i class="fas fa-camera"></i></span>
-                  <input type="file" @change="handleFileChange(index, $event)" />
-                </label>
-                <label style="margin-left: 65px"  class="btn btn-file-change">
-                  <span><i class="fas fa-trash" @click="deleteFileChange(index)"></i></span>
-                </label>
-              </div>
+              <label v-else class="btn btn-file-change">
+                <span><i class="fas fa-camera"></i></span>
+                <input type="file" @change="handleFileChange(index, $event)" />
+              </label>
               <br>
               <label for="title">Tiêu đề:</label> <br>
               <input
