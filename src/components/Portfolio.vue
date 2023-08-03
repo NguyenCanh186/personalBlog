@@ -124,14 +124,6 @@ a:hover {
   font-size: 24px;
   font-weight: 400;
 }
-
-
-
-
-
-
-
-
 .pinput {
   font-size: 18px;
   outline: none;
@@ -160,10 +152,6 @@ a:hover {
   border-color: #00CCCC;
   color: white;
 }
-
-.pgray-dark {
-  background-color: #3c4148 !important;
-}
 img {
   object-fit: cover;
   max-width: 500px;
@@ -171,7 +159,6 @@ img {
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 50%;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (max-width: 580px) {

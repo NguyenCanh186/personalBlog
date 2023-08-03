@@ -27,7 +27,7 @@
                 <td style="width: 4%">{{ index + 1 }}</td>
                 <td style="width: 20%">
                   <!-- Hiển thị ảnh -->
-                  <img :src="getImageUrl(item.image)" alt="Ảnh" width="100" height="100" />
+                  <img :src="getImageUrl(item.cover)" alt="Ảnh" width="100" height="100" />
                 </td>
                 <td style="width: 50%;" class="left-aligned">{{ item.title }}</td>
                 <td style="width: 25%; text-align: center !important;">
@@ -84,7 +84,7 @@ export default {
     };
   },
   created() {
-    this.getBlog()
+    this.getNews()
   },
   methods: {
     logOut() {
@@ -100,7 +100,7 @@ export default {
     },
     closeModal(check) {
       if (check === true) {
-        this.getBlog()
+        this.getNews()
       }
       this.showModal = false;
       this.showDesignModal = false;
@@ -108,19 +108,19 @@ export default {
     },
     closeModalEdit(check) {
       if (check === true) {
-        this.getBlog()
+        this.getNews()
       }
       this.showModal = false;
       this.showEditModal = false;
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
-    getBlog() {
-      GetDataService.getBlog().then((response) => {
+    getNews() {
+      GetDataService.getNews().then((response) => {
         this.items = response.data
       });
     },
     async findByIdBlog(id) {
-      await GetDataService.getBlogById(id).then((response) => {
+      await GetDataService.getNewsById(id).then((response) => {
         this.blog = response.data
         console.log(this.blog)
       });
@@ -151,7 +151,7 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
-          this.getBlog();
+          this.getNews();
           console.log(response);
         });
       }
@@ -243,7 +243,6 @@ img {
 @media only screen and (max-width: 580px) {
   img {
     object-fit: cover;
-    border-radius: 50%;
     height: 200px;
     width: 200px;
     margin-top: 10px;
