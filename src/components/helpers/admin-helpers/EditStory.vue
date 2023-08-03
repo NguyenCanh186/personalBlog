@@ -90,6 +90,10 @@
                     </div>
                     <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
                   </td>
+                  <td>
+                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
+                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -185,6 +189,7 @@ export default {
       this.$emit("close");
     },
     deleteRow(idRow) {
+      console.log(123)
       let itemcheck = null
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].idRow === idRow) {
@@ -194,7 +199,6 @@ export default {
       if (itemcheck.id !== null) {
         this.listIdPicture += itemcheck.id + ","
       }
-      console.log(this.listIdPicture)
       this.items = this.items.filter(item => item.idRow !== idRow);
     },
     async convertData() {
