@@ -54,6 +54,17 @@
         </div>
       </div>
     </div>
+    <AddStory
+        :showModal="showDesignModal"
+        @close="closeModal"
+        v-if="showDesignModal"
+    />
+    <EditStory
+        :showModal="showEditModal"
+        @close="closeModalEdit"
+        :data="story"
+        v-if="showEditModal"
+    />
   </div>
 </template>
 
@@ -62,10 +73,14 @@
 
 import {GetDataService} from "@/service/get-data-service";
 import Swal from "sweetalert2";
+import EditStory from "@/components/helpers/admin-helpers/EditStory.vue";
+import AddStory from "@/components/helpers/admin-helpers/AddStory.vue";
 
 export default {
   name: "HomeAdmin",
   components: {
+    AddStory,
+    EditStory
   },
   props: {
     nightMode: {
