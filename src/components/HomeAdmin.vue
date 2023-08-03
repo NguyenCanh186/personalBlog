@@ -27,7 +27,7 @@
                 <td style="width: 4%">{{ index + 1 }}</td>
                 <td style="width: 20%">
                   <!-- Hiển thị ảnh -->
-                  <img :src="getImageUrl(item.cover)" alt="Ảnh" width="100" height="100" />
+                  <img :src="getImageUrl(item.cover)" alt="Ảnh" style="width: 100%;" />
                 </td>
                 <td style="width: 50%;" class="left-aligned">{{ item.title }}</td>
                 <td style="width: 25%; text-align: center !important;">

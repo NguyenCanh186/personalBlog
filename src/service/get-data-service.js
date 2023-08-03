@@ -3,8 +3,8 @@ import authHeader from "@/service/auth-header";
 export class GetDataService {
     static serverURL = `http://localhost:8080`
 
-    static createStory(story) {
-        return axios.post(`${this.serverURL}/story`, story, { headers: authHeader() })
+    static createNews(news) {
+        return axios.post(`${this.serverURL}/news`, news, { headers: authHeader() })
     }
 
     static getNews() {
@@ -27,8 +27,8 @@ export class GetDataService {
         return axios.delete(`${this.serverURL}/story/${id}`, { headers: authHeader() })
     }
 
-    static updateStory(story) {
-        return axios.post(`${this.serverURL}/story/update`, story, { headers: authHeader() })
+    static updateNews(story) {
+        return axios.post(`${this.serverURL}/news/update`, story, { headers: authHeader() })
     }
 
     static updateBlog(blog) {

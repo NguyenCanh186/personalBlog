@@ -31,39 +31,49 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <label for="name">Ảnh bìa:</label> <br>
-              <img v-if="cover" :src="coverShow" alt="Preview" class="image-preview" />
-              <label v-if="!cover" class="btn btn-file">
-                <span>Chọn ảnh</span>
-                <input type="file" @change="handleFileChange(index, $event)" />
+              <img style="width: 100%" v-if="cover" :src="coverShow" alt="Preview" /><br><br>
+              <label style="margin-left: 46% !important;" class="btn btn-file">
+                <span>Thêm ảnh bìa</span>
+                <input type="file" @change="handleFileCoverChange($event)" />
               </label>
-              <label v-else class="btn btn-file-change">
-                <span><i class="fas fa-camera"></i></span>
-                <input type="file" @change="handleFileChange(index, $event)" />
-              </label>
-              <br>
-              <label for="title">Tiêu đề:</label> <br>
-              <input
-                  id="title"
-                  type="text"
-                  name="title"
-                  v-model="storyTitle"
-                  placeholder="Nhập tên tiêu đề"
-                  class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
-              />
+              <br><br>
+              <div class="row">
+                <div class="col-6">
+                  <label for="title">Tên bài viết:</label>
+                  <input
+                    id="title"
+                    type="text"
+                    name="title"
+                    v-model="storyTitle"
+                    placeholder="Nhập tên bài viết"
+                    class="pinput"
+                    style="transition-delay: 0.2s;
+                  text-align: center;
+                  line-height: 1.5;
+                  width: 80%"
+                />
+                </div>
+                <div class="col-6">
+                  <label for="selectOption">Thể loại:</label>
+                  <select class="pinput" id="selectOption" style="width: 80%"  v-model="category">
+                    <option value="1">Tin khuyến mại</option>
+                    <option value="2">Tin khách hàng</option>
+                    <option value="3">Tin quảng cáo</option>
+                  </select>
+                </div>
+
+              </div>
+
               <br><br>
               <table>
                 <tbody>
                 <tr v-for="(item, index) in items" :key="item.id">
                   <td style="width: 100%; text-align: center">
                     <!-- Image container and input -->
-                    <div class="image-container">
+                    <div v-if="index !== 0" class="image-container">
                       <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
-                        <span v-if="!item.image">Chọn ảnh</span>
+                        <span v-if="!item.image">Thêm ảnh</span>
                         <input type="file" @change="handleFileChange(index, $event)" />
                       </label>
                       <div v-else>
@@ -121,16 +131,16 @@ export default {
   },
   data() {
     return {
+      category: null,
       cover: null,
       coverShow: null,
       items: [],
-      storyName: "",
       storyTitle: "",
       nextId: 1,
       showSnackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
-      currentStory: [],
+      currentNews: [],
     };
   },
   components: {
@@ -142,11 +152,24 @@ export default {
     }
   },
   created() {
-    GetDataService.getStory().then((response) => {
-      this.currentStory = response.data
+    GetDataService.getNews().then((response) => {
+      this.currentNews = response.data
     });
   },
   methods: {
+    async handleFileCoverChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.cover = file;
+        this.coverShow = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageURL = e.target.result;
+          this.coverShow = imageURL;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     close() {
       this.$emit("close");
     },
@@ -193,15 +216,22 @@ export default {
       }
     },
     async submitData() {
-      for (let i = 0; i < this.currentStory.length; i++) {
-        if (this.storyName.trim() === this.currentStory[i].name) {
+      for (let i = 0; i < this.currentNews.length; i++) {
+        if (this.storyTitle.trim() === this.currentNews[i].title.trim()) {
           this.showSnackbar = true;
           this.snackbarMessage = "Tên đã tồn tại!";
           this.snackbarColor = "#64808E";
           return;
         }
       }
-      if (!this.storyName.trim() || !this.storyTitle.trim()) {
+      if (!this.category) {
+        // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
+        this.showSnackbar = true;
+        this.snackbarMessage = "Vui lòng chọn thể loại tin!";
+        this.snackbarColor = "#64808E";
+        return;
+      }
+      if (!this.cover || !this.storyTitle.trim()) {
         // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
         this.showSnackbar = true;
         this.snackbarMessage = "Vui lòng nhập đầy đủ thông tin!";
@@ -210,38 +240,51 @@ export default {
       }
       if (this.items.length === 0) {
         this.showSnackbar = true;
-        this.snackbarMessage = "Vui lòng chọn ít nhất một ảnh!";
+        this.snackbarMessage = "Vui lòng nhập ít nhất một nội dung!";
         this.snackbarColor = "#64808E";
         return;
       }
 
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i];
-        if (!item.image || !item.title.trim()) {
+        if (!item.title.trim()) {
           this.showSnackbar = true;
-          this.snackbarMessage = "Vui lòng điền đủ thông tin ảnh và title cho\ntất cả các mục!";
+          this.snackbarMessage = "Vui lòng điền nội dung cho tất cả các mục!";
           this.snackbarColor = "#64808E";
           return;
         }
       }
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i];
-        console.log(item)
-        if (item.title && item.image) {
           const formData = new FormData();
+          formData.append('cover', this.cover);
           formData.append('title', this.storyTitle);
-          formData.append('name', this.storyName);
           formData.append('titleImage', item.title);
-
-          // const imageData = this.convertBase64ToBlob(item.image);
-          formData.append('image', item.image);
-          try {
-            const response = await GetDataService.createStory(formData);
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
+          if (item.image) {
+            formData.append('image', item.image);
           }
-        }
+          formData.append('category', this.category);
+          try {
+            await GetDataService.createNews(formData).then((res) => {
+              console.log(res)
+              if (!res) {
+                // If there was an error in adding the item, show a snackbar and return
+                this.showSnackbar = true;
+                this.snackbarMessage = "Đã có lỗi xảy ra!";
+                this.snackbarColor = "#64808E";
+                return;
+              }
+            });
+          } catch (error) {
+            // Handle any exceptions during the API call (optional)
+            console.error(error);
+            this.showSnackbar = true;
+            this.snackbarMessage = "Đã có lỗi xảy ra!";
+            this.snackbarColor = "#64808E";
+            return;
+          }
+
+        // If we reach this point, it means the current item was added successfully
         if (i === this.items.length - 1) {
           this.$emit("close", true);
           await Swal.fire({
@@ -307,8 +350,8 @@ a:hover {
 }
 
 .modal-container {
-  width: 50%;
-  max-height: 80%;
+  width: 60%;
+  max-height: 90%;
   min-height: 80%;
   margin: 0px auto;
   border-radius: 7px;
@@ -413,13 +456,11 @@ a:hover {
 /* Định dạng cho bảng */
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th,
 td {
   text-align: center;
-  border: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -499,7 +540,7 @@ button {
 .btn-file {
   position: relative;
   overflow: hidden;
-  width: 70px;
+  width: 120px;
   height: 28px;
   font-size: 12px;
   color: white;

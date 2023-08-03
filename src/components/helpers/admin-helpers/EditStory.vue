@@ -11,18 +11,18 @@
           }"
         >
           <div class="title1 px-4 pt-3">
-            <span :class="{ 'text-light': nightMode }">
-                Chỉnh sửa tin tức
+            <span>
+                Chỉnh sửa bài viết
               </span>
             <a
                 class="pull-right"
                 style="font-size: 18px;"
                 @click="close()"
-            ><i class="fas fa-times"></i
-            ></a>
+            >
+              <i class="fas fa-times"></i>
+            </a>
             <hr
                 class="my-1"
-                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
           </div>
           <div style="padding: 30px" class="modal-body my-0 pb-0 px-4 pt-0">
@@ -31,53 +31,64 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <img :src="`http://localhost:8080/image/${data.cover}`" alt="" style="width: 100%">
+              <img v-if="!cover" style="width: 100%" :src="`http://localhost:8080/image/${coverShow}`" alt="Preview" />
+              <img v-else style="width: 100%" :src="coverShow" alt="Preview" />
               <br><br>
-              <label for="title">Tên bài viết:</label>
-              <input
-                  id="title"
-                  type="text"
-                  name="title"
-                  v-model="storyTitle"
-                  placeholder="Nhập tên tiêu đề"
-                  class="pinput"
-                  style="transition-delay: 0.2s;
-         text-align: center;
-         line-height: 1.5;"
-              />
+              <label style="margin-left: 46% !important;" class="btn btn-file">
+                <span>Thêm ảnh bìa</span>
+                <input type="file" @change="handleFileCoverChange($event)" />
+              </label>
+              <br><br>
+              <div class="row">
+                <div class="col-6">
+                  <label for="title">Tên bài viết:</label>
+                  <input
+                      id="title"
+                      type="text"
+                      name="title"
+                      v-model="storyTitle"
+                      placeholder="Nhập tên bài viết"
+                      class="pinput"
+                      style="transition-delay: 0.2s;
+                  text-align: center;
+                  line-height: 1.5;
+                  width: 80%"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="selectOption">Thể loại:</label>
+                  <select class="pinput" id="selectOption" style="width: 80%"  v-model="category">
+                    <option value="1">Tin khuyến mại</option>
+                    <option value="2">Tin khách hàng</option>
+                    <option value="3">Tin quảng cáo</option>
+                  </select>
+                </div>
+
+              </div>
+
               <br><br>
               <table>
-                <thead>
-                <tr>
-                  <th style="width: 5%">Stt</th>
-                  <th style="width: 30%; text-align: center">Ảnh</th>
-                  <th style="width: 60%">Title</th>
-                  <th style="width: 5%">Xóa</th> <!-- Add the "Xóa" header -->
-                </tr>
-                </thead>
                 <tbody>
-                <tr v-for="(item, index) in items" :key="item.idRow">
-                  <td>{{ index + 1 }}</td>
-                  <td style="width: 30%; text-align: center">
-                    <div class="image-container">
-                      <img v-if="item.image && !item.change" :src="`http://localhost:8080/image/${item.imageShow}`" alt="Preview" class="image-preview" />
-                      <img v-if="item.image && item.change" :src="item.imageShow" alt="Preview" class="image-preview" />
+                <tr v-for="(item, index) in items" :key="item.id">
+                  <td style="width: 100%; text-align: center">
+                    <!-- Image container and input -->
+                    <div v-if="index !== 0" class="image-container">
+                      <img v-if="item.image" :src="`http://localhost:8080/image/${item.imageShow}`" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
-                        <span v-if="!item.image">Chọn ảnh</span>
+                        <span v-if="!item.image">Thêm ảnh</span>
                         <input type="file" @change="handleFileChange(index, $event)" />
                       </label>
-                      <label v-else class="btn btn-file-change">
-                        <span><i class="fas fa-camera"></i></span>
-                        <input type="file" @change="handleFileChange(index, $event)" />
-                      </label>
+                      <div v-else>
+                        <label  class="btn btn-file-change">
+                          <span><i class="fas fa-camera"></i></span>
+                          <input type="file" @change="handleFileChange(index, $event)" />
+                        </label>
+                        <label style="margin-left: 65px"  class="btn btn-file-change">
+                          <span><i class="fas fa-trash" @click="deleteFileChange(index)"></i></span>
+                        </label>
+                      </div>
                     </div>
-                  </td>
-                  <td>
-                    <input class="form-control" type="text" v-model="item.title" />
-                  </td>
-                  <td>
-                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
-                    <span class="delete-icon" @click="deleteRow(item.idRow)">❌</span>
+                    <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
                   </td>
                 </tr>
                 </tbody>
@@ -93,9 +104,8 @@
           <div class="text-center pb-3">
             <hr
                 class="mt-1 mb-4"
-                :class="{ pgray: !nightMode, 'bg-secondary': nightMode }"
             />
-            <button class="btn-add w-25" @click="submitData">Cập nhật</button>
+            <button class="btn-add w-25" @click="submitData">Thêm mới</button>
           </div>
         </div>
       </div>
@@ -126,8 +136,10 @@ export default {
   },
   data() {
     return {
+      category: null,
+      cover: null,
+      coverShow: null,
       items: [],
-      storyName: "",
       storyTitle: "",
       nextId: 1,
       listIdPicture: "",
@@ -147,11 +159,28 @@ export default {
   },
   created() {
     this.convertData()
-    GetDataService.getStory().then((response) => {
+    GetDataService.getNews().then((response) => {
       this.currentStory = response.data
     });
     },
   methods: {
+    async handleFileCoverChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.cover = file;
+        this.coverShow = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageURL = e.target.result;
+          this.coverShow = imageURL;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    async deleteFileChange(index) {
+      this.items[index].imageShow = null;
+      this.items[index].image = null;
+    },
     close() {
       this.$emit("close");
     },
@@ -169,8 +198,9 @@ export default {
       this.items = this.items.filter(item => item.idRow !== idRow);
     },
     async convertData() {
-      this.items = this.data.storyPictures;
-      this.storyName = this.data.name;
+      this.coverShow = this.data.cover;
+      this.items = this.data.newsPictures;
+      this.category = this.data.category;
       this.storyTitle = this.data.title;
       for (let i = 0; i < this.items.length; i++) {
         this.items[i].idRow = this.nextId;
@@ -218,14 +248,14 @@ export default {
     },
     async submitData() {
       for (let i = 0; i < this.currentStory.length; i++) {
-        if (this.storyName.trim() === this.currentStory[i].name && this.storyName.trim() !== this.data.name) {
+        if (this.storyTitle.trim() === this.currentStory[i].title && this.storyTitle.trim() !== this.data.title) {
           this.showSnackbar = true;
           this.snackbarMessage = "Tên đã tồn tại!";
           this.snackbarColor = "#64808E";
           return;
         }
       }
-      if (!this.storyName.trim() || !this.storyTitle.trim()) {
+      if (!this.storyTitle.trim()) {
         // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
         this.showSnackbar = true;
         this.snackbarMessage = "Vui lòng nhập đầy đủ thông tin!";
@@ -234,16 +264,16 @@ export default {
       }
       if (this.items.length === 0) {
         this.showSnackbar = true;
-        this.snackbarMessage = "Vui lòng chọn ít nhất một ảnh!";
+        this.snackbarMessage = "Vui lòng điền ít nhất một nội dung!";
         this.snackbarColor = "#64808E";
         return;
       }
 
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i];
-        if (!item.image || !item.title.trim()) {
+        if (!item.title.trim()) {
           this.showSnackbar = true;
-          this.snackbarMessage = "Vui lòng điền đủ thông tin ảnh và title cho\ntất cả các mục!";
+          this.snackbarMessage = "Vui lòng điền nội dung cho tất cả các mục!";
           this.snackbarColor = "#64808E";
           return;
         }
@@ -257,28 +287,35 @@ export default {
             console.log("change and id");
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyName);
+            if (this.cover) {
+              formData.append('cover', this.cover);
+            }
             formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             formData.append('pictureId', item.id);
-            formData.append('image', item.image);
+            if (item.image) {
+              formData.append('image', item.image);
+            }
             if (this.listIdPicture.length > 0) {
               formData.append('listIdPicture', this.listIdPicture);
             }
             try {
-              const response = await GetDataService.updateStory(formData);
+              const response = await GetDataService.updateNews(formData);
               console.log(response.data);
             } catch (error) {
               console.error(error);
             }
           } else if (item.change && !item.id) {
-            console.log("change and !id");
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyName);
+            if (this.cover) {
+              formData.append('cover', this.cover);
+            }
             formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
-            formData.append('image', item.image);
+            if (item.image) {
+              formData.append('image', item.image);
+            }
             if (this.listIdPicture.length > 0) {
               formData.append('listIdPicture', this.listIdPicture);
             }
@@ -291,7 +328,9 @@ export default {
           } else if (!item.change && item.id) {
             const formData = new FormData();
             formData.append('id', this.data.id);
-            formData.append('name', this.storyName);
+            if (this.cover) {
+              formData.append('cover', this.cover);
+            }
             formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             formData.append('pictureId', item.id);
@@ -319,7 +358,9 @@ export default {
       } else {
         const formData = new FormData();
         formData.append('id', this.data.id);
-        formData.append('name', this.storyName);
+        if (this.cover) {
+          formData.append('cover', this.cover);
+        }
         formData.append('title', this.storyTitle);
         if (this.listIdPicture.length > 0) {
           formData.append('listIdPicture', this.listIdPicture);
@@ -395,8 +436,8 @@ a:hover {
 }
 
 .modal-container {
-  width: 50%;
-  max-height: 80%;
+  width: 60%;
+  max-height: 90%;
   min-height: 80%;
   margin: 0px auto;
   border-radius: 7px;
@@ -416,7 +457,7 @@ a:hover {
 @media screen and (max-width: 1200px) {
   .modal-container {
     width: 80%;
-    height: 90%;
+    height: 80%;
   }
 }
 
@@ -501,13 +542,11 @@ a:hover {
 /* Định dạng cho bảng */
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th,
 td {
   text-align: center;
-  border: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -573,7 +612,7 @@ button {
 .image-container .btn-file-change {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;
@@ -587,7 +626,7 @@ button {
 .btn-file {
   position: relative;
   overflow: hidden;
-  width: 70px;
+  width: 120px;
   height: 28px;
   font-size: 12px;
   color: white;
