@@ -158,7 +158,7 @@ export default {
 
       if (swalResult.isConfirmed) {
         // Nút Xóa được nhấn
-        await GetDataService.deleteBlogById(item.id).then((response) => {
+        await GetDataService.deleteByNewsById(item.id).then((response) => {
           Swal.fire({
             title: 'Đã xóa',
             html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',

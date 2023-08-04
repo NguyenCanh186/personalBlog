@@ -315,7 +315,7 @@ export default {
             if (item.idRow) {
               formData.append('pictureId', item.idRow);
             }
-            if (item.image) {
+            if (item.image && item.image instanceof File) {
               formData.append('image', item.image);
             }
             if (this.listIdPicture.length > 0) {
