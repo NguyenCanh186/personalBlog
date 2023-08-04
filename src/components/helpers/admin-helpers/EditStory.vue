@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-6">
                   <label for="selectOption">Thể loại:</label>
-                  <select class="pinput" id="selectOption" style="width: 80%"  v-model="category">
+                  <select class="pinput" :value="category" id="selectOption" style="width: 80%"  v-model="category">
                     <option value="1">Tin khuyến mại</option>
                     <option value="2">Tin khách hàng</option>
                     <option value="3">Tin quảng cáo</option>
@@ -72,8 +72,9 @@
                 <tr v-for="(item, index) in items" :key="item.id">
                   <td style="width: 100%; text-align: center">
                     <!-- Image container and input -->
-                    <div v-if="index !== 0" class="image-container">
-                      <img v-if="item.image" :src="`http://localhost:8080/image/${item.imageShow}`" alt="Preview" class="image-preview" />
+                    <div class="image-container">
+                      <img v-if="!item.imageShow && item.image" :src="`http://localhost:8080/image/${item.image}`" alt="Preview" class="image-preview" />
+                      <img v-else class="image-preview" :src="item.imageShow" alt="">
                       <label v-if="!item.image" class="btn btn-file">
                         <span v-if="!item.image">Thêm ảnh</span>
                         <input type="file" @change="handleFileChange(index, $event)" />
@@ -88,11 +89,10 @@
                         </label>
                       </div>
                     </div>
-                    <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
-                  </td>
-                  <td>
-                    <!-- Hiển thị biểu tượng xóa với viền đỏ -->
-                    <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                    <div class="textarea-container">
+                      <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
+                      <span class="delete-icon" @click="deleteRow(item.id)">❌</span>
+                    </div>
                   </td>
                 </tr>
                 </tbody>
@@ -184,24 +184,27 @@ export default {
     async deleteFileChange(index) {
       this.items[index].imageShow = null;
       this.items[index].image = null;
+      if (this.items[index].idRow !== null) {
+        this.items[index].isDeletePicture = 'delete';
+      }
     },
     close() {
       this.$emit("close");
     },
-    deleteRow(idRow) {
-      let itemcheck = null
-      console.log(idRow)
+    deleteRow(id) {
+      let itemcheck = null;
       for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i].idRow === idRow) {
-          itemcheck = this.items[i]
+        if (this.items[i].idRow === id) {
+          itemcheck = this.items[i];
+          break;
         }
       }
-      console.log(itemcheck)
+      console.log(itemcheck);
       if (itemcheck !== null) {
-        this.listIdPicture += itemcheck.id + ","
+        this.listIdPicture += itemcheck.id + ",";
       }
-      console.log(this.listIdPicture)
-      this.items = this.items.filter(item => item.idRow !== idRow);
+      console.log(this.listIdPicture);
+      this.items = this.items.filter(item => item.id !== id);
     },
     async convertData() {
       this.coverShow = this.data.cover;
@@ -210,13 +213,13 @@ export default {
       this.storyTitle = this.data.title;
       for (let i = 0; i < this.items.length; i++) {
         this.items[i].idRow = this.items[i].id;
-        this.items[i].imageShow = this.items[i].image;
+        this.items[i].imageShow = null;
+        this.items[i].isDeletePicture = null;
         this.items[i].change = false;
         if (this.items.length -1 === i) {
           this.nextId = this.items[i].id +1
         }
       }
-      console.log(this.items)
     },
     addRow() {
       this.items.push({
@@ -232,11 +235,13 @@ export default {
     async handleFileChange(index, event) {
       const file = event.target.files[0];
       if (file) {
+        if( this.items[index].idRow !== null ) {
+          this.items[index].isDeletePicture = null;
+        }
         const imageData = {
           ...this.items[index],
           title: this.items[index].title,
           image: file, // Gán URL cho thuộc tính image
-          change: true,
         };
         this.$set(this.items, index, imageData);
         const reader = new FileReader();
@@ -286,21 +291,23 @@ export default {
           return;
         }
       }
-      console.log(this.listIdPicture)
+      console.log(this.items)
       if (this.items.length >0) {
         for (let i = 0; i < this.items.length; i++) {
           const item = this.items[i];
-          console.log(item)
-          if (item.change && item.id) {
-            console.log("change and id");
             const formData = new FormData();
             formData.append('id', this.data.id);
             if (this.cover) {
               formData.append('cover', this.cover);
             }
+            if (item.isDeletePicture === 'delete') {
+              formData.append('isDeletePicture', 'delete');
+            }
             formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
-            formData.append('pictureId', item.id);
+            if (item.idRow) {
+              formData.append('pictureId', item.idRow);
+            }
             if (item.image) {
               formData.append('image', item.image);
             }
@@ -313,45 +320,7 @@ export default {
             } catch (error) {
               console.error(error);
             }
-          } else if (item.change && !item.id) {
-            const formData = new FormData();
-            formData.append('id', this.data.id);
-            if (this.cover) {
-              formData.append('cover', this.cover);
-            }
-            formData.append('title', this.storyTitle);
-            formData.append('titleImage', item.title);
-            if (item.image) {
-              formData.append('image', item.image);
-            }
-            if (this.listIdPicture.length > 0) {
-              formData.append('listIdPicture', this.listIdPicture);
-            }
-            try {
-              const response = await GetDataService.updateStory(formData);
-              console.log(response.data);
-            } catch (error) {
-              console.error(error);
-            }
-          } else if (!item.change && item.id) {
-            const formData = new FormData();
-            formData.append('id', this.data.id);
-            if (this.cover) {
-              formData.append('cover', this.cover);
-            }
-            formData.append('title', this.storyTitle);
-            formData.append('titleImage', item.title);
-            formData.append('pictureId', item.id);
-            if (this.listIdPicture.length > 0) {
-              formData.append('listIdPicture', this.listIdPicture);
-            }
-            try {
-              const response = await GetDataService.updateStory(formData);
-              console.log(response.data);
-            } catch (error) {
-              console.error(error);
-            }
-          }
+
           this.listIdPicture = "";
           if (i === this.items.length - 1) {
             this.$emit("close", true);
@@ -374,7 +343,7 @@ export default {
           formData.append('listIdPicture', this.listIdPicture);
         }
         try {
-          const response = await GetDataService.updateStory(formData);
+          const response = await GetDataService.updateNews(formData);
           console.log(response.data);
         } catch (error) {
           console.error(error);
@@ -395,6 +364,21 @@ export default {
 </script>
 
 <style scoped>
+.textarea-container {
+  display: flex;
+  align-items: center;
+}
+
+.textarea-container textarea {
+  flex: 1; /* Dãn tỷ lệ flex cho textarea để chiếm phần còn lại của container */
+  margin-right: 5px; /* Khoảng cách giữa textarea và icon xóa */
+}
+
+.delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
 .custom-circle {
   display: inline-block;
   width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
