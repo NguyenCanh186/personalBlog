@@ -3,21 +3,21 @@
     <div class="prow">
       <div
           style="text-align: center"
-        class="pcolumn"
-        v-for="(i, idx) in images"
-        :key="i.title"
-        :class="{
+          class="pcolumn"
+          v-for="(i, idx) in images"
+          :key="i.title"
+          :class="{
           flex: design ? '100%' : '50%',
           '-ms-flex': design ? '100%' : '50%',
           'max-width': design ? '100%' : '50%',
         }"
       >
         <img
-          :src="`http://3.1.195.111:8080/image/${images[0]}`"
-          style="width:60%"
-          :id="`gi${idx}`"
-          @click="showImg(idx)"
-          class="g-img"
+            :src="`http://3.1.195.111:8080/image/${i.img}`"
+            style="width:80%"
+            :id="`gi${idx}`"
+            @click="showImg(idx)"
+            class="g-img"
         />
         <div class="mt-1">
           <p style="font-weight: 500">{{ i.title }}</p>

@@ -141,6 +141,7 @@ export default {
       this.$store.dispatch('auth/login', password).then(
           () => {
             this.$router.push('/admin/home');
+            location.reload();
             this.showDesignModal = false;
           },
           error => {

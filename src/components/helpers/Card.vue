@@ -1,8 +1,8 @@
 <template>
   <div class="my-3 mx-3">
     <div
-      class="card smcard"
-      :class="{
+        class="card smcard"
+        :class="{
         'pcard-dark': nightMode,
         pcard: !nightMode,
         'bg-dark3': nightMode,
@@ -10,17 +10,17 @@
     >
       <div style="height: 180px;">
         <img
-          class="card-img-top"
-          :src="portfolio.pictures[0].img"
-          alt="Card image cap"
+            class="card-img-top"
+            :src="`http://3.1.195.111:8080/image/${portfolio.pictures[0]}`"
+            alt="Card image cap"
         />
       </div>
       <div class="card-body pborder-top">
         <h5 class="title2">{{ portfolio.name }}</h5>
         <div>
           <p
-            class="title3 m-0 pb-2 pheight pt-1"
-            v-html="
+              class="title3 m-0 pb-2 pheight pt-1"
+              v-html="
               portfolio.description.length > 100
                 ? portfolio.description.substring(0, 105) + '...'
                 : portfolio.description
@@ -30,9 +30,9 @@
         </div>
         <div class="text-center mt-2">
           <button
-            href=""
-            class="btn-sm btn btn-outline-secondary no-outline"
-            @click.prevent="showModal"
+              href=""
+              class="btn-sm btn btn-outline-secondary no-outline"
+              @click.prevent="showModal"
           >
             Xem thêm
           </button>

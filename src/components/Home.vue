@@ -10,31 +10,18 @@
       data-aos-duration="1000"
     >
       <div class="row align-items-center">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser !== null">
+        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
           <div class="image-container">
-            <img :src="picture" :style="getImageStyle" />
-            <button @click="changePicture" class="camera-button">
-              <i class="fas fa-camera"></i>
-            </button>
-          </div>
-        </div>
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center" v-if="currentUser === null">
-          <div class="image-container">
-            <img :src="picture"/>
+            <img :src="`http://3.1.195.111:8080/image/${picture}`"/>
           </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
-          <span v-if="currentUser === null"
+          <span
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
             >{{ homeTitle }}</span
           >
-          <div v-if="currentUser !== null" class="d-flex flex-column align-items-end">
-            <input type="text" style="font-size: 20px" class="form-control" v-model="homeTitle">
-            <button class="btn btn-outline-success mt-2 mb-2" @click="updateDescription">Update Title</button>
-          </div>
-
-          <div v-if="currentUser === null">
+          <div>
             <div>
               <p v-html="description"></p>
             </div>
@@ -69,14 +56,6 @@
               </button>
             </div>
           </div>
-          <div v-else>
-            <div class="d-flex flex-column align-items-end">
-              <textarea v-model="description" class="form-control" rows="6"></textarea>
-              <button class="btn btn-outline-success mt-2" @click="updateDescription">Update</button>
-            </div>
-          </div>
-
-
         </div>
       </div>
     </div>
@@ -85,6 +64,7 @@
 
 <script>
 import info from "../../info";
+import {GetDataService as getDataService} from "@/service/get-data-service";
 
 
 export default {
@@ -98,9 +78,10 @@ export default {
   },
   data() {
     return {
-      homeTitle: "Welcome to my World.",
+      profile: null,
+      homeTitle: '',
       picture: info.flat_picture,
-      description: info.description,
+      description: '',
       name: info.name,
       linkedin: info.links.linkedin,
       github: info.links.github,
@@ -108,14 +89,24 @@ export default {
       resume: info.links.resume
     };
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
+  created() {
+    this.getProfile();
   },
   methods: {
-    changePicture() {
-      this.picture = 'new_picture.jpg';
+    getProfile() {
+      getDataService.getProfile().then((response) => {
+        this.profile = response.data;
+        this.picture = this.profile.image;
+        this.homeTitle = this.profile.title;
+        this.description = this.profile.description;
+      });
+    },
+    update() {
+      let form = document.querySelector('#form');
+      console.log(form)
+      getDataService.update(form).then(() => {
+        this.getProfile();
+      });
     },
     open(link) {
       switch (link) {
@@ -143,21 +134,6 @@ export default {
   display: inline-block;
 }
 
-.camera-button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 25px;
-  cursor: pointer;
-  padding: 0px 20px;
-  border-radius: 4px;
-  background-color: rgba(65, 63, 63, 0.5);
-  backdrop-filter: blur(8px);
-}
 .home-title {
   font-size: 55px;
   font-weight: 500;
@@ -166,7 +142,6 @@ export default {
 img {
   max-width: 800px;
   max-height: 500px;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (max-width: 580px) {
@@ -179,10 +154,6 @@ img {
     margin-bottom: 10px;
     border: 2px solid rgb(205, 205, 205);
   }
-}
-
-.fa {
-  font-size: 15px;
 }
 
 .btn {
