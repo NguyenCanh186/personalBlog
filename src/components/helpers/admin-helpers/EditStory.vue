@@ -268,6 +268,12 @@ export default {
           return;
         }
       }
+      if (!this.category) {
+        this.showSnackbar = true;
+        this.snackbarMessage = "Vui lòng chọn thể loại tin!";
+        this.snackbarColor = "#64808E";
+        return;
+      }
       if (!this.storyTitle.trim()) {
         // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
         this.showSnackbar = true;
@@ -303,6 +309,7 @@ export default {
             if (item.isDeletePicture === 'delete') {
               formData.append('isDeletePicture', 'delete');
             }
+            formData.append('category', this.category);
             formData.append('title', this.storyTitle);
             formData.append('titleImage', item.title);
             if (item.idRow) {
@@ -338,6 +345,7 @@ export default {
         if (this.cover) {
           formData.append('cover', this.cover);
         }
+        formData.append('category', this.category);
         formData.append('title', this.storyTitle);
         if (this.listIdPicture.length > 0) {
           formData.append('listIdPicture', this.listIdPicture);
