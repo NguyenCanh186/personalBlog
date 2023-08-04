@@ -139,7 +139,7 @@ export default {
       });
     },
     getImageUrl(imageName) {
-      return `http://localhost:8080/image/${imageName}`;
+      return `http://3.1.195.111:8080/image/${imageName}`;
     },
     async deleteItem(item) {
       const swalResult = await Swal.fire({

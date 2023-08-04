@@ -13,7 +13,7 @@
         }"
       >
         <img
-          :src="`http://localhost:8080/image/${images[0]}`"
+          :src="`http://3.1.195.111:8080/image/${images[0]}`"
           style="width:60%"
           :id="`gi${idx}`"
           @click="showImg(idx)"

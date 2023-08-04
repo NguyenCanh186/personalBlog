@@ -45,7 +45,7 @@
               <label for="file">Chọn ảnh:</label>
               <br>
               <img v-if="fileShow" :src="fileShow" alt="Ảnh" class="image-preview"/>
-              <img v-else :src="`http://localhost:8080/image/${fileCurrent}`" alt="Ảnh" class="image-preview">
+              <img v-else :src="`http://3.1.195.111:8080/image/${fileCurrent}`" alt="Ảnh" class="image-preview">
               <input type="file" id="file" @change="handleFileChange($event)">
               <br>
               <label for="title">Nội dung:</label> <br>
