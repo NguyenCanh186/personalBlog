@@ -71,7 +71,7 @@
                   <td>{{ index + 1 }}</td>
                   <td style="width: 30%; text-align: center">
                     <div class="image-container">
-                      <img v-if="item.image && !item.change" :src="`http://3.1.195.111:8080/image/${item.imageShow}`" alt="Preview" class="image-preview" />
+                      <img v-if="item.image && !item.change" :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${item.imageShow}`" alt="Preview" class="image-preview" />
                       <img v-if="item.image && item.change" :src="item.imageShow" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
                         <span v-if="!item.image">Chọn ảnh</span>

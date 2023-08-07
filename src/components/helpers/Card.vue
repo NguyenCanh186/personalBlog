@@ -11,7 +11,7 @@
       <div style="height: 180px;">
         <img
             class="card-img-top"
-            :src="`http://3.1.195.111:8080/image/${portfolio.pictures[0]}`"
+            :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${portfolio.pictures[0]}`"
             alt="Card image cap"
         />
       </div>

@@ -47,7 +47,7 @@
                 <vueper-slide
                   v-for="(slide, i) in design.pictures"
                   :key="i"
-                  :image="`http://3.1.195.111:8080/image/${slide.img}`"
+                  :image="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${slide.img}`"
                 />
               </vueper-slides>
               <div
