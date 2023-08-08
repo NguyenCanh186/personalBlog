@@ -18,10 +18,10 @@ let info = {
     }
   },
   links: {
-    linkedin: "https://www.facebook.com/Shurikenger186",
+    linkedin: "https://www.facebook.com/ka1896.jp/",
     github: "https://www.tiktok.com/@ka1896.jp?_t=8aDcPNpf72X&_r=1",
       behance: "https://join.skype.com/invite/yX3vsxMddME8",
-    resume: "https://drive.google.com/file/d/1W0pzOo1Gb-W70BYKehOfZ4qaJt7m1_7O/view?usp=sharing",
+    resume: "https://t.me/canhnguyen186",
   },
   portfolio: [
     {

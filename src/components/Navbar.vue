@@ -150,10 +150,10 @@ export default {
             this.showDesignModal = false;
           },
           error => {
-            this.loading = false;
             this.a = (error.response && error.response.data)
+            this.loading = false;
             this.showSnackbar = true;
-            this.snackbarMessage = "Không vào được đâu bạn ơi.";
+            this.snackbarMessage = "Chỉ có bố Cảnh mới vào được thôi =)))";
             this.snackbarColor = "#64808E";
           }
       );

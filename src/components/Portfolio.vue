@@ -55,7 +55,7 @@
                 class="mt-2"
               >
                 <div>
-                  <div class="title2" style="font-weight: 500;">{{ design.title }}</div>
+                  <div class="title2" style="font-weight: 500;">{{ design.name }}</div>
                 </div>
 
                 <button v-if="currentUser === null"
