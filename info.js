@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export class GetDataService {
-  static serverURL = `http://localhost:8080`
+  static serverURL = `http://52.221.184.235:8080`
 
   static getProfile() {
     return axios.get(`${this.serverURL}/get-data/profile`)

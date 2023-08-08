@@ -13,7 +13,7 @@
         }"
       >
         <img
-            :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${i.img}`"
+            :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${i.img}`"
             style="width:80%"
             :id="`gi${idx}`"
             @click="showImg(idx)"

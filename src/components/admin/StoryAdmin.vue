@@ -76,7 +76,7 @@
         :data="story"
         v-if="showEditModal"
     />
-
+    <Loading :loading="loading" />
   </div>
 </template>
 
@@ -85,12 +85,14 @@ import {GetDataService} from "@/service/get-data-service";
 import AddStory from "@/components/helpers/admin-helpers/AddStory.vue";
 import EditStory from "@/components/helpers/admin-helpers/EditStory.vue";
 import Swal from "sweetalert2";
+import Loading from "@/components/helpers/Loading.vue";
 
 export default {
   name: "StoryAdmin",
-  components: {EditStory, AddStory},
+  components: {Loading, EditStory, AddStory},
   data() {
     return {
+      loading: false,
       story: {},
       showEditModal: false,
       showDesignModal: false,
@@ -140,12 +142,12 @@ export default {
       });
     },
     getImageUrl(imageName) {
-      return `https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${imageName}`;
+      return `https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${imageName}`;
     },
     async deleteItem(item) {
       const swalResult = await Swal.fire({
         title: 'Xóa thật hả',
-        html: '<div class="custom-circle"><i class="fas fa-exclamation-circle" style="color: #FF0000; font-size: 60px;"></i></div>',
+        html: '<div class="custom-circle"><i class="fas fa-exclamation-circle" style="color: #bd5e5e; font-size: 60px;"></i></div>',
         showCancelButton: true,
         confirmButtonText: 'Ừ',
         cancelButtonText: 'Thôi :(',
@@ -156,7 +158,9 @@ export default {
         },
       });
       if (swalResult.isConfirmed) {
+        this.loading = true;
         await GetDataService.deleteByStoryById(item.id).then((response) => {
+          this.loading = false;
           Swal.fire({
             title: 'Đã xóa',
             html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',

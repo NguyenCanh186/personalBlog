@@ -81,6 +81,7 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
+    <Loading :loading="loading" />
   </div>
 </template>
 
@@ -89,6 +90,7 @@ import Logo from "./helpers/Logo";
 import info from "../../info";
 import Login from "@/components/helpers/Login.vue";
 import Snackbar from "@/components/helpers/Snackbar.vue";
+import Loading from "@/components/helpers/Loading.vue";
 
 export default {
   name: "Navbar",
@@ -99,6 +101,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       navbarConfig: info.config.navbar,
       localNightMode: this.nightMode,
       showDesignModal: false,
@@ -108,6 +111,7 @@ export default {
     };
   },
   components: {
+    Loading,
     Logo,
     Login,
     Snackbar,
@@ -138,13 +142,15 @@ export default {
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
     login(password) {
+      this.loading = true;
       this.$store.dispatch('auth/login', password).then(
           () => {
-            this.$router.push('/admin/home');
-            location.reload();
+            this.loading = false;
+            this.$router.push('/');
             this.showDesignModal = false;
           },
           error => {
+            this.loading = false;
             this.a = (error.response && error.response.data)
             this.showSnackbar = true;
             this.snackbarMessage = "Không vào được đâu bạn ơi.";
@@ -156,9 +162,10 @@ export default {
       this.showDesignModal = true;
     },
     logOut() {
+      this.loading = true;
       this.$store.dispatch('auth/logout');
+      this.loading = false;
       this.$router.push('/');
-      location.reload();
     },
   },
 };

@@ -31,7 +31,7 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <img :src="picture" /> <br>
+              <img :src="getImageUrl(picture)" /> <br>
               <input
                   type="password"
                   name="user_name"
@@ -64,13 +64,19 @@
         </div>
       </div>
     </div>
+    <Loading
+        :loading="loading"
+    />
   </div>
 </template>
 
 <script>
 import info from "../../../info";
+import {GetDataService as getDataService} from "@/service/get-data-service";
+import Loading from "@/components/helpers/Loading.vue";
 export default {
   name: "Login",
+  components: {Loading},
   props: {
     showModal: {
       type: Boolean,
@@ -79,6 +85,7 @@ export default {
   data() {
     return {
       password: "",
+      loading: false,
       picture: info.flat_picture,
     };
   },
@@ -91,8 +98,17 @@ export default {
     if (this.loggedIn) {
       this.$router.push('/admin/home');
     }
+    this.getProfile()
   },
   methods: {
+    getImageUrl(imageName) {
+      return `https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${imageName}`;
+    },
+    getProfile() {
+      getDataService.getProfile().then((response) => {
+        this.picture = response.data.image;
+      });
+    },
     open(url) {
       window.open(url, "_blank");
     },
@@ -297,7 +313,6 @@ img {
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 50%;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (max-width: 580px) {

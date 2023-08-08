@@ -116,6 +116,9 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
+    <Loading
+        :loading="loading"
+    />
   </div>
 </template>
 
@@ -124,6 +127,7 @@ import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import Swal from "sweetalert2";
+import Loading from "@/components/helpers/Loading.vue";
 export default {
   name: "AddStory",
   props: {
@@ -141,9 +145,11 @@ export default {
       snackbarMessage: "",
       snackbarColor: "",
       currentStory: [],
+      loading: false,
     };
   },
   components: {
+    Loading,
     Snackbar,
   },
   computed: {
@@ -230,6 +236,7 @@ export default {
           return;
         }
       }
+      this.loading = true;
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i];
         console.log(item)
@@ -249,6 +256,7 @@ export default {
           }
         }
         if (i === this.items.length - 1) {
+          this.loading = false;
           this.$emit("close", true);
           await Swal.fire({
             title: 'Xong',

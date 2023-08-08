@@ -35,6 +35,7 @@
         </div>
       </div>
     </div>
+    <Loading :loading="loading" />
   </div>
 </template>
 
@@ -44,10 +45,12 @@
 import info from "../../../info";
 import {GetDataService as getDataService} from "@/service/get-data-service";
 import Swal from "sweetalert2";
+import Loading from "@/components/helpers/Loading.vue";
 
 export default {
   name: "HomeAdmin",
   components: {
+    Loading
   },
   props: {
     nightMode: {
@@ -66,7 +69,8 @@ export default {
       linkedin: info.links.linkedin,
       github: info.links.github,
       behance: info.links.behance,
-      resume: info.links.resume
+      resume: info.links.resume,
+      loading: false
     };
   },
   created() {
@@ -105,7 +109,7 @@ export default {
       }
     },
     getImageUrl(imageName) {
-      return `https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${imageName}`;
+      return `https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${imageName}`;
     },
     getProfile() {
       getDataService.getProfile().then((response) => {
@@ -115,6 +119,25 @@ export default {
       });
     },
     async update() {
+      if (!this.homeTitle) {
+        await Swal.fire({
+          title: 'Vui lòng nhập tiêu đề',
+          html: '<div class="custom-circle"><i class="fas fa-exclamation-circle" style="color: #FFCC00; font-size: 60px;"></i></div>',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        return;
+      }
+      if (!this.description) {
+        await Swal.fire({
+          title: 'Vui lòng nhập mô tả',
+          html: '<div class="custom-circle"><i class="fas fa-exclamation-circle" style="color: #FFCC00; font-size: 60px;"></i></div>',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        return;
+      }
+      this.loading = true;
       const formData = new FormData();
       formData.append('title', this.homeTitle);
       formData.append('description', this.description);
@@ -122,6 +145,7 @@ export default {
         formData.append('image', this.file);
       }
       await getDataService.update(formData).then(() => {
+        this.loading = false;
         Swal.fire({
           title: 'Xong',
           html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',

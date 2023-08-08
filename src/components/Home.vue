@@ -12,7 +12,7 @@
       <div class="row align-items-center">
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
           <div class="image-container">
-            <img :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${picture}`"/>
+            <img :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${picture}`"/>
           </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">

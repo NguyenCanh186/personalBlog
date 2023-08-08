@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Loading
+    :loading="loading"
+    />
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div
@@ -12,7 +15,7 @@
         >
           <div class="title1 px-4 pt-3">
             <span :class="{ 'text-light': nightMode }">
-                Thêm mới Story
+                Thêm mới Blog
               </span>
             <a
                 class="pull-right"
@@ -58,7 +61,6 @@
                   placeholder="Nhập nội dung"
                   class="pinput"
                   style="transition-delay: 0.2s; width: 100%;
-  text-align: center;
   line-height: 1.5;"
                   rows="6"
               ></textarea>
@@ -88,6 +90,7 @@ import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import Swal from "sweetalert2";
+import Loading from "@/components/helpers/Loading.vue";
 export default {
   name: "AddBlog",
   props: {
@@ -104,9 +107,11 @@ export default {
       showSnackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
+      loading: false,
     };
   },
   components: {
+    Loading,
     Snackbar,
   },
   computed: {
@@ -151,12 +156,13 @@ export default {
         this.snackbarColor = "#64808E";
         return;
       }
+      this.loading = true; // Bật biểu tượng loading khi bắt đầu gửi dữ liệu
       const formData = new FormData();
       formData.append("title", this.name);
       formData.append("fileImage", this.file);
       formData.append("content", this.content);
       GetDataService.createBlog(formData).then(async (response) => {
-        if (response === "done") {
+        if (response.data === "Done") {
           this.$emit("close", true);
           await Swal.fire({
             title: 'Xong',
@@ -169,7 +175,7 @@ export default {
           this.snackbarMessage = "Tiêu đề đã tồn tại!";
           this.snackbarColor = "#64808E";
         }
-
+        this.loading = false; // Tắt biểu tượng loading khi dữ liệu được gửi thành công
       });
     }
   },

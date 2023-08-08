@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURl = "http://localhost:8080/api"
+const baseURl = "http://52.221.184.235:8080/api"
 
 export const jsonRequest = axios.create({
     baseURL: baseURl,

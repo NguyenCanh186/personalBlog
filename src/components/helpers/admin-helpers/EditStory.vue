@@ -71,7 +71,7 @@
                   <td>{{ index + 1 }}</td>
                   <td style="width: 30%; text-align: center">
                     <div class="image-container">
-                      <img v-if="item.image && !item.change" :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${item.imageShow}`" alt="Preview" class="image-preview" />
+                      <img v-if="item.image && !item.change" :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${item.imageShow}`" alt="Preview" class="image-preview" />
                       <img v-if="item.image && item.change" :src="item.imageShow" alt="Preview" class="image-preview" />
                       <label v-if="!item.image" class="btn btn-file">
                         <span v-if="!item.image">Chọn ảnh</span>
@@ -117,6 +117,7 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
+    <Loading :loading="loading" />
   </div>
 </template>
 
@@ -125,6 +126,7 @@ import index from "vuex";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import { GetDataService } from "@/service/get-data-service";
 import Swal from 'sweetalert2';
+import Loading from "@/components/helpers/Loading.vue";
 export default {
   name: "EditStory",
   props: {
@@ -146,9 +148,11 @@ export default {
       snackbarMessage: "",
       snackbarColor: "",
       currentStory: [],
+      loading: false,
     };
   },
     components: {
+      Loading,
       Snackbar,
     },
   computed: {
@@ -259,7 +263,7 @@ export default {
           return;
         }
       }
-      console.log(this.listIdPicture)
+      this.loading = true;
       if (this.items.length >0) {
         for (let i = 0; i < this.items.length; i++) {
           const item = this.items[i];
@@ -318,6 +322,7 @@ export default {
           }
           this.listIdPicture = "";
           if (i === this.items.length - 1) {
+            this.loading = false;
             this.$emit("close", true);
             await Swal.fire({
               title: 'Xong',
@@ -341,6 +346,7 @@ export default {
         } catch (error) {
           console.error(error);
         }
+        this.loading = false;
         this.$emit("close", true);
         await Swal.fire({
           title: 'Xong',

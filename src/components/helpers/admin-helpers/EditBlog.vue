@@ -45,7 +45,7 @@
               <label for="file">Chọn ảnh:</label>
               <br>
               <img v-if="fileShow" :src="fileShow" alt="Ảnh" class="image-preview"/>
-              <img v-else :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/image/${fileCurrent}`" alt="Ảnh" class="image-preview">
+              <img v-else :src="`https://anhcuatoi.s3.ap-southeast-1.amazonaws.com/${fileCurrent}`" alt="Ảnh" class="image-preview">
               <input type="file" id="file" @change="handleFileChange($event)">
               <br>
               <label for="title">Nội dung:</label> <br>
@@ -76,6 +76,9 @@
         :snackbarMessage="snackbarMessage"
         :snackbarColor="snackbarColor"
     />
+    <Loading
+    :loading="loading"
+    />
   </div>
 </template>
 
@@ -84,6 +87,7 @@ import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/helpers/Snackbar.vue";
 import Swal from "sweetalert2";
+import Loading from "@/components/helpers/Loading.vue";
 export default {
   name: "AddBlog",
   props: {
@@ -105,9 +109,11 @@ export default {
       snackbarMessage: "",
       snackbarColor: "",
       currentBlog: [],
+      loading: false,
     };
   },
   components: {
+    Loading,
     Snackbar,
   },
   computed: {
@@ -165,6 +171,7 @@ export default {
           return;
         }
       }
+      this.loading = true;
       const formData = new FormData();
       formData.append("id", this.data.id);
       formData.append("title", this.name);
@@ -174,6 +181,7 @@ export default {
       formData.append("content", this.content);
       GetDataService.updateBlog(formData).then(async (response) => {
         if (response.data === "Xong") {
+          this.loading = false;
           this.$emit("close", true);
           await Swal.fire({
             title: 'Xong',
@@ -182,6 +190,7 @@ export default {
             timer: 2000,
           });
         } else {
+          this.loading = false;
           this.showSnackbar = true;
           this.snackbarMessage = "Có lỗi xảy ra!";
           this.snackbarColor = "#64808E";
