@@ -1,7 +1,7 @@
 import axios from "axios"
 import authHeader from "@/service/auth-header";
 export class GetDataService {
-    static serverURL = `http://52.221.184.235:8080`
+    static serverURL = `http://18.140.60.194:8080`
 
     static getProfile() {
         return axios.get(`${this.serverURL}/get-data/profile`)
