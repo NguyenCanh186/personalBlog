@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg navbar-dark bg-info fixed-top p-st"
+        class="navbar navbar-expand-lg navbar-dark bg-e8237c fixed-top p-st"
     >
       <div class="container">
         <a
@@ -153,7 +153,7 @@ export default {
             this.a = (error.response && error.response.data)
             this.loading = false;
             this.showSnackbar = true;
-            this.snackbarMessage = "Chỉ có bố Cảnh mới vào được thôi =)))";
+            this.snackbarMessage = "Không vào được đâu bạn ơi=)))";
             this.snackbarColor = "#64808E";
           }
       );
@@ -188,6 +188,11 @@ button:hover {
   border: none;
   outline: none;
 }
+
+.bg-e8237c {
+  background-color: #e8237c;
+}
+
 
 nav {
   border-bottom: 1px solid rgba(160, 159, 159, 0.336);

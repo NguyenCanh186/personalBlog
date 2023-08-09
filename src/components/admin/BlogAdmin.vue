@@ -165,7 +165,7 @@ export default {
           this.loading = false;
           Swal.fire({
             title: 'Đã xóa',
-            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #e8237c; font-size: 60px;"></i></div>',
             showConfirmButton: false,
             timer: 2000,
           });
@@ -186,11 +186,11 @@ export default {
   border: 1px solid #d3d0d0; /* Add a border to the table */
 }
 .swal-button--confirm {
-  background-color: #00CCCC !important;
+  background-color: #e8237c !important;
   color: white !important;
 }
 .custom-table th {
-  background-color: #17a2b8;
+  background-color: #e8237c;
   color: white;
   text-align: center;
   padding: 8px; /* Add padding to the table headers */
@@ -213,23 +213,23 @@ export default {
   width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
   height: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
   border-radius: 50%; /* Tạo vòng tròn */
-  border: 3px solid #00CCCC; /* Màu viền vòng tròn */
+  border: 3px solid #e8237c; /* Màu viền vòng tròn */
   text-align: center;
 }
 
 .btn {
-  border-color: #17a2b8;
-  color: #17a2b8;
+  border-color: #e8237c;
+  color: #e8237c;
 }
 .btn:hover {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 
 .btn:focus {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 /* Định dạng hình ảnh trong cột ảnh */

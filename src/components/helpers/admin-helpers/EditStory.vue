@@ -326,7 +326,7 @@ export default {
             this.$emit("close", true);
             await Swal.fire({
               title: 'Xong',
-              html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+              html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #e8237c; font-size: 60px;"></i></div>',
               showConfirmButton: false,
               timer: 2000,
             });
@@ -350,7 +350,7 @@ export default {
         this.$emit("close", true);
         await Swal.fire({
           title: 'Xong',
-          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+          html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #e8237c; font-size: 60px;"></i></div>',
           showConfirmButton: false,
           timer: 2000,
         });
@@ -368,7 +368,7 @@ export default {
   width: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
   height: 100px; /* Điều chỉnh kích thước vòng tròn tại đây */
   border-radius: 50%; /* Tạo vòng tròn */
-  border: 3px solid #00CCCC; /* Màu viền vòng tròn */
+  border: 3px solid #e8237c; /* Màu viền vòng tròn */
   text-align: center;
 }
 body.modal-open {
@@ -470,16 +470,16 @@ a:hover {
   padding: 10px;
   width: 50%;
   transition: all 1s;
-  background-color: #97FFFF;
+  background-color: #dec1ce;
 }
 
 .btn {
-  color: #00CCCC;
+  color: #e8237c;
 }
 
 .btn-add-row {
-  border: 1px solid #00CCCC;
-  color: #00CCCC;
+  border: 1px solid #e8237c;
+  color: #e8237c;
   background-color: white;
 }
 
@@ -489,19 +489,19 @@ a:hover {
   height: 40px;
   background-color: white;
   border-radius: 5px;
-  border: 1px solid #00CCCC;
-  color: #00CCCC;
+  border: 1px solid #e8237c;
+  color: #e8237c;
 }
 
 .btn:hover {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 
 .btn:focus {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 
@@ -561,7 +561,7 @@ button {
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;
-  background-color: #17a2b8 !important;
+  background-color: #e8237c !important;
   padding: 5px 10px;
   cursor: pointer;
 }
@@ -608,10 +608,10 @@ button {
   height: 28px;
   font-size: 12px;
   color: white;
-  background-color: #17a2b8 !important;
+  background-color: #e8237c !important;
 }
 .btn-file input[type=file] {
-  /*color: #00CCCC;*/
+  /*color: #e8237c;*/
   position: absolute;
   top: 0;
   right: 0;
@@ -628,7 +628,7 @@ button {
 }
 
 .btn-file-change input[type=file] {
-  /*color: #00CCCC;*/
+  /*color: #e8237c;*/
   position: absolute;
   top: 0;
   right: 0;

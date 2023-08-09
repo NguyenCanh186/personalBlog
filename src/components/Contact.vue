@@ -229,24 +229,24 @@ export default {
   padding: 10px;
   width: 50%;
   transition: all 1s;
-  background-color: #97FFFF;
+  background-color: #dec1ce;
 }
 
 .btn {
-  border-color: #00CCCC;
-  color: #00CCCC;
+  border-color: #e8237c;
+  color: #e8237c;
   width: 50%;
 }
 
 .btn:hover {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 
 .btn:focus {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 

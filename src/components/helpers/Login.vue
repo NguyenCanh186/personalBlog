@@ -36,8 +36,8 @@
                   type="password"
                   name="user_name"
                   v-model="password"
-                  placeholder="Mời bố Cảnh nhập mật khẩu"
-                  class="pinput"
+                  placeholder="Chị Ngọc Anh ơi nhập pass vào đây"
+                  class="pinput mt-4"
                   :class="{
                   pgray: !nightMode,
                   'pgray-dark': nightMode,
@@ -47,19 +47,18 @@
          text-align: center;
          line-height: 1.5;"
               />
+              <button
+                  @click="login()"
+                  class="mt-2 btn"
+                  data-aos="fade"
+                  data-aos-once="true"
+                  data-aos-duration="1000"
+                  data-aos-offset="50"
+              >
+                Đăng nhập
+              </button>
             </div>
-
-            <button
-                @click="login()"
-                class="mt-2 btn"
-                data-aos="fade"
-                data-aos-once="true"
-                data-aos-duration="1000"
-                data-aos-offset="50"
-            >
-              Đăng nhập
-            </button>
-            <p class="mt-5">Không phải Cảnh, vui lòng đóng popup</p>
+            <p class="mt-4">Bạn là khách, vui lòng đóng popup</p>
           </div>
         </div>
       </div>
@@ -180,21 +179,21 @@ a:hover {
 @media screen and (max-width: 1600px) {
   .modal-container {
     width: 60%;
-    height: 90%;
+    height: 60%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .modal-container {
     width: 80%;
-    height: 90%;
+    height: 60%;
   }
 }
 
 @media screen and (max-width: 580px) {
   .modal-container {
     width: 90%;
-    height: 100%;
+    height: 60%;
   }
 }
 
@@ -282,24 +281,24 @@ a:hover {
   padding: 10px;
   width: 50%;
   transition: all 1s;
-  background-color: #97FFFF;
+  background-color: #dec1ce;
 }
 
 .btn {
-  border-color: #00CCCC;
-  color: #00CCCC;
+  border-color: #e8237c;
+  color: #e8237c;
   width: 50%;
 }
 
 .btn:hover {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 
 .btn:focus {
-  background-color: #00CCCC;
-  border-color: #00CCCC;
+  background-color: #e8237c;
+  border-color: #e8237c;
   color: white;
 }
 

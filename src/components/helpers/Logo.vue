@@ -3,7 +3,7 @@
     <span
       class="logo-title-name"
       :class="{ pgray: !nightMode, 'text-light': nightMode }"
-      >{{ name }}</span
+      >Ngọc Anh</span
     >
 <!--    <span class="logo-title-dot pblue">{{ dot }}</span>-->
   </div>

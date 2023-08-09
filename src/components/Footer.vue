@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-info">
+  <div class="bg-e8237c">
     <div class="container py-3">
       <div class="row pt-1 align-items-center">
         <div
@@ -102,6 +102,9 @@ span {
   color: gray;
 }
 
+.bg-e8237c {
+  background-color: #e8237c;
+}
 @media screen and (max-width: 580px) {
   .pbelow {
     padding-bottom: 20px;
