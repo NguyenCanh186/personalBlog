@@ -31,9 +31,6 @@ export default {
     };
   },
   created() {
-    if (this.config.use_cookies) {
-      this.nightMode = this.$cookie.get("nightMode") === "true" ? true : false;
-    }
     console.log(this.$store.state.auth.user)
   },
   mounted() {
@@ -67,7 +64,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Lobster');
+/*@import url('https://fonts.googleapis.com/css?family=Lobster');*/
 #app {
   font-family: "Lobster", sans-serif;
   -webkit-font-smoothing: antialiased;

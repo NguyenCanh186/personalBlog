@@ -5,9 +5,7 @@
         <div
             class="modal-container"
             :class="{
-            'bg-light': !nightMode,
-            'bg-dark': nightMode,
-            'text-light': nightMode,
+            'bg-light': !nightMode
           }"
         >
           <div class="title1 px-4 pt-3">
@@ -65,37 +63,7 @@
               </div>
 
               <br><br>
-              <table>
-                <tbody>
-                <tr v-for="(item, index) in items" :key="item.id">
-                  <td style="width: 100%; text-align: center">
-                    <!-- Image container and input -->
-                    <div v-if="index !== 0" class="image-container">
-                      <img v-if="item.image" :src="item.imageShow" alt="Preview" class="image-preview" />
-                      <label v-if="!item.image" class="btn btn-file">
-                        <span v-if="!item.image">Thêm ảnh</span>
-                        <input type="file" @change="handleFileChange(index, $event)" />
-                      </label>
-                      <div v-else>
-                        <label  class="btn btn-file-change">
-                          <span><i class="fas fa-camera"></i></span>
-                          <input type="file" @change="handleFileChange(index, $event)" />
-                        </label>
-                        <label style="margin-left: 65px"  class="btn btn-file-change">
-                          <span><i class="fas fa-trash" @click="deleteFileChange(index)"></i></span>
-                        </label>
-                      </div>
-                    </div>
-                    <textarea rows="6" style="margin-top: 15px" class="form-control" type="text" v-model="item.title" />
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="d-flex flex-column align-items-center">
-                <button class="btn-add-row mt-2 rounded-circle" @click="addRow">
-                  <i class="fa fa-plus"></i>
-                </button>
-              </div>
+              <tinymce v-model="content" ref="content" />
             </div>
 
           </div>
@@ -122,6 +90,7 @@ import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/Snackbar.vue";
 import Swal from "sweetalert2";
+import Tinymce from "@/components/tinymce/index.vue";
 export default {
   name: "AddStory",
   props: {
@@ -134,6 +103,7 @@ export default {
       category: null,
       cover: null,
       coverShow: null,
+      content: '',
       items: [],
       storyTitle: "",
       nextId: 1,
@@ -144,7 +114,7 @@ export default {
     };
   },
   components: {
-    Snackbar,
+    Snackbar, Tinymce
   },
   computed: {
     index() {
@@ -172,20 +142,6 @@ export default {
     },
     close() {
       this.$emit("close");
-    },
-    deleteRow(id) {
-      console.log(this.items);
-      console.log(id);
-      this.items = this.items.filter(item => item.id !== id);
-    },
-    addRow() {
-      this.items.push({
-        id: this.nextId, // Sử dụng biến đếm để tạo id
-        title: "",
-        image: null,
-        imageShow: null,
-      });
-      this.nextId++; // Tăng biến đếm cho lần thêm phần tử kế tiếp
     },
     async handleFileChange(index, event) {
       const file = event.target.files[0];
@@ -231,42 +187,14 @@ export default {
         this.snackbarColor = "#64808E";
         return;
       }
-      if (!this.cover || !this.storyTitle.trim()) {
-        // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
-        this.showSnackbar = true;
-        this.snackbarMessage = "Vui lòng nhập đầy đủ thông tin!";
-        this.snackbarColor = "#64808E";
-        return;
-      }
-      if (this.items.length === 0) {
-        this.showSnackbar = true;
-        this.snackbarMessage = "Vui lòng nhập ít nhất một nội dung!";
-        this.snackbarColor = "#64808E";
-        return;
-      }
 
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i];
-        if (!item.title.trim()) {
-          this.showSnackbar = true;
-          this.snackbarMessage = "Vui lòng điền nội dung cho tất cả các mục!";
-          this.snackbarColor = "#64808E";
-          return;
-        }
-      }
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i];
           const formData = new FormData();
           formData.append('cover', this.cover);
           formData.append('title', this.storyTitle);
-          formData.append('titleImage', item.title);
-          if (item.image) {
-            formData.append('image', item.image);
-          }
+          formData.append('content', this.$refs.content.content);
           formData.append('category', this.category);
           try {
             await GetDataService.createNews(formData).then((res) => {
-              console.log(res)
               if (!res) {
                 // If there was an error in adding the item, show a snackbar and return
                 this.showSnackbar = true;
@@ -274,6 +202,13 @@ export default {
                 this.snackbarColor = "#64808E";
                 return;
               }
+              this.$emit("close", true);
+              Swal.fire({
+                title: 'Xong',
+                html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
+                showConfirmButton: false,
+                timer: 2000,
+              });
             });
           } catch (error) {
             // Handle any exceptions during the API call (optional)
@@ -283,18 +218,6 @@ export default {
             this.snackbarColor = "#64808E";
             return;
           }
-
-        // If we reach this point, it means the current item was added successfully
-        if (i === this.items.length - 1) {
-          this.$emit("close", true);
-          await Swal.fire({
-            title: 'Xong',
-            html: '<div class="custom-circle"><i class="fas fa-check-circle" style="color: #00CCCC; font-size: 60px;"></i></div>',
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      }
     }
   },
 };
@@ -350,7 +273,7 @@ a:hover {
 }
 
 .modal-container {
-  width: 60%;
+  width: 80%;
   max-height: 90%;
   min-height: 80%;
   margin: 0px auto;
