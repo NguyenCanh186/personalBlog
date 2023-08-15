@@ -1,24 +1,12 @@
 <template>
-  <div>
-    <div class="modal-mask">
-      <div class="modal-wrapper">
+  <div style="margin-top: -50px">
         <div
-            class="modal-container"
-            :class="{
-            'bg-light': !nightMode
-          }"
+            class="container"
         >
-          <div class="title1 px-4 pt-3">
+          <div class="title1">
             <span>
                 Thêm mới bài viết
               </span>
-            <a
-                class="pull-right"
-                style="font-size: 18px;"
-                @click="close()"
-            >
-              <i class="fas fa-times"></i>
-            </a>
             <hr
                 class="my-1"
             />
@@ -45,24 +33,33 @@
                     v-model="storyTitle"
                     placeholder="Nhập tên bài viết"
                     class="pinput"
-                    style="transition-delay: 0.2s;
-                  text-align: center;
-                  line-height: 1.5;
-                  width: 80%"
+                    style="width: 80%"
                 />
                 </div>
-                <div class="col-6">
+                <div class="col-6 text-right"> <!-- Sử dụng lớp text-right để căn phải -->
                   <label for="selectOption">Thể loại:</label>
-                  <select class="pinput" id="selectOption" style="width: 80%"  v-model="category">
+                  <select class="pinput" id="selectOption" style="width: 80%;"  v-model="category">
                     <option value="1">Tin khuyến mại</option>
                     <option value="2">Tin khách hàng</option>
                     <option value="3">Tin quảng cáo</option>
                   </select>
                 </div>
-
+              </div>
+              <div>
+                <label for="description">Mô tả:</label>
+                <textarea
+                    id="description"
+                    type="text"
+                    name="description"
+                    v-model="description"
+                    rows="3"
+                    placeholder="Nhập mô tả"
+                    class="pinput"
+                    style="width: 100%"
+                />
               </div>
 
-              <br><br>
+              <br>
               <tinymce v-model="content" ref="content" />
             </div>
 
@@ -73,8 +70,6 @@
             />
             <button class="btn-add w-25" @click="submitData">Thêm mới</button>
           </div>
-        </div>
-      </div>
     </div>
     <Snackbar
         :showSnackbar="showSnackbar"
@@ -90,20 +85,16 @@ import index from "vuex";
 import { GetDataService } from "@/service/get-data-service";
 import Snackbar from "@/components/Snackbar.vue";
 import Swal from "sweetalert2";
-import Tinymce from "@/components/tinymce/index.vue";
+import Tinymce from "@/components/tinymce/tinymce/index.vue";
 export default {
   name: "AddStory",
-  props: {
-    showModal: {
-      type: Boolean,
-    },
-  },
   data() {
     return {
       category: null,
       cover: null,
       coverShow: null,
       content: '',
+      description: '',
       items: [],
       storyTitle: "",
       nextId: 1,
@@ -160,10 +151,6 @@ export default {
         reader.readAsDataURL(file);
       }
     },
-    async deleteFileChange(index) {
-          this.items[index].imageShow = null;
-          this.items[index].image = null;
-    },
     closeSnackbar(val) {
       if (!val) {
         setTimeout(() => {
@@ -188,11 +175,37 @@ export default {
         return;
       }
 
+      if (!this.storyTitle.trim()) {
+        // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
+        this.showSnackbar = true;
+        this.snackbarMessage = "Vui lòng nhập tên bài viết!";
+        this.snackbarColor = "#64808E";
+        return;
+      }
+
+      if (!this.description.trim()) {
+        // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
+        this.showSnackbar = true;
+        this.snackbarMessage = "Vui lòng nhập mô tả!";
+        this.snackbarColor = "#64808E";
+        return;
+      }
+
+      if (!this.cover) {
+        // Kiểm tra nếu trường tên hoặc tiêu đề trống hoặc chỉ gồm khoảng trắng, thông báo lỗi
+        this.showSnackbar = true;
+        this.snackbarMessage = "Vui lòng chọn ảnh bìa!";
+        this.snackbarColor = "#64808E";
+        return;
+      }
+
           const formData = new FormData();
           formData.append('cover', this.cover);
           formData.append('title', this.storyTitle);
-          formData.append('content', this.$refs.content.content);
+          formData.append('content', this.content);
           formData.append('category', this.category);
+          formData.append('description', this.description);
+      console.log(this.$refs.content.content)
           try {
             await GetDataService.createNews(formData).then((res) => {
               if (!res) {
@@ -232,9 +245,7 @@ export default {
   border: 3px solid #00CCCC; /* Màu viền vòng tròn */
   text-align: center;
 }
-body.modal-open {
-  overflow: hidden;
-}
+
 
 a {
   text-decoration: none;
@@ -247,81 +258,10 @@ a:hover {
   transition: all 0.2s;
   color: gray;
 }
-.date {
-  font-size: 14px;
-  font-weight: 400;
-}
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: opacity 0.5s ease;
-}
-
-.modal-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-container {
-  width: 80%;
-  max-height: 90%;
-  min-height: 80%;
-  margin: 0px auto;
-  border-radius: 7px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  flex-direction: column;
-  display: flex; /*added*/
-}
-
-@media screen and (max-width: 1600px) {
-  .modal-container {
-    width: 60%;
-    height: 80%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .modal-container {
-    width: 80%;
-    height: 80%;
-  }
-}
-
-@media screen and (max-width: 580px) {
-  .modal-container {
-    margin-top: -80px;
-    width: 95%;
-    height: 60%;
-    min-height: 60%;
-  }
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
 
 .title1 {
   font-size: 24px;
   font-weight: 400;
-}
-
-.modal-body {
-  margin: 20px 0;
-  overflow-y: scroll;
-  max-height: inherit;
 }
 .pinput {
   font-size: 18px;
@@ -330,6 +270,7 @@ a:hover {
   border-radius: 7px;
   padding: 10px;
   width: 50%;
+  height: 39px;
   transition: all 1s;
   background-color: #97FFFF;
 }
@@ -337,13 +278,6 @@ a:hover {
 .btn {
   color: #00CCCC;
 }
-
-.btn-add-row {
-  border: 1px solid #00CCCC;
-  color: #00CCCC;
-  background-color: white;
-}
-
 .btn-add {
   margin-top: -20px;
   width: 150px;
@@ -371,11 +305,6 @@ a:hover {
     width: 100%;
   }
 }
-
-.delete-icon {
-  cursor: pointer;
-  font-size: 20px;
-}
 /* Định dạng cho bảng */
 table {
   width: 100%;
@@ -396,22 +325,6 @@ button {
   margin-top: 10px;
 }
 
-/* Định dạng kích thước ảnh */
-.image-preview {
-  max-width: 30%;
-  max-height: 30%;
-}
-@media only screen and (max-width: 580px) {
-  .image-preview {
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
-/* ... */
-.image-container {
-  position: relative;
-  display: inline-block;
-}
 
 .image-container .btn-file {
   position: absolute;
@@ -424,41 +337,6 @@ button {
   padding: 5px 10px;
   cursor: pointer;
 }
-
-.btn-file-change {
-  position: relative;
-  overflow: hidden;
-  width: 70px;
-  height: 28px;
-  font-size: 12px;
-  color: white;
-  background-color: #606060 !important;
-}
-
-.btn-file-change {
-  position: relative;
-  overflow: hidden;
-  width: 50px;
-  height: 28px;
-  font-size: 17px;
-  color: white;
-  background-color: #606060 !important;
-
-}
-
-.image-container .btn-file-change {
-  position: absolute;
-  top: 50%;
-  left: 48%;
-  transform: translate(-50%, -50%);
-  font-size: 12px;
-  color: white;
-  background-color: #757575 !important;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-/* ... */
-
 
 .btn-file {
   position: relative;

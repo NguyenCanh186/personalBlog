@@ -54,17 +54,6 @@
         </div>
       </div>
     </div>
-    <AddStory
-        :showModal="showDesignModal"
-        @close="closeModal"
-        v-if="showDesignModal"
-    />
-    <EditStory
-        :showModal="showEditModal"
-        @close="closeModalEdit"
-        :data="news"
-        v-if="showEditModal"
-    />
   </div>
 </template>
 
@@ -73,13 +62,11 @@
 
 import {GetDataService} from "@/service/get-data-service";
 import Swal from "sweetalert2";
-import EditStory from "@/components/helpers/admin-helpers/EditStory.vue";
-import AddStory from "@/components/helpers/admin-helpers/AddStory.vue";
+import EditStory from "@/components/helpers/admin-helpers/Edit.vue";
 
 export default {
   name: "HomeAdmin",
   components: {
-    AddStory,
     EditStory
   },
   props: {
@@ -107,19 +94,10 @@ export default {
       this.$router.push('/');
     },
     showDesignModalFn() {
-      this.showDesignModal = true;
+      this.$router.push('/admin/create');
     },
-    async showEditModalModalFn(item) {
-      await this.findByIdBlog(item.id)
-      this.showEditModal = true;
-    },
-    closeModal(check) {
-      if (check === true) {
-        this.getNews()
-      }
-      this.showModal = false;
-      this.showDesignModal = false;
-      document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    showEditModalModalFn(item) {
+      this.$router.push('/admin/edit/' + item.id);
     },
     closeModalEdit(check) {
       if (check === true) {

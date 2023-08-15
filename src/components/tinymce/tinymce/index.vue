@@ -85,10 +85,12 @@ export default {
         this.$nextTick(() =>
           window.tinymce.get(this.tinymceId).setContent(val || ''))
       }
+      console.log(123)
     }
   },
   mounted() {
     this.init()
+    console.log(this.value)
   },
   activated() {
     if (window.tinymce) {
