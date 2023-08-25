@@ -1,5 +1,6 @@
 <template>
   <div style="margin-top: -50px">
+    <el-button @click="back" class="back-btn" type="info" icon="el-icon-back" circle></el-button>
       <div class="modal-wrapper">
         <div
             class="container"
@@ -165,6 +166,9 @@ export default {
         }, 1000);
       }
     },
+    back() {
+      this.$router.back()
+    },
     async submitData() {
       for (let i = 0; i < this.currentStory.length; i++) {
         if (this.storyTitle.trim() === this.currentStory[i].title && this.storyTitle.trim() !== this.data.title) {
@@ -264,7 +268,14 @@ a:hover {
   transition: all 0.2s;
   color: gray;
 }
-
+.back-btn {
+  position: fixed;
+  top: 45%;
+  left: 10%;
+  z-index: 9999;
+  color: #fff;
+  font-size: 40px;
+}
 .title1 {
   font-size: 24px;
   font-weight: 400;

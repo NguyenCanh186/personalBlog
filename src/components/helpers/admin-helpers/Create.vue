@@ -1,5 +1,6 @@
 <template>
   <div style="margin-top: -50px">
+    <el-button @click="back" class="back-btn" type="info" icon="el-icon-back" circle></el-button>
         <div
             class="container"
         >
@@ -118,6 +119,9 @@ export default {
     });
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     async handleFileCoverChange(event) {
       const file = event.target.files[0];
       if (file) {
@@ -215,6 +219,7 @@ export default {
                 this.snackbarColor = "#64808E";
                 return;
               }
+              this.$router.back()
               this.$emit("close", true);
               Swal.fire({
                 title: 'Xong',
@@ -309,7 +314,14 @@ a:hover {
 table {
   width: 100%;
 }
-
+.back-btn {
+  position: fixed;
+  top: 45%;
+  left: 10%;
+  z-index: 9999;
+  color: #fff;
+  font-size: 40px;
+}
 th,
 td {
   text-align: center;

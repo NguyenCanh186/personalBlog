@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button class="btn logout-btn" @click="logOut">Đăng xuất</button>
+    <el-button type="danger" class="btn logout-btn" @click="logOut">Đăng xuất</el-button>
     <div
-        class="pt-5 p-st"
+        class="p-st"
+        style="margin-top: -30px"
     >
       <div
           class="container"
@@ -10,6 +11,20 @@
           data-aos-once="true"
           data-aos-duration="1000"
       >
+        <div class="text-center">
+          <h3 class="brand-title">Quản lý trang tin tức Brandname</h3>
+        </div>
+        <br><br>
+        <div class="row">
+          <div class="col-6">
+            <el-input placeholder="Nhập tên bài viết" v-model="request.title" style="margin-left: -15px"></el-input>
+          </div>
+          <div class="col-6 text-right" >
+            <el-button type="primary" @click="getNews" icon="el-icon-search">Tìm kiếm</el-button>
+            <el-button icon="el-icon-plus" style="margin-right: -15px" type="success" @click.prevent="showDesignModalFn()">Thêm mới</el-button>
+          </div>
+        </div>
+        <br>
         <div class="row align-items-center">
           <div class="table-responsive">
             <table class="custom-table">
@@ -25,30 +40,35 @@
               <!-- Sử dụng v-for để lặp qua danh sách các mục -->
               <tr v-for="(item, index) in items" :key="item.id">
                 <td style="width: 4%">{{ index + 1 }}</td>
-                <td style="width: 20%">
+                <td style="width: 15%">
                   <!-- Hiển thị ảnh -->
-                  <img :src="getImageUrl(item.cover)" alt="Ảnh" style="width: 100%;" />
+                  <img :src="getImageUrl(item.cover)" alt="Ảnh" style="width: 100px; max-height: 60px" />
                 </td>
                 <td style="width: 50%;" class="left-aligned">{{ item.title }}</td>
-                <td style="width: 25%; text-align: center !important;">
-                  <div class="button-container">
+                <td style="width: 15%; text-align: center !important;">
+                  <div>
                     <!-- Button with edit icon -->
-                    <button class="action-button edit" @click="showEditModalModalFn(item)">
-                      <i class="fa fa-pencil"></i>
-                    </button>
+                    <el-button style="background-color: #eecc0b; color: white" icon="el-icon-edit" circle @click="showEditModalModalFn(item)"></el-button>
                     <!-- Button with delete icon -->
-                    <button class="action-button delete" @click="deleteItem(item)">
-                      <i class="fa fa-trash"></i>
-                    </button>
+                    <el-button type="danger" icon="el-icon-delete" circle @click="deleteItem(item)"></el-button>
                   </div>
                 </td>
               </tr>
               </tbody>
             </table>
-            <div class="d-flex flex-column align-items-center">
-              <button class="btn mt-2 rounded-circle" @click.prevent="showDesignModalFn()">
-                <i class="fa fa-plus"></i>
-              </button>
+            <div>
+              <Pagination
+                  class="align-items-end pagination"
+                  v-show="total>0"
+                  style="margin-right: 0"
+                  :total="total"
+                  :page.sync="request.page"
+                  :limit.sync="request.size"
+                  @pagination="getNews"
+              />
+<!--              <button class="btn mt-2 rounded-circle" @click.prevent="showDesignModalFn()">-->
+<!--                <i class="fa fa-plus"></i>-->
+<!--              </button>-->
             </div>
           </div>
         </div>
@@ -63,11 +83,12 @@
 import {GetDataService} from "@/service/get-data-service";
 import Swal from "sweetalert2";
 import EditStory from "@/components/helpers/admin-helpers/Edit.vue";
+import Pagination from "@/components/tinymce/tinymce/components/Pagination/index.vue";
 
 export default {
   name: "HomeAdmin",
   components: {
-    EditStory
+    EditStory, Pagination
   },
   props: {
     nightMode: {
@@ -76,6 +97,12 @@ export default {
   },
   data() {
     return {
+      request: {
+        page: 1,
+        size: 5,
+        title: '',
+      },
+      total: 0,
       news: {},
       showEditModal: false,
       showDesignModal: false,
@@ -108,8 +135,9 @@ export default {
       document.getElementsByTagName("body")[0].classList.remove("modal-open");
     },
     getNews() {
-      GetDataService.getNews().then((response) => {
-        this.items = response.data
+      GetDataService.getNews(this.request).then((response) => {
+        this.items = response.data.content
+        this.total = response.data.totalElements
       });
     },
     async findByIdBlog(id) {
@@ -153,13 +181,18 @@ export default {
 </script>
 
 <style scoped>
+.brand-title {
+  color: #605f5f; /* Màu chữ */
+  font-size: 50px; /* Kích thước chữ */
+  /* Thêm các thuộc tính CSS khác nếu cần */
+}
 .custom-table {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #d3d0d0; /* Add a border to the table */
 }
 .custom-table th {
-  background-color: #17a2b8;
+  background-color: #409EFF;
   color: white;
   text-align: center;
   padding: 8px; /* Add padding to the table headers */
@@ -244,17 +277,6 @@ img {
 }
 
 
-.btn {
-  border-color: #17a2b8;
-  color: #17a2b8;
-}
-
-.btn:hover {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-  color: white;
-}
-
 .btn:focus {
   background-color: #17a2b8;
   border-color: #17a2b8;
@@ -269,7 +291,10 @@ p {
   text-align: justify;
   font-weight: 400;
 }
-
+.pagination {
+  background-color: transparent; /* Xóa bỏ nền */
+  /* Thêm các thuộc tính CSS khác nếu cần */
+}
 /* LEAVES */
 </style>
 

@@ -7,9 +7,10 @@ export class GetDataService {
         return axios.post(`${this.serverURL}/news`, news, { headers: authHeader() })
     }
 
-    static getNews() {
-        return axios.get(`${this.serverURL}/get-data/news`)
+    static getNews(params) {
+        return axios.get(`${this.serverURL}/get-data/news`, { params: params });
     }
+
 
     static getNewsById(id) {
         return axios.get(`${this.serverURL}/get-data/news/${id}`)
