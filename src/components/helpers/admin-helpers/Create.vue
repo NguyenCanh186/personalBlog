@@ -18,48 +18,53 @@
                 data-aos-once="true"
                 data-aos-duration="1000"
             >
-              <img style="width: 100%" v-if="cover" :src="coverShow" alt="Preview" /><br><br>
-              <label style="margin-left: 46% !important;" class="btn btn-file">
-                <span>Thêm ảnh bìa</span>
-                <input type="file" @change="handleFileCoverChange($event)" />
-              </label>
-              <br><br>
+              <br>
               <div class="row">
-                <div class="col-6">
-                  <label for="title">Tên bài viết:</label>
-                  <input
-                    id="title"
-                    type="text"
-                    name="title"
-                    v-model="storyTitle"
-                    placeholder="Nhập tên bài viết"
-                    class="pinput"
-                    style="width: 80%"
-                />
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="title">Tên bài viết:</label>
+                      <input
+                          id="title"
+                          type="text"
+                          name="title"
+                          v-model="storyTitle"
+                          placeholder="Nhập tên bài viết"
+                          class="pinput"
+                          style="width: 100%"
+                      />
+                    </div>
+                    <div class="col-6 "> <!-- Sử dụng lớp text-right để căn phải -->
+                      <label for="selectOption">Thể loại:</label><br>
+                      <select class="pinput" id="selectOption" style="width: 100%;"  v-model="category">
+                        <option value="1">Tin khuyến mại</option>
+                        <option value="2">Tin khách hàng</option>
+                        <option value="3">Tin quảng cáo</option>
+                      </select>
+                    </div>
+                  </div>
+                  <label for="description">Mô tả:</label>
+                  <textarea
+                      class="text "
+                      id="description"
+                      type="text"
+                      name="description"
+                      v-model="description"
+                      rows="4"
+                      placeholder="Nhập mô tả"
+                      style="width: 100%"
+                  ></textarea>
                 </div>
-                <div class="col-6 text-right"> <!-- Sử dụng lớp text-right để căn phải -->
-                  <label for="selectOption">Thể loại:</label>
-                  <select class="pinput" id="selectOption" style="width: 80%;"  v-model="category">
-                    <option value="1">Tin khuyến mại</option>
-                    <option value="2">Tin khách hàng</option>
-                    <option value="3">Tin quảng cáo</option>
-                  </select>
+                <div class="col-4">
+                  <div class="image-container justify-content-center" style="text-align: center; border: 1px solid #a4a4a4; padding: 10px; height: 200px; display: flex; flex-direction: column; align-items: center;">
+                    <img v-if="coverShow" style="max-width: 90%" :src="coverShow" alt="Preview" />
+                    <label class="btn btn-file image-button">
+                      <i class="fas fa-camera"></i>
+                      <input type="file" @change="handleFileCoverChange($event)" />
+                    </label>
+                  </div>
                 </div>
               </div>
-              <div>
-                <label for="description">Mô tả:</label>
-                <textarea
-                    id="description"
-                    type="text"
-                    name="description"
-                    v-model="description"
-                    rows="3"
-                    placeholder="Nhập mô tả"
-                    class="pinput"
-                    style="width: 100%"
-                />
-              </div>
-
               <br>
               <tinymce v-model="content" ref="content" />
             </div>
@@ -277,11 +282,11 @@ a:hover {
   width: 50%;
   height: 39px;
   transition: all 1s;
-  background-color: #97FFFF;
+  background-color: #97d4ff;
 }
 
 .btn {
-  color: #00CCCC;
+  color: #97d4ff;
 }
 .btn-add {
   margin-top: -20px;
@@ -331,7 +336,18 @@ td {
 th {
   background-color: #f2f2f2;
 }
-
+.image-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: white;
+  width: 60px;
+  background-color: #17a2b8 !important;
+  padding: 5px 10px;
+  cursor: pointer;
+}
 /* Định dạng cho nút "Thêm mới" */
 button {
   margin-top: 10px;
@@ -345,7 +361,8 @@ button {
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;
-  background-color: #17a2b8 !important;
+  width: 12%;
+  background-color: #5b5b5b !important;
   padding: 5px 10px;
   cursor: pointer;
 }

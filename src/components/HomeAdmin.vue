@@ -19,7 +19,7 @@
           <div class="col-6">
             <el-input placeholder="Nhập tên bài viết" v-model="request.title" style="margin-left: -15px"></el-input>
           </div>
-          <div class="col-6 text-right" >
+          <div class="col-6 text-right">
             <el-button type="primary" @click="getNews" icon="el-icon-search">Tìm kiếm</el-button>
             <el-button icon="el-icon-plus" style="margin-right: -15px" type="success" @click.prevent="showDesignModalFn()">Thêm mới</el-button>
           </div>
