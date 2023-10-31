@@ -8,7 +8,7 @@ export class GetDataService {
     }
 
     static getNews(params) {
-        return axios.get(`${this.serverURL}/get-data/news`, { params: params });
+        return axios.get(`${this.serverURL}/get-data/newsCustomer`, { params: params });
     }
 
 

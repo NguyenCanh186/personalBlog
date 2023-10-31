@@ -56,8 +56,8 @@
                   ></textarea>
                 </div>
                 <div class="col-4">
-                  <div class="image-container justify-content-center" style="text-align: center; border: 1px solid #a4a4a4; padding: 10px; height: 200px; display: flex; flex-direction: column; align-items: center;">
-                    <img v-if="coverShow" style="max-width: 90%" :src="coverShow" alt="Preview" />
+                  <div class="image-container justify-content-center">
+                    <img v-if="coverShow" :src="coverShow" alt="Preview" />
                     <label class="btn btn-file image-button">
                       <i class="fas fa-camera"></i>
                       <input type="file" @change="handleFileCoverChange($event)" />
@@ -335,6 +335,24 @@ td {
 
 th {
   background-color: #f2f2f2;
+}
+.col-4 {
+  width: 25%; /* Just an example width for demonstration */
+}
+
+.image-container {
+  text-align: center;
+  border: 1px solid #a4a4a4;
+  padding: 10px;
+  height: 205px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  max-width: 100%; /* Image will not exceed parent's width */
+  max-height: 100%; /* Image will not exceed parent's height */
 }
 .image-button {
   position: absolute;

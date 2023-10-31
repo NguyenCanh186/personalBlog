@@ -56,19 +56,15 @@
               </tr>
               </tbody>
             </table>
-            <div>
+            <div class="flex-container">
               <Pagination
                   class="align-items-end pagination"
-                  v-show="total>0"
-                  style="margin-right: 0"
+                  v-show="total > 0"
                   :total="total"
                   :page.sync="request.page"
                   :limit.sync="request.size"
                   @pagination="getNews"
               />
-<!--              <button class="btn mt-2 rounded-circle" @click.prevent="showDesignModalFn()">-->
-<!--                <i class="fa fa-plus"></i>-->
-<!--              </button>-->
             </div>
           </div>
         </div>
@@ -181,6 +177,10 @@ export default {
 </script>
 
 <style scoped>
+.flex-container {
+  display: flex;
+  justify-content: flex-end;
+}
 .brand-title {
   color: #605f5f; /* Màu chữ */
   font-size: 50px; /* Kích thước chữ */
@@ -211,30 +211,6 @@ export default {
   z-index: 9999;
   color: #fff;
 }
-.action-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 7px; /* 7px spacing between buttons */
-  background-color: #e9ecef;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-.edit {
-  border-color: #ffc800;
-  border: 2px solid #ffc107;
-  color: #ffc800;
-  background-color: white;
-}
-
-.delete {
-  border-color: #d54444;
-  border: 2px solid #d54444;
-  color: #d54444;
-  background-color: white;
-}
-
 .image-container input[type="file"] {
   opacity: 0;
   position: absolute;
@@ -245,19 +221,6 @@ export default {
   cursor: pointer;
 }
 
-.image-container .camera-icon {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  margin-top: 50%;
-  background: transparent;
-  cursor: pointer;
-  padding: 0px 20px;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  background-color: rgba(65, 63, 63, 0.5);
-  color: #ffffff;
-}
 
 
 img {
