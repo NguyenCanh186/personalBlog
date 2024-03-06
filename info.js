@@ -127,83 +127,83 @@ let info = {
       description:
         ""
     },
-    {
-      name: "Một nửa của Cảnh =))))",
-      title: "Người yêu tôi và tôi",
-      pictures: [
-        {
-          img: require("./src/assets/designs/digital agency/avt.jpg"),
-          title: "Cô ấy là Phạm Ngọc Anh"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh1.jpeg"),
-          title: "Tôi gặp cô ấy lần đầu tiên trên tàu điện, và đây là lần đầu tôi hẹn cô ấy đi chơi. Thích tôi quá hay sao mà cười tươi thế không biết =)"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh2.jpeg"),
-          title: "Sau vài lần cảm thấy đáng tin nên cũng đồng ý xuống phòng tôi chơi hihaa"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh3.jpg"),
-          title: "Bả ngồi cả buổi chán quá, thế là tôi đưa ra công viên tình yêu chơi"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh4.jpeg"),
-          title: "Xong bả còn checkin các thứ mà"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh7.jpeg"),
-          title: "Sau hôm đấy là bả yêu tôi luôn. Đấy!!! Trông bà có được mình phát mà cười không thấy trời đất gì. Còn mặt tôi lúc đó thì các ông cũng hiểu rồi đấy"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh6.jpeg"),
-          title: "Từ đó, những nơi mà tôi muốn đi đều có cô ấy ở bên"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh9.jpg"),
-          title: "Lần đầu tiên tôi đưa cô ấy đi chơi xa"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh10.jpg"),
-          title: "Thức ăn ở đấy không ngon hay sao mà trông cô ấy như muốn chiến đấu với tôi vậy"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/dibienvoicoay.jpg"),
-          title: "Biển gì quên tên rồi =)))))"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/14.jpg"),
-          title: "Tà tưa các loại"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/sinhnhattoi.jpg"),
-          title: "Sinh nhật ấm áp"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/monquasinhnhatdautin.jpg"),
-          title: "Qùa sinh nhật cuả tôi đấy các ông ạ "
-        },
-        {
-          img: require("./src/assets/designs/digital agency/anh8.jpeg"),
-          title: "Vừa khóc vừa đan khăn cho ny. Trông cột tóc hai bên đáng yêu chưa"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/15.jpg"),
-          title: "Và rồi tôi cũng phải về Việt Nam. Từ đấy đến giờ chẳng có cái ảnh nào chụp chung"
-        },
-        {
-          img: require("./src/assets/designs/digital agency/01.jpg"),
-          title: "Mà cuối năm nay cô ấy về rồi =))) Cuối năm mình update tiếp nhé <3"
-        },
-      ],
-      technologies: ["Nguyễn Cảnh", "Ngọc Anh"],
-      category: "Để tôi kể cho mà nghe ",
-      github: "",
-      date: "Quá khứ - Hiện tại - Tương lai",
-      visit: "",
-      description:
-        ""
-    },
+    // {
+    //   name: "Một nửa của Cảnh =))))",
+    //   title: "Người yêu tôi và tôi",
+    //   pictures: [
+    //     {
+    //       img: require("./src/assets/designs/digital agency/avt.jpg"),
+    //       title: "Cô ấy là Phạm Ngọc Anh"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh1.jpeg"),
+    //       title: "Tôi gặp cô ấy lần đầu tiên trên tàu điện, và đây là lần đầu tôi hẹn cô ấy đi chơi. Thích tôi quá hay sao mà cười tươi thế không biết =)"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh2.jpeg"),
+    //       title: "Sau vài lần cảm thấy đáng tin nên cũng đồng ý xuống phòng tôi chơi hihaa"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh3.jpg"),
+    //       title: "Bả ngồi cả buổi chán quá, thế là tôi đưa ra công viên tình yêu chơi"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh4.jpeg"),
+    //       title: "Xong bả còn checkin các thứ mà"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh7.jpeg"),
+    //       title: "Sau hôm đấy là bả yêu tôi luôn. Đấy!!! Trông bà có được mình phát mà cười không thấy trời đất gì. Còn mặt tôi lúc đó thì các ông cũng hiểu rồi đấy"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh6.jpeg"),
+    //       title: "Từ đó, những nơi mà tôi muốn đi đều có cô ấy ở bên"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh9.jpg"),
+    //       title: "Lần đầu tiên tôi đưa cô ấy đi chơi xa"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh10.jpg"),
+    //       title: "Thức ăn ở đấy không ngon hay sao mà trông cô ấy như muốn chiến đấu với tôi vậy"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/dibienvoicoay.jpg"),
+    //       title: "Biển gì quên tên rồi =)))))"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/14.jpg"),
+    //       title: "Tà tưa các loại"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/sinhnhattoi.jpg"),
+    //       title: "Sinh nhật ấm áp"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/monquasinhnhatdautin.jpg"),
+    //       title: "Qùa sinh nhật cuả tôi đấy các ông ạ "
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/anh8.jpeg"),
+    //       title: "Vừa khóc vừa đan khăn cho ny. Trông cột tóc hai bên đáng yêu chưa"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/15.jpg"),
+    //       title: "Và rồi tôi cũng phải về Việt Nam. Từ đấy đến giờ chẳng có cái ảnh nào chụp chung"
+    //     },
+    //     {
+    //       img: require("./src/assets/designs/digital agency/01.jpg"),
+    //       title: "Mà cuối năm nay cô ấy về rồi =))) Cuối năm mình update tiếp nhé <3"
+    //     },
+    //   ],
+    //   technologies: ["Nguyễn Cảnh", "Ngọc Anh"],
+    //   category: "Để tôi kể cho mà nghe ",
+    //   github: "",
+    //   date: "Quá khứ - Hiện tại - Tương lai",
+    //   visit: "",
+    //   description:
+    //     ""
+    // },
     {
       name: "Bạn, thân ai người ấy lo",
       title: "Cạ cứng",
@@ -456,24 +456,12 @@ let info = {
           title: "Mì hảo hảo sau 2 năm xa quê"
         },
         {
-          img: require("./src/assets/designs/booksi/dichoiohassamu.jpeg"),
-          title: "Aeon mall Hassamu"
-        },
-        {
-          img: require("./src/assets/designs/booksi/duanguoiyeudichoi.jpg"),
-          title: "Đưa Ngọc Anh lên Shinsapporo"
-        },
-        {
           img: require("./src/assets/designs/booksi/chuanbiconguoiyeu.jpg"),
           title: "Công viên tình yêu ShiroiKoibito"
         },
         {
           img: require("./src/assets/designs/booksi/anhmawtnhinxaxam.jpg"),
           title: "Chuẩn bị đón mùa hè"
-        },
-        {
-          img: require("./src/assets/designs/booksi/comgicuahanquocquentenroi.jpg"),
-          title: "Ăn cơm Hàn Quốc"
         },
         {
           img: require("./src/assets/designs/booksi/dilamveluc6giosang.jpg"),
