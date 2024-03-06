@@ -47,7 +47,7 @@
                 <vueper-slide
                   v-for="(slide, i) in design.pictures"
                   :key="i"
-                  :image="slide.img"
+                  :image="`http://3.1.195.111:8080/image/${slide.img}`"
                 />
               </vueper-slides>
               <div
@@ -56,24 +56,32 @@
               >
                 <div>
                   <div class="title2" style="font-weight: 500;">{{ design.title }}</div>
-                  <span
-                    class="badge mr-2 mb-2"
-                    v-for="tech in design.technologies"
-                    :key="tech"
-                    :class="{ 'bg-dark4': nightMode }"
-                    >{{ tech }}</span
-                  >
-                  •
-                  <span class="date ml-1">{{design.date}}</span>
                 </div>
 
-                <button
+                <button v-if="currentUser === null"
                   style="height: 31px; margin-top: 5px;"
                   class="btn-sm btn btn-outline-secondary no-outline"
                   @click.prevent="showDesignModalFn(design)"
                 >
                   Xem thêm
                 </button>
+                <div class="col-4 d-flex justify-content-end" v-if="currentUser !== null">
+                  <button
+                      style="height: 31px; margin-top: 5px;"
+                      class="btn-sm btn-edit btn-outline-secondary no-outline"
+                      @click.prevent="showDesignModalFn(design)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                      style="height: 31px; margin-top: 5px;"
+                      class="btn-sm btn-delete btn-outline-secondary no-outline ml-1"
+                      @click.prevent="showDesignModalFn(design)"
+                  >
+                    Xóa
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>
@@ -118,7 +126,7 @@
       />
     </transition>
     <transition name="modal">
-      <DesignModal
+      <DesignModalStory
         :showModal="showDesignModal"
         @close="closeModal"
         v-if="showDesignModal"
@@ -132,8 +140,6 @@
 <script>
 import Card from "./helpers/Card";
 import Modal from "./helpers/Modal";
-import DesignModal from "./helpers/DesignModal";
-import Carousel from "./helpers/Carousel";
 import info from "../../info";
 
 import { VueTabs, VTab } from "vue-nav-tabs";
@@ -141,6 +147,8 @@ import "vue-nav-tabs/themes/vue-tabs.css";
 
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
+import {GetDataService} from "@/service/get-data-service";
+import DesignModalStory from "@/components/helpers/DesignModalStory.vue";
 
 export default {
   name: "Portfolio",
@@ -151,7 +159,7 @@ export default {
     VTab,
     VueperSlides,
     VueperSlide,
-    DesignModal,
+    DesignModalStory,
   },
   props: {
     nightMode: {
@@ -161,7 +169,7 @@ export default {
   data() {
     return {
       all_info: info.portfolio,
-      desgin_info: info.portfolio_design,
+      desgin_info: [],
       portfolio_info: [],
       showModal: false,
       showDesignModal: false,
@@ -175,22 +183,31 @@ export default {
         '<div class="example-slide">Slide 2</div>',
         '<div class="example-slide">Slide 3</div>',
       ],
+      story: [],
     };
   },
   created() {
-    for (var i = 0; i < this.number; i++) {
-      this.portfolio_info.push(this.all_info[i]);
+    this.getStory();
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
     }
   },
-  watch: {
-    number() {
-      this.portfolio_info = [];
-      for (var i = 0; i < this.number; i++) {
-        this.portfolio_info.push(this.all_info[i]);
-      }
-    },
-  },
   methods: {
+    getStory() {
+      GetDataService.getStory().then((response) => {
+        this.story = response.data;
+        for (let i = 0; i < this.story.length; i++) {
+          let design = { name: this.story[i].name, title: this.story[i].title, pictures: [] };
+          for (let j = 0; j < this.story[i].storyPictures.length; j++) {
+            let pictures = { img: this.story[i].storyPictures[j].image, title: this.story[i].storyPictures[j].title };
+            design.pictures.push(pictures);
+          }
+          this.desgin_info.push(design);
+        }
+      });
+    },
     next() {
       this.$refs.flickity.next();
     },
@@ -379,7 +396,39 @@ export default {
 /deep/.vueperslides__parallax-wrapper {
   border-radius: 10px !important;
 }
+.btn-edit {
+  border-color: #d7b31b;
+  color: #d7b31b;
+}
 
+.btn-delete {
+  border-color: #dc0d0d;
+  color: #e30c0c;
+}
+
+.btn-edit:hover {
+  background-color: #d7b31b;
+  border-color: #d7b31b;
+  color: white;
+}
+
+.btn-edit:focus {
+  background-color: #d7b31b;
+  border-color: #d7b31b;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #dc0d0d;
+  border-color: #dc0d0d;
+  color: white;
+}
+
+.btn-delete:focus {
+  background-color: #dc0d0d;
+  border-color: #dc0d0d;
+  color: white;
+}
 .btn {
   border-color: #17a2b8;
   color: #17a2b8;

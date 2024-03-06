@@ -1,8 +1,8 @@
 <template>
   <div class="my-3 mx-3">
     <div
-      class="card smcard"
-      :class="{
+        class="card smcard"
+        :class="{
         'pcard-dark': nightMode,
         pcard: !nightMode,
         'bg-dark3': nightMode,
@@ -10,26 +10,17 @@
     >
       <div style="height: 180px;">
         <img
-          class="card-img-top"
-          :src="portfolio.pictures[0].img"
-          alt="Card image cap"
+            class="card-img-top"
+            :src="`http://3.1.195.111:8080/image/${portfolio.pictures[0]}`"
+            alt="Card image cap"
         />
       </div>
       <div class="card-body pborder-top">
         <h5 class="title2">{{ portfolio.name }}</h5>
         <div>
-          <div class="pb-1 bheight">
-            <span
-              class="badge mr-2 mb-2 "
-              v-for="tech in portfolio.technologies"
-              :key="tech"
-              :class="{ 'bg-dark4': nightMode }"
-              >{{ tech }}</span
-            >
-          </div>
           <p
-            class="title3 m-0 pb-2 pheight pt-1"
-            v-html="
+              class="title3 m-0 pb-2 pheight pt-1"
+              v-html="
               portfolio.description.length > 100
                 ? portfolio.description.substring(0, 105) + '...'
                 : portfolio.description
@@ -39,19 +30,11 @@
         </div>
         <div class="text-center mt-2">
           <button
-            href=""
-            class="btn-sm btn btn-outline-secondary no-outline"
-            @click.prevent="showModal"
+              href=""
+              class="btn-sm btn btn-outline-secondary no-outline"
+              @click.prevent="showModal"
           >
-            read more
-          </button>
-          <button
-            href="#"
-            class="btn-sm btn btn-outline-secondary no-outline ml-4"
-            v-if="portfolio.visit"
-            @click.prevent="open(portfolio.visit)"
-          >
-            visit website
+            Xem thêm
           </button>
         </div>
       </div>
@@ -106,8 +89,8 @@ img {
 }
 
 .pheight {
-  height: 110px;
-  max-height: 130px;
+  height: 80px;
+  max-height: 90px;
   overflow: auto;
   text-align: justify;
 }
@@ -127,7 +110,7 @@ div.img-div {
   border: none;
   box-shadow: 1px 1px 12px rgb(233, 233, 233);
   transition: all 0.5s;
-  height: 460px;
+  height: 380px;
 }
 
 .pcard:hover {
@@ -184,19 +167,19 @@ div.img-div {
 }
 
 .btn {
-  border-color: #759CC9;
-  color: #759CC9;
+  border-color: #17a2b8;
+  color: #17a2b8;
 }
 
 .btn:hover {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 
 .btn:focus {
-  background-color: #759CC9;
-  border-color: #759CC9;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
   color: white;
 }
 

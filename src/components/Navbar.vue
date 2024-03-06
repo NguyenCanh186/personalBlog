@@ -20,7 +20,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span style="color: gray; font-size: 23px;"
+          <span style="color: white; font-size: 23px;"
             ><i class="fas fa-bars"></i>
             </span>
         </button>
@@ -32,25 +32,14 @@
                 class="nav-link"
                 href="/portfolio"
                 @click.prevent="$emit('scroll', 'portfolio')"
-                :class="{ 'text-light': nightMode }"
                 >Story</a
               >
             </li>
-<!--            <li class="nav-item mx-2">-->
-<!--              <a-->
-<!--                class="nav-link"-->
-<!--                href="/skills"-->
-<!--                @click.prevent="$emit('scroll', 'skills')"-->
-<!--                :class="{ 'text-light': nightMode }"-->
-<!--                >Skills</a-->
-<!--              >-->
-<!--            </li>-->
             <li class="nav-item mx-2 ">
               <a
                 class="nav-link"
                 href="/about"
                 @click.prevent="$emit('scroll', 'about')"
-                :class="{ 'text-light': nightMode }"
                 >Blog</a
               >
             </li>
@@ -59,35 +48,47 @@
                 class="nav-link"
                 href="/contact"
                 @click.prevent="$emit('scroll', 'contact')"
-                :class="{ 'text-light': nightMode }"
                 >Contact</a
               >
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item mx-2" v-if="currentUser === null">
               <a
-                class="nav-link"
-                href="#"
-                @click.prevent="switchMode"
-                :class="{ 'text-light': nightMode }"
-                ><i
-                  :class="{
-                    'fas fa-moon': nightMode,
-                    'far fa-moon': !nightMode,
-                  }"
-                  v-tooltip.bottom="nightMode ? 'Light Mode' : 'Night Mode'"
-                ></i
-              ></a>
+                  class="nav-link"
+                  @click.prevent="showDesignModalFn()"
+              >Login</a
+              >
+            </li>
+            <li class="nav-item mx-2" v-if="currentUser !== null">
+              <a
+                  class="nav-link"
+                  @click.prevent="logOut()"
+              >Logout</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <Login
+        :showModal="showDesignModal"
+        @close="closeModal"
+        v-if="showDesignModal"
+        @login="login"
+    />
+    <Snackbar
+        :showSnackbar="showSnackbar"
+        @close="closeSnackbar"
+        :snackbarMessage="snackbarMessage"
+        :snackbarColor="snackbarColor"
+    />
   </div>
 </template>
 
 <script>
 import Logo from "./helpers/Logo";
 import info from "../../info";
+import Login from "@/components/helpers/Login.vue";
+import Snackbar from "@/components/helpers/Snackbar.vue";
 
 export default {
   name: "Navbar",
@@ -100,29 +101,77 @@ export default {
     return {
       navbarConfig: info.config.navbar,
       localNightMode: this.nightMode,
+      showDesignModal: false,
+      showSnackbar: false,
+      snackbarMessage: "",
+      snackbarColor: "",
     };
   },
   components: {
     Logo,
+    Login,
+    Snackbar,
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   methods: {
+    closeSnackbar(val) {
+      if (!val) {
+        setTimeout(() => {
+          this.showSnackbar = val;
+        }, 1000);
+      }
+    },
     switchMode() {
       this.localNightMode = !this.localNightMode;
       this.$emit("nightMode", this.localNightMode);
+    },
+    closeModal() {
+      this.showModal = false;
+      this.showDesignModal = false;
+      document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    },
+    login(password) {
+      this.$store.dispatch('auth/login', password).then(
+          () => {
+            this.$router.push('/admin/home');
+            location.reload();
+            this.showDesignModal = false;
+          },
+          error => {
+            this.a = (error.response && error.response.data)
+            this.showSnackbar = true;
+            this.snackbarMessage = "Không vào được đâu bạn ơi.";
+            this.snackbarColor = "#64808E";
+          }
+      );
+    },
+    showDesignModalFn() {
+      this.showDesignModal = true;
+    },
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/');
+      location.reload();
     },
   },
 };
 </script>
 
-<style scoped>
+<style scope>
 .nav-link {
-  color: white;
+  color: white !important;
   font-weight: 500;
 }
 .nav-link:hover{
-  background-color: rgba(160, 159, 159, 0.336);
+  color: white;
 }
-
 button {
   border: none;
   outline: none;

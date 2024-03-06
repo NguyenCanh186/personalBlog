@@ -11,46 +11,50 @@
     >
       <div class="row align-items-center">
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
-          <img :src="picture" />
+          <div class="image-container">
+            <img :src="`http://3.1.195.111:8080/image/${picture}`"/>
+          </div>
         </div>
         <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
           <span
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-            >Welcome to my World.</span
+            >{{ homeTitle }}</span
           >
           <div>
-            <p v-html="description"></p>
-          </div>
-          <div class="text-center pb-4">
-            <button
-                class="btn btn-outline-success mx-2 "
-                @click="open('linkedin')"
-                v-tooltip.bottom="'Facebook'"
-            >
-              <i class="fa-brands fa-square-facebook"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('github')"
-              v-tooltip.bottom="'Tóp tóp'"
-            >
-              <i class="fa-brands fa-tiktok"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('behance')"
-              v-tooltip.bottom="'Skype'"
-            >
-              <i class="fa-brands fa-skype"></i>
-            </button>
-            <button
-              class="btn btn-outline-info mx-2"
-              @click="open('resume')"
-              v-tooltip.bottom="'Telegram'"
-            >
-              <i class="fa-brands fa-telegram"></i>
-            </button>
+            <div>
+              <p v-html="description"></p>
+            </div>
+            <div class="text-center pb-4">
+              <button
+                  class="btn btn-outline-success mx-2 "
+                  @click="open('linkedin')"
+                  v-tooltip.bottom="'Facebook'"
+              >
+                <i class="fa-brands fa-square-facebook"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('github')"
+                  v-tooltip.bottom="'Tóp tóp'"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('behance')"
+                  v-tooltip.bottom="'Skype'"
+              >
+                <i class="fa-brands fa-skype"></i>
+              </button>
+              <button
+                  class="btn btn-outline-info mx-2"
+                  @click="open('resume')"
+                  v-tooltip.bottom="'Telegram'"
+              >
+                <i class="fa-brands fa-telegram"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -60,13 +64,12 @@
 
 <script>
 import info from "../../info";
+import {GetDataService as getDataService} from "@/service/get-data-service";
 
-import Wave from "./helpers/Wave";
 
 export default {
   name: "Home",
   components: {
-    Wave,
   },
   props: {
     nightMode: {
@@ -75,8 +78,10 @@ export default {
   },
   data() {
     return {
+      profile: null,
+      homeTitle: '',
       picture: info.flat_picture,
-      description: info.description,
+      description: '',
       name: info.name,
       linkedin: info.links.linkedin,
       github: info.links.github,
@@ -84,7 +89,25 @@ export default {
       resume: info.links.resume
     };
   },
+  created() {
+    this.getProfile();
+  },
   methods: {
+    getProfile() {
+      getDataService.getProfile().then((response) => {
+        this.profile = response.data;
+        this.picture = this.profile.image;
+        this.homeTitle = this.profile.title;
+        this.description = this.profile.description;
+      });
+    },
+    update() {
+      let form = document.querySelector('#form');
+      console.log(form)
+      getDataService.update(form).then(() => {
+        this.getProfile();
+      });
+    },
     open(link) {
       switch (link) {
         case "linkedin":
@@ -106,6 +129,11 @@ export default {
 </script>
 
 <style scoped>
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
 .home-title {
   font-size: 55px;
   font-weight: 500;
@@ -114,8 +142,6 @@ export default {
 img {
   max-width: 800px;
   max-height: 500px;
-  margin-top: 80px;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (max-width: 580px) {
@@ -128,10 +154,6 @@ img {
     margin-bottom: 10px;
     border: 2px solid rgb(205, 205, 205);
   }
-}
-
-.fa {
-  font-size: 15px;
 }
 
 .btn {

@@ -2,11 +2,13 @@
   <div id="app" :class="{ 'text-dark': !nightMode, 'text-light': nightMode }">
     <Navbar @scroll="scrollTo" @nightMode="switchMode" :nightMode="nightMode" />
     <div class="parent">
-      <Home :nightMode="nightMode" />
-      <Portfolio id="portfolio" :nightMode="nightMode" />
-      <About id="about" :nightMode="nightMode" />
-<!--      <Skills id="skills" :nightMode="nightMode" />-->
-      <Contact id="contact" :nightMode="nightMode" />
+      <Home v-if="currentUser === null" :nightMode="nightMode" />
+      <HomeAdmin v-if="currentUser !== null" :nightMode="nightMode" />
+      <StoryAdmin v-if="currentUser !== null" :nightMode="nightMode" />
+      <BlogAdmin v-if="currentUser !== null" :nightMode="nightMode" />
+      <Portfolio v-if="currentUser === null" :nightMode="nightMode" id="portfolio" />
+      <About v-if="currentUser === null" id="about" :nightMode="nightMode" />
+      <Contact v-if="currentUser === null"  id="contact" :nightMode="nightMode" />
       <Footer :nightMode="nightMode" />
     </div>
   </div>
@@ -16,23 +18,32 @@
 import Navbar from "./components/Navbar.vue";
 import Home from "./components/Home";
 import About from "./components/About";
-import Skills from "./components/Skills";
 import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 import info from "../info";
+import HomeAdmin from "@/components/admin/HomeAdmin.vue";
+import StoryAdmin from "@/components/admin/StoryAdmin.vue";
+import BlogAdmin from "@/components/admin/BlogAdmin.vue";
 
 export default {
   name: "App",
   components: {
+    BlogAdmin,
+    StoryAdmin,
+    HomeAdmin,
     Navbar,
     Home,
     About,
-    Skills,
     Portfolio,
     Contact,
     Footer,
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   data() {
     return {
@@ -44,6 +55,7 @@ export default {
     if (this.config.use_cookies) {
       this.nightMode = this.$cookie.get("nightMode") === "true" ? true : false;
     }
+    console.log(this.$store.state.auth.user)
   },
   mounted() {
     ["about", "contact", "skills", "portfolio"].forEach((l) => {
