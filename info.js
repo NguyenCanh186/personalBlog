@@ -430,10 +430,6 @@ let info = {
           title: "Mô hình thành phố Sapporo"
         },
         {
-          img: require("./src/assets/designs/booksi/t38sapporo.jpeg"),
-          title: "Tầng 38 tại ga Sapporo, ban đêm lên đây ngắm thành phố thì hết sảy. Rượu ngon, nhạc cũng du dương nữa"
-        },
-        {
           img: require("./src/assets/designs/booksi/tieptucngamgainhat.jpg"),
           title: "Tiếp tục series ngắm gái Nhật"
         },
