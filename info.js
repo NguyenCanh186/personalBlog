@@ -434,10 +434,6 @@ let info = {
           title: "Tiếp tục series ngắm gái Nhật"
         },
         {
-          img: require("./src/assets/designs/booksi/gocnholamvieccuatoi.jpg"),
-          title: "Góc nhỏ của tôi. Ngày đó idol Kyary Pamyu nên đồng nghiệp ở công ty tặng cho quả ảnh không thể chất lượng hơn"
-        },
-        {
           img: require("./src/assets/designs/booksi/otaru1.jpg"),
           title: "Otaru cũng đẹp ở Hokkaido nhé. Mọi người sang nhật nhớ ghé qua đây nha"
         },
